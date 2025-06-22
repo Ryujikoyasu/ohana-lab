@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>花懶</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        max-width: 400px;
+        margin: 0 auto;
+        display: block;
+    }
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .grid-item {
+        flex: 0 1 400px;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="intro">
+        <div class="intro-logo">花懶</div>
+    </div>
+
+    <div class="cursor"></div>
+
+    <div id="nav-trigger">
+        <div class="bud"></div>
+    </div>
+
+    <nav id="navigation">
+        <ul>
+            <li><a href="#fashion" class="nav-link">衣</a></li>
+            <li><a href="#interior" class="nav-link">光</a></li>
+            <li><a href="#journal" class="nav-link">記録</a></li>
+            <li><a href="#about" class="nav-link">我ら</a></li>
+            <li><a href="#contact" class="nav-link">葉書</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+
+        <header class="prologue">
+            <h1 class="vertical-text">
+                花懶
+                <span class="subtitle">——咲くことさえ面倒な、美の一片</span>
+            </h1>
+        </header>
+
+        <!-- Section: 衣 (Fashion) - 記事内容を反映 -->
+        <section id="fashion" class="creation-section">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">衣</h2>
+                <p class="section-subtitle">洗練と野生の間に立つ</p>
+            </div>
+            <div class="grid-container">
+                <div class="grid-item wide">
+                    <!-- ネイチャープリントの記事より -->
+                    <img src="images/journal/nature-print/1.jpg" alt="ネイチャープリントされたシャツ">
+                    <div class="item-overlay">
+                        <p>この瞬間の転写</p>
+                        <a href="journal.html#nature-print" class="read-more">記録を読む</a>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <!-- カラムシ染の記事より -->
+                    <img src="images/journal/karamushi-dye/3.png" alt="カラムシと泥で染められた布">
+                    <div class="item-overlay">
+                        <p>土地の色</p>
+                         <a href="journal.html#karamushi-dye" class="read-more">記録を読む</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 光 (Interior) - 記事内容を反映 -->
+        <section id="interior" class="creation-section">
+             <div class="section-title-wrapper">
+                <h2 class="section-title">光</h2>
+                <p class="section-subtitle">影を愛でるための灯火</p>
+            </div>
+            <div class="grid-container">
+                <div class="grid-item">
+                     <!-- ネイチャープリントのおまけより -->
+                    <img src="images/interior/wasi.png" alt="和紙と植物でできた照明">
+                    <div class="item-overlay">
+                        <p>五箇山和紙の灯り</p>
+                        <a href="journal.html#nature-print" class="read-more">記録を読む</a>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="images/interior/tutuji.jpg" alt="真鍮のキャンドルスタンド">
+                     <div class="item-overlay">
+                        <p>エゾイソツツジの蓄光オブジェ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: 記録 (Journal) - 新設 -->
+        <section id="journal" class="creation-section">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">記録</h2>
+                <p class="section-subtitle">思考と試行の断章</p>
+            </div>
+            <div class="journal-list">
+                <a href="journal.html#nature-print" class="journal-item">
+                    <h3>ネイチャープリント</h3>
+                    <p>植物という存在が持つ固有のフォルムを、布というメディアに写し取る「転写」の試み。</p>
+                    <span class="journal-date">2025.06.21</span>
+                </a>
+                <a href="journal.html#karamushi-dye" class="journal-item">
+                    <h3>カラムシ染</h3>
+                    <p>明確な完成図を持たない行為が、いかにして土地と身体の記憶を布の上に堆積させていくかという実証。</p>
+                    <span class="journal-date">2025.06.20</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Section: 我ら (About) - 記事内容を反映 -->
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <img src="https://images.unsplash.com/photo-1579724131844-319d921a8a29?q=80&w=1887" alt="影で重なる二つの手">
+                <div class="about-text">
+                    <p>「洗練され過ぎている格好はらしくない。かといって、抜け過ぎたのも田舎くさすぎるのも服に関しては嫌いだ」</p>
+                    <p>消費社会の記号と、土地に根差した生の質感との間に、極めて個人的で繊細なバランスポイントを探る。私たちは、その探求の過程そのものを、創造と呼ぶ。</p>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <p>花懶への葉書は、このアドレスへ。</p>
+            <a href="mailto:contact@hanaran.jp">contact@hanaran.jp</a>
+            <div class="copyright">
+                © 2025 花懶
+            </div>
+        </footer>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
