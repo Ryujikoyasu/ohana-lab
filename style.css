@@ -223,6 +223,11 @@ body {
 .grid-item {
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.5s ease-in-out; /* 浮き上がる光の影のアニメーション */
+}
+
+.grid-item:hover {
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.07); /* 白く柔らかな光の影を追加 */
 }
 
 .grid-item.wide {
@@ -234,12 +239,12 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: saturate(0.2) blur(1px);
-    transition: filter 0.8s, transform 0.8s;
+    /* filter: saturate(0.2) blur(1px); <-- この行を削除し、くすませる効果をなくします */
+    transition: transform 0.8s; /* 拡大アニメーションのみ残します */
 }
 
 .grid-item:hover img {
-    filter: saturate(0.8) blur(0);
+    /* filter: saturate(0.8) blur(0); <-- この行を削除 */
     transform: scale(1.05);
 }
 
