@@ -189,7 +189,18 @@ body {
     overflow: hidden; /* For background patterns */
 }
 
-.creation-section::before, .about-section::before, .prologue::before, footer::before {
+/* --- 背景紋様の定義 --- */
+
+/* Generic ::before styles for patterns */
+.prologue::before,
+#fashion::before,
+#interior::before,
+#ezo::before,
+#journal::before,
+#ohana-robot::before,
+#about::before,
+#hanaran::before,
+footer::before {
     content: '';
     position: absolute;
     top: 0;
@@ -200,9 +211,8 @@ body {
     opacity: 0.8;
 }
 
-/* --- 背景紋様の定義 --- */
 
-/* Prologue: 氷 (こおり) */
+/* Prologue: 氷 (こおり) - Subtle Stripes */
 .prologue::before {
     background-color: #f2f2f2;
     background-image: linear-gradient(45deg, #e6e6e6 25%, transparent 25%), 
@@ -212,8 +222,8 @@ body {
     background-size: 20px 20px;
 }
 
-/* Creation Section: 撫子 (なでしこ) */
-.creation-section::before {
+/* Fashion: 撫子 (なでしこ) - Hemp Leaf Pattern */
+#fashion::before {
     background-color: #e5a6c5; /* 紅梅色 */
     background-image: 
         linear-gradient(30deg, #9e3d3f 12%, transparent 12.5%, transparent 87%, #9e3d3f 87.5%, #9e3d3f),
@@ -226,13 +236,51 @@ body {
     background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 
-/* About Section: 蝉の羽 (せみのは) */
-.about-section::before {
-    background-color: #c3b8a5; /* 蝉の羽色 */
-    background-image: repeating-linear-gradient(45deg, #165e83, #165e83 10px, transparent 10px, transparent 20px);
+/* Interior: 菖蒲 (しょうぶ) - Polka Dots */
+#interior::before {
+    background-color: #f2f2f2; /* 白 */
+    background-image: radial-gradient(#aacf53 20%, transparent 20%); /* 萌黄 */
+    background-size: 30px 30px;
 }
 
-/* Footer: 杜若 (かきつばた) */
+/* Ezo: 橘 (たちばな) - Checkered Pattern */
+#ezo::before {
+    background-color: #917347; /* 朽葉色 */
+    background-image:  
+      linear-gradient(45deg, #fef263 25%, transparent 25%, transparent 75%, #fef263 75%, #fef263),
+      linear-gradient(45deg, #fef263 25%, transparent 25%, transparent 75%, #fef263 75%, #fef263);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
+/* Journal: 蝉の羽 (せみのは) - Diagonal Stripes */
+#journal::before {
+    background-color: #c3b8a5; /* 蝉の羽色 */
+    background-image: repeating-linear-gradient(45deg, #165e83, #165e83 10px, transparent 10px, transparent 20px); /* 藍 */
+}
+
+/* OHANA-ROBOT: 若苗 (わかなえ) - Grid Pattern */
+#ohana-robot::before {
+    background-color: #c7dc68; /* 苗色 */
+    background-image: linear-gradient(#89c379 1px, transparent 1px), linear-gradient(90deg, #89c379 1px, transparent 1px); /* 浅緑 */
+    background-size: 20px 20px;
+}
+
+/* About: 百合 (ゆり) - Elegant Thin Stripes */
+#about::before {
+    background-color: #f2f2f2; /* 白 */
+    background-image: repeating-linear-gradient(120deg, #9d896c, #9d896c 1px, transparent 1px, transparent 40px); /* 檜皮色 */
+}
+
+/* Hanaran: 常夏 (とこなつ) - Soft Dots */
+#hanaran::before {
+    background-color: #c8385a; /* 濃紅 */
+    background-image: radial-gradient(circle, #a22042 25%, transparent 25%); /* 濃紅 (裏) */
+    background-size: 50px 50px;
+}
+
+
+/* Footer: 杜若 (かきつばた) - Gradient */
 footer::before {
     background: linear-gradient(to bottom, #2792c3, #002c43);
 }
@@ -248,7 +296,7 @@ footer::before {
 
 .creation-section, .about-section {
     padding: 10vh 0;
-    border-top: 1px solid #333;
+    border-top: none;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1.5s, transform 1.5s;
