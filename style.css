@@ -183,6 +183,69 @@ body {
 }
 
 /* 各セクション共通 */
+.creation-section, .about-section, .prologue, footer {
+    padding: 10vh 5vw;
+    position: relative;
+    overflow: hidden; /* For background patterns */
+}
+
+.creation-section::before, .about-section::before, .prologue::before, footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* --- 背景紋様の定義 --- */
+
+/* Prologue: 氷 (こおり) */
+.prologue::before {
+    background-color: #f2f2f2;
+    background-image: linear-gradient(45deg, #e6e6e6 25%, transparent 25%), 
+                      linear-gradient(-45deg, #e6e6e6 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #e6e6e6 75%),
+                      linear-gradient(-45deg, transparent 75%, #e6e6e6 75%);
+    background-size: 20px 20px;
+}
+
+/* Creation Section: 撫子 (なでしこ) */
+.creation-section::before {
+    background-color: #e5a6c5; /* 紅梅色 */
+    background-image: 
+        linear-gradient(30deg, #9e3d3f 12%, transparent 12.5%, transparent 87%, #9e3d3f 87.5%, #9e3d3f),
+        linear-gradient(150deg, #9e3d3f 12%, transparent 12.5%, transparent 87%, #9e3d3f 87.5%, #9e3d3f),
+        linear-gradient(30deg, #9e3d3f 12%, transparent 12.5%, transparent 87%, #9e3d3f 87.5%, #9e3d3f),
+        linear-gradient(150deg, #9e3d3f 12%, transparent 12.5%, transparent 87%, #9e3d3f 87.5%, #9e3d3f),
+        linear-gradient(60deg, #9e3d3f 25%, transparent 25.5%, transparent 75%, #9e3d3f 75%, #9e3d3f),
+        linear-gradient(120deg, #9e3d3f 25%, transparent 25.5%, transparent 75%, #9e3d3f 75%, #9e3d3f);
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}
+
+/* About Section: 蝉の羽 (せみのは) */
+.about-section::before {
+    background-color: #c3b8a5; /* 蝉の羽色 */
+    background-image: repeating-linear-gradient(45deg, #165e83, #165e83 10px, transparent 10px, transparent 20px);
+}
+
+/* Footer: 杜若 (かきつばた) */
+footer::before {
+    background: linear-gradient(to bottom, #2792c3, #002c43);
+}
+
+/* コンテンツエリアのパネル */
+.content-panel {
+    background-color: rgba(252, 250, 242, 0.85); /* 生成り色の半透明パネル */
+    padding: 5vh 5vw;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
 .creation-section, .about-section {
     padding: 10vh 0;
     border-top: 1px solid #333;
