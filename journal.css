@@ -30,18 +30,18 @@ body {
 }
 
 .journal-article header {
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #dddddd;
     margin-bottom: 40px;
     padding-bottom: 20px;
 }
 .journal-article h2 {
     font-size: 2.2rem;
-    color: #ddd;
+    color: var(--text-color);
     font-weight: 500;
     margin-bottom: 10px;
 }
 .journal-article time {
-    color: #888;
+    color: #888888;
 }
 
 .article-content {
@@ -63,7 +63,7 @@ body {
 }
 .article-content figcaption {
     font-size: 0.9rem;
-    color: #888;
+    color: #888888;
     margin-top: 10px;
     text-align: center;
 }
@@ -71,7 +71,7 @@ body {
 .hanaran-commentary {
     margin-top: 5em;
     padding: 30px;
-    background-color: rgba(255,255,255,0.02);
+    background-color: rgba(0,0,0,0.02);
     border-left: 2px solid var(--accent-color-2);
 }
 .hanaran-commentary h4 {
@@ -82,5 +82,5 @@ body {
 .hanaran-commentary p {
     font-size: 1rem;
     line-height: 2;
-    color: #bbb;
+    color: #555555;
 }
