@@ -1,32 +1,16 @@
 // script.js (更新版)
 document.addEventListener('DOMContentLoaded', () => {
 
-    const intro = document.getElementById('intro');
     const mainContent = document.getElementById('main-content');
     const cursor = document.querySelector('.cursor');
     const navTrigger = document.getElementById('nav-trigger');
     const navigation = document.getElementById('navigation');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // サイトへのエントリー処理
-    function enterSite() {
-        if (intro.style.opacity === '0') return; // 既に実行済みの場合は何もしない
-        intro.style.opacity = '0';
-        intro.style.pointerEvents = 'none';
-        
-        // メインコンテンツがあるページのみ適用
-        if(mainContent) {
-            document.body.style.overflow = 'auto';
-            mainContent.style.opacity = '1';
-        }
-        if(navTrigger) {
-            navTrigger.style.opacity = '1';
-        }
+    // ページ読み込み時の初期化
+    if(navTrigger) {
+        navTrigger.style.opacity = '1';
     }
-
-    // イントロ画面をクリックまたは3秒経過でエントリー
-    document.body.addEventListener('click', enterSite, { once: true });
-    setTimeout(enterSite, 4000); // 4秒後に強制エントリー
 
     // カスタムカーソルの追従
     window.addEventListener('mousemove', e => {
@@ -180,11 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // エフェクトを初期化（サイト表示後）
+    // エフェクトを初期化
     setTimeout(() => {
         createFloatingPetals();
         addRotatingFlowers();
         addLightParticles();
         addSwayingEffect();
-    }, 5000);
+    }, 1000);
 });

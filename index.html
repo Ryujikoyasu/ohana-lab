@@ -33,10 +33,6 @@
 </head>
 <body>
 
-    <div id="intro">
-        <div class="intro-logo">おはな研究所</div>
-    </div>
-
     <div class="cursor"></div>
 
     <div id="nav-trigger">
@@ -45,25 +41,23 @@
 
     <nav id="navigation">
         <ul>
-            <li><a href="#fashion" class="nav-link">衣</a></li>
-            <li><a href="#interior" class="nav-link">光</a></li>
-            <li><a href="#ezo" class="nav-link">蝦夷</a></li>
+            <li><a href="#works" class="nav-link">作品</a></li>
             <li><a href="#journal" class="nav-link">記録</a></li>
-            <li><a href="#ohana-robot" class="nav-link">OHANA-ROBOT</a></li>
-            <li><a href="#about" class="nav-link">研究所について</a></li>
-            <li><a href="#hanaran" class="nav-link">花懶とは</a></li>
+            <li><a href="#ohana-robot" class="nav-link">プロジェクト</a></li>
             <li><a href="#contact" class="nav-link">葉書</a></li>
         </ul>
     </nav>
 
     <main id="main-content">
 
-        <header class="prologue">
-            <div class="content-panel">
-                <h1 class="vertical-text">
-                    おはな研究所
-                    <span class="subtitle">人と自然、そのあわいを探る</span>
-                </h1>
+        <header class="hero-section">
+            <div class="hero-content">
+                <h1 class="main-title">おはな研究所</h1>
+                <p class="hero-subtitle">人と自然、そのあわいを探る</p>
+                <div class="hero-description">
+                    <p>消費社会の喧騒と、土地に根ざした自然の質感との間に、極めて個人的で繊細なバランスポイントを探る研究所です。</p>
+                    <p>「花懶（はならん）」の美学のもと、衣・光・蝦夷をテーマに、人と自然の境界が曖昧になる「あわい」の領域を創造していきます。</p>
+                </div>
             </div>
         </header>
 
@@ -176,79 +170,121 @@
             </div>
         </section>
         
-        <!-- Section: 記録 (Journal) - 新設 -->
+        <!-- Section: 作品ギャラリー -->
+        <section id="works" class="creation-section">
+            <div class="content-panel">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">作品</h2>
+                    <p class="section-subtitle">衣・光・蝦夷 - 三つのテーマで表現する「あわい」の美学</p>
+                </div>
+                
+                <!-- 衣：Fashion -->
+                <div class="theme-section">
+                    <h3 class="theme-title">衣 - 洗練と野生の間に立つ</h3>
+                    <div class="grid-container">
+                        <div class="grid-item wide">
+                            <img src="images/journal/nature-print/1.jpg" alt="ネイチャープリントされたシャツ">
+                            <div class="item-overlay">
+                                <p>この瞬間の転写</p>
+                                <a href="journal.html#nature-print" class="read-more">記録を読む</a>
+                            </div>
+                        </div>
+                        <div class="grid-item">
+                            <img src="images/journal/karamushi-dye/3.png" alt="カラムシと泥で染められた布">
+                            <div class="item-overlay">
+                                <p>土地の色</p>
+                                <a href="journal.html#karamushi-dye" class="read-more">記録を読む</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 光：Interior -->
+                <div class="theme-section">
+                    <h3 class="theme-title">光 - 影を愛でるための灯火</h3>
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <img src="images/interior/wasi.png" alt="和紙と植物でできた照明">
+                            <div class="item-overlay">
+                                <p>五箇山和紙の灯り</p>
+                                <a href="journal.html#nature-print" class="read-more">記録を読む</a>
+                            </div>
+                        </div>
+                        <div class="grid-item">
+                            <img src="images/interior/tutuji.jpg" alt="真鍮のキャンドルスタンド">
+                            <div class="item-overlay">
+                                <p>エゾイソツツジの蓄光オブジェ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 蝦夷：Ezo -->
+                <div class="theme-section">
+                    <h3 class="theme-title">蝦夷 - 北の大地が育んだ、野生の息吹</h3>
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <img src="images/textile/エゾイソツツジ.JPG" alt="エゾイソツツジのテキスタイル">
+                            <div class="item-overlay">
+                                <p>エゾイソツツジ</p>
+                            </div>
+                        </div>
+                        <div class="grid-item">
+                            <img src="images/textile/エゾウサギギク.jpg" alt="エゾウサギギクのテキスタイル">
+                            <div class="item-overlay">
+                                <p>エゾウサギギク</p>
+                            </div>
+                        </div>
+                        <div class="grid-item">
+                            <img src="images/textile/エゾリンドウ.jpg" alt="エゾリンドウのテキスタイル">
+                            <div class="item-overlay">
+                                <p>エゾリンドウ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 思考の記録 -->
         <section id="journal" class="creation-section">
             <div class="content-panel">
                 <div class="section-title-wrapper">
-                    <h2 class="section-title">記録</h2>
-                    <p class="section-subtitle">思考と試行の断章</p>
+                    <h2 class="section-title">思考の記録</h2>
+                    <p class="section-subtitle">創造の過程で生まれる断章</p>
                 </div>
-                <div class="journal-list">
-                    <a href="journal.html#nature-print" class="journal-item">
+                <div class="journal-grid">
+                    <a href="journal.html#nature-print" class="journal-card">
                         <h3>ネイチャープリント</h3>
                         <p>植物という存在が持つ固有のフォルムを、布というメディアに写し取る「転写」の試み。</p>
                         <span class="journal-date">2025.06.21</span>
                     </a>
-                    <a href="journal.html#karamushi-dye" class="journal-item">
+                    <a href="journal.html#karamushi-dye" class="journal-card">
                         <h3>カラムシ染</h3>
                         <p>明確な完成図を持たない行為が、いかにして土地と身体の記憶を布の上に堆積させていくかという実証。</p>
                         <span class="journal-date">2025.06.20</span>
                     </a>
+                    <div class="journal-card philosophy">
+                        <h3>花懶の美学</h3>
+                        <p>咲くことさえ面倒な、美の一片（ひとひら）。咲かない美の美学化であり、反抗の詩情化。</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section: OHANA-ROBOT -->
+        <!-- Section: プロジェクト -->
         <section id="ohana-robot" class="creation-section">
             <div class="content-panel">
                 <div class="section-title-wrapper">
-                    <h2 class="section-title">OHANA-ROBOT</h2>
-                    <p class="section-subtitle">対話可能な選択的機械除草ロボット</p>
+                    <h2 class="section-title">プロジェクト</h2>
+                    <p class="section-subtitle">技術と自然の調和を目指して</p>
                 </div>
-                <div class="about-section">
-                    <div class="about-content">
-                        <img src="https://raw.githubusercontent.com/Ryujikoyasu/ohana-robot/main/media/ogp.png" alt="OHANA-ROBOT">
-                        <div class="about-text">
-                            <p>OHANA-ROBOTは、大規模な機械が入れない複雑な農地向けに開発された、対話可能な除草ロボットです。自然言語での指示を理解し、人と共存しながら雑草を選択的に除去します。</p>
-                            <p>このプロジェクトは、農業の効率化だけを追求するのではなく、自然環境との調和を目指すオープンソースな試みです。詳細は、以下のリンクからご覧ください。</p>
-                            <a href="https://ryujikoyasu.github.io/ohana-robot/" target="_blank" class="read-more">プロジェクトサイトへ</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: 研究所について (About) -->
-        <section id="about" class="about-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">研究所について</h2>
-                </div>
-                <div class="about-content">
-                    <img src="https://images.unsplash.com/photo-1589923188900-85dae523342d?q=80&w=1887" alt="森の中で光に手をかざす">
-                    <div class="about-text">
-                        <p>私たちは、消費社会の喧騒と、土地に根ざした自然の質感との間に、極めて個人的で繊細なバランスポイントを探ることを目的とした研究所です。</p>
-                        <p>人と自然、その境界が曖昧になるような「あわい」の領域にこそ、新しい豊かさの可能性があると信じています。当研究所では、その探求の過程そのものを「創造」と呼び、衣食住、そして美学に渡る様々な試みを記録しています。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: 花懶とは (Hanalan) -->
-        <section id="hanaran" class="creation-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">美学の探求: 花懶</h2>
-                    <p class="section-subtitle">咲くことさえ面倒な、美の一片（ひとひら）</p>
-                </div>
-                <div class="about-section">
-                    <div class="about-content">
-                         <img src="https://images.unsplash.com/photo-1562625295-51e4c6c453ac?q=80&w=1887" alt="萎れた一輪の花">
-                        <div class="about-text">
-                            <p>「花」が本来持つ華やかさや生命力に対して、「懶（ものう）さ」や「怠惰さ」を重ねることで、咲ききらない、あるいは咲くことを拒否したような、未完で、退廃的な美しさを表現する、私たちが見出した美学的な造語です。</p>
-                            <p>積極的に咲き誇ることよりも、咲く前の曖昧で静かな時間、萎れゆく美、意志の希薄さ、自己放棄のような姿に価値を見出す。「咲かない」ことが選択であるかのように、そこに主体性と反抗、そして耽美主義的な香りも含んでいます。</p>
-                            <p>花懶はただの「怠け」ではなく、咲かない美の美学化であり、反抗の詩情化なのです。</p>
-                        </div>
+                <div class="project-content">
+                    <img src="https://raw.githubusercontent.com/Ryujikoyasu/ohana-robot/main/media/ogp.png" alt="OHANA-ROBOT">
+                    <div class="project-text">
+                        <h3>OHANA-ROBOT</h3>
+                        <p>対話可能な選択的機械除草ロボット。人と自然が共存する新しい農業のかたちを提案します。</p>
+                        <a href="https://ryujikoyasu.github.io/ohana-robot/" target="_blank" class="read-more">プロジェクトサイトへ</a>
                     </div>
                 </div>
             </div>
