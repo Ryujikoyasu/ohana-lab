@@ -333,12 +333,13 @@ footer::before {
 .grid-item {
     position: relative;
     overflow: hidden;
+    border-radius: 8px;
     transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out; 
 }
 
 .grid-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05) rotate(0.5deg);
+    box-shadow: 0 15px 40px rgba(136, 201, 179, 0.3), 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .grid-item.wide {
@@ -350,13 +351,14 @@ footer::before {
     height: 100%;
     object-fit: cover;
     display: block;
-    /* filter: saturate(0.2) blur(1px); <-- この行を削除し、くすませる効果をなくします */
-    transition: transform 0.8s; /* 拡大アニメーションのみ残します */
+    border-radius: 8px;
+    transition: transform 0.8s ease-out, filter 0.5s;
+    filter: brightness(0.9) saturate(1.1);
 }
 
 .grid-item:hover img {
-    /* filter: saturate(0.8) blur(0); <-- この行を削除 */
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(-0.5deg);
+    filter: brightness(1.1) saturate(1.3);
 }
 
 .item-overlay {
@@ -365,9 +367,12 @@ footer::before {
     left: 0;
     width: 100%;
     padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3), transparent);
+    color: white;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    border-radius: 0 0 8px 8px;
 }
 
 .grid-item:hover .item-overlay {
@@ -540,4 +545,201 @@ footer a {
 @keyframes fadeInOut {
     0%, 100% { opacity: 0; }
     50% { opacity: 0.5; }
+}
+
+/* 浮遊する花びらのアニメーション */
+.floating-petals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, #ff9eb5, #ffc0cb, #ffb6c1);
+    border-radius: 50% 10% 50% 10%;
+    animation: float 8s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+.petal:nth-child(2n) {
+    background: linear-gradient(45deg, #ffeaa7, #fab1a0, #fdcb6e);
+    animation-duration: 12s;
+    border-radius: 70% 30% 70% 30%;
+}
+
+.petal:nth-child(3n) {
+    background: linear-gradient(45deg, #a8e6cf, #88d8c0, #66c3b7);
+    animation-duration: 10s;
+    border-radius: 60% 40% 60% 40%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100vh) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 回転する小花エフェクト */
+.section-title-wrapper {
+    position: relative;
+}
+
+.rotating-flower {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #ff9eb5, #ffc0cb);
+    border-radius: 50%;
+    animation: rotateAroundTitle 20s linear infinite;
+}
+
+.rotating-flower::before,
+.rotating-flower::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #ffeaa7, #fdcb6e);
+    border-radius: 50%;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.rotating-flower::after {
+    top: auto;
+    bottom: -3px;
+    background: radial-gradient(circle, #a8e6cf, #88d8c0);
+}
+
+@keyframes rotateAroundTitle {
+    0% {
+        transform: rotate(0deg) translateX(80px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+    }
+}
+
+/* 光の粒子エフェクト */
+.light-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+    border-radius: 50%;
+    animation: sparkle 4s infinite ease-in-out;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 揺れる要素 */
+.swaying-element {
+    animation: sway 6s infinite ease-in-out;
+    transform-origin: bottom center;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+}
+
+/* グリッドアイテムのホバー時花開きエフェクト */
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.grid-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 192, 203, 0.3), rgba(255, 182, 193, 0.2), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease-out;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.grid-item:hover::before {
+    width: 150px;
+    height: 150px;
+    opacity: 0.7;
+}
+
+/* セクションタイトルの装飾強化 */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color-1), transparent, var(--accent-color-1));
+    transform: translateX(-50%);
+    animation: glow 3s infinite ease-in-out;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--accent-color-1);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--accent-color-1), 0 0 25px var(--accent-color-1);
+    }
 }
