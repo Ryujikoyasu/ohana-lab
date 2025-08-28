@@ -48,6 +48,11 @@ body {
     text-align: center;
     position: relative;
     padding: 5vh 5vw;
+    background: linear-gradient(135deg,
+        rgba(247, 231, 206, 0.3) 0%,
+        rgba(228, 161, 193, 0.1) 30%,
+        rgba(125, 157, 133, 0.08) 70%,
+        rgba(247, 231, 206, 0.3) 100%);
 }
 
 /* プロジェクト詳細 */
@@ -305,17 +310,19 @@ footer::before {
 /* コンテンツエリアのパネル */
 .content-panel {
     background: linear-gradient(135deg, 
-        rgba(250, 248, 243, 0.9) 0%, 
-        rgba(247, 231, 206, 0.85) 50%, 
-        rgba(250, 248, 243, 0.9) 100%);
+        rgba(247, 231, 206, 0.7) 0%, 
+        rgba(228, 161, 193, 0.15) 25%,
+        rgba(250, 248, 243, 0.8) 50%,
+        rgba(125, 157, 133, 0.12) 75%,
+        rgba(247, 231, 206, 0.7) 100%);
     padding: 5vh 5vw;
     border-radius: 16px;
     box-shadow: 
-        0 10px 40px rgba(228, 161, 193, 0.1),
-        0 5px 15px rgba(125, 157, 133, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        0 10px 40px rgba(228, 161, 193, 0.15),
+        0 5px 15px rgba(125, 157, 133, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(228, 161, 193, 0.2);
+    border: 1px solid rgba(228, 161, 193, 0.3);
 }
 
 .creation-section, .about-section {
