@@ -70,6 +70,20 @@ body {
 .hero-content {
     max-width: 800px;
     animation: heroFadeIn 2s ease-out;
+    background: linear-gradient(135deg, 
+        rgba(247, 231, 206, 0.8) 0%, 
+        rgba(228, 161, 193, 0.2) 25%,
+        rgba(250, 248, 243, 0.9) 50%,
+        rgba(125, 157, 133, 0.15) 75%,
+        rgba(247, 231, 206, 0.8) 100%);
+    padding: 4vh 4vw;
+    border-radius: 20px;
+    box-shadow: 
+        0 15px 50px rgba(228, 161, 193, 0.2),
+        0 8px 20px rgba(125, 157, 133, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(228, 161, 193, 0.25);
 }
 
 .main-title {
