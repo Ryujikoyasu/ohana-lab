@@ -47,6 +47,18 @@ body {
     padding: 5vh 5vw;
 }
 
+/* プロジェクト詳細 */
+.project-details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--accent-color-2);
+}
+
+.project-details p {
+    margin-bottom: 0.5rem;
+}
+
 .hero-content {
     max-width: 800px;
     animation: heroFadeIn 2s ease-out;
