@@ -1055,25 +1055,6 @@ footer a {
     font-weight: 500;
 }
 
-/* 特別な作品の大きな画像表示 */
-.work-content.featured {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-}
-
-.featured-image {
-    flex: none;
-    width: 80%;
-    max-width: 800px;
-}
-
-.work-content.featured .work-description {
-    width: 100%;
-    text-align: center;
-    padding: 0;
-}
-
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .main-title {
@@ -1106,9 +1087,6 @@ footer a {
         width: 100%;
     }
     
-    .featured-image {
-        width: 95%;
-    }
     
     .work-section {
         margin: 4vh 0;
