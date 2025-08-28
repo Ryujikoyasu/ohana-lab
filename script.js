@@ -19,16 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ホバーエフェクト
-    document.querySelectorAll('a, button, .grid-item, #nav-trigger, input, audio').forEach(el => {
+    document.querySelectorAll('a, button, .grid-item, #nav-trigger, input, audio, .work-image-container').forEach(el => {
         el.addEventListener('mouseover', () => {
-            cursor.style.width = '40px';
-            cursor.style.height = '40px';
-            cursor.style.backgroundColor = 'rgba(136, 201, 179, 0.3)'; // 薄浅葱に合わせる
+            cursor.style.width = '32px';
+            cursor.style.height = '32px';
+            cursor.style.backgroundColor = 'rgba(228, 161, 193, 0.2)'; // 桜色
+            cursor.style.boxShadow = '0 0 12px rgba(228, 161, 193, 0.4)';
         });
         el.addEventListener('mouseout', () => {
-            cursor.style.width = '20px';
-            cursor.style.height = '20px';
+            cursor.style.width = '16px';
+            cursor.style.height = '16px';
             cursor.style.backgroundColor = 'transparent';
+            cursor.style.boxShadow = '0 0 8px rgba(228, 161, 193, 0.3)';
         });
     });
 
@@ -73,9 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 浮遊する花びらを生成
     function createFloatingPetals() {
-        const petalsContainer = document.createElement('div');
-        petalsContainer.className = 'floating-petals';
-        document.body.appendChild(petalsContainer);
+        const petalsContainer = document.getElementById('petals-container');
+        if (!petalsContainer) return;
 
         function createPetal() {
             const petal = document.createElement('div');
@@ -83,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // ランダムな位置とアニメーション遅延を設定
             petal.style.left = Math.random() * 100 + '%';
-            petal.style.animationDelay = Math.random() * 8 + 's';
-            petal.style.animationDuration = (8 + Math.random() * 8) + 's';
+            petal.style.animationDelay = Math.random() * 6 + 's';
+            petal.style.animationDuration = (12 + Math.random() * 6) + 's';
             
-            // ランダムなサイズ
-            const size = 6 + Math.random() * 6;
+            // ランダムなサイズ（より小さく繊細に）
+            const size = 3 + Math.random() * 4;
             petal.style.width = size + 'px';
             petal.style.height = size + 'px';
             
@@ -98,15 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (petal.parentNode) {
                     petal.parentNode.removeChild(petal);
                 }
-            }, 16000);
+            }, 20000);
         }
 
-        // 定期的に花びらを生成
-        setInterval(createPetal, 800);
+        // 定期的に花びらを生成（より控えめに）
+        setInterval(createPetal, 1500);
         
         // 初期花びらを生成
-        for (let i = 0; i < 5; i++) {
-            setTimeout(createPetal, i * 1000);
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createPetal, i * 2000);
         }
     }
 
