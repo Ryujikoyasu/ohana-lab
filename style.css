@@ -224,10 +224,19 @@ footer::before {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.3;
-    background: radial-gradient(circle at 20% 30%, rgba(228, 161, 193, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(125, 157, 133, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(247, 231, 206, 0.15) 0%, transparent 40%);
+    opacity: 0.6;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(228, 161, 193, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(125, 157, 133, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(247, 231, 206, 0.3) 0%, transparent 55%),
+        radial-gradient(circle at 90% 20%, rgba(228, 161, 193, 0.15) 0%, transparent 35%),
+        radial-gradient(circle at 10% 90%, rgba(125, 157, 133, 0.18) 0%, transparent 40%),
+        linear-gradient(135deg, 
+            rgba(250, 248, 243, 0.9) 0%,
+            rgba(247, 231, 206, 0.7) 25%,
+            rgba(228, 161, 193, 0.1) 50%,
+            rgba(125, 157, 133, 0.1) 75%,
+            rgba(250, 248, 243, 0.9) 100%);
 }
 
 /* Fashion: 撫子 (なでしこ) - Hemp Leaf Pattern */
