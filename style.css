@@ -379,14 +379,29 @@ footer::before {
 .creation-section, .about-section {
     padding: 10vh 0;
     border-top: none;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 1.5s, transform 1.5s;
 }
 
 .creation-section.visible, .about-section.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* 動画プレビューのスタイル */
+.work-video-preview {
+    max-width: 400px;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.work-video-preview video {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .section-title-wrapper {
