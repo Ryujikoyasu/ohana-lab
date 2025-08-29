@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // エフェクトを初期化
     setTimeout(() => {
         createFloatingPetals();
