@@ -1207,3 +1207,50 @@ footer a {
         gap: 15px;
     }
 }
+
+/* 'お花の池・小鳥の森'の新しいレイアウト用スタイル */
+.work-top-content {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.work-top-content .work-media-container {
+    flex: 1 1 65%; /* 動画の幅を広げる */
+    max-width: 65%;
+}
+
+.work-details-sidebar {
+    flex: 1 1 35%;
+    max-width: 35%;
+}
+
+.work-main-description {
+    max-width: 1200px;
+    margin: 30px auto 0; /* 上部にマージンを追加 */
+    padding: 0 20px; /* 少しパディングを追加 */
+}
+
+/* 既存のwork-video-previewのmax-widthを上書き */
+.work-top-content .work-video-preview {
+    max-width: 100%;
+}
+
+/* 詳細ギャラリーのマージン調整 */
+.work-gallery-extended {
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .work-top-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .work-top-content .work-media-container,
+    .work-top-content .work-details-sidebar {
+        max-width: 100%;
+    }
+}
