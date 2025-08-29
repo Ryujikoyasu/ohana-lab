@@ -44,7 +44,7 @@ body {
     position: fixed;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
+    transition: all 0.05s ease;
     z-index: 9999;
     background: radial-gradient(circle, rgba(228, 161, 193, 0.1) 0%, transparent 70%);
     box-shadow: 0 0 8px rgba(228, 161, 193, 0.3);
@@ -391,18 +391,33 @@ footer::before {
 
 /* 動画プレビューのスタイル */
 .work-video-preview {
-    max-width: 400px;
-    margin: 20px 0;
+    margin: 20px auto;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 60%;
 }
 
+.work-media-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.work-main-image,
+.work-video-preview {
+    flex: 1;
+    min-width: 0;
+}
+
+.work-main-image img,
 .work-video-preview video {
     width: 100%;
     height: auto;
+    border-radius: 8px;
     display: block;
 }
+
 
 .section-title-wrapper {
     text-align: center;
@@ -517,16 +532,23 @@ audio::-webkit-media-controls-enclosure {
 /* Aboutセクション */
 .about-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
     max-width: 900px;
     margin: 0 auto;
     gap: 40px;
 }
 
+.profiles-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .about-content img {
     width: 40%;
     height: auto;
-    filter: grayscale(1);
 }
 
 .about-text {
@@ -560,7 +582,7 @@ footer a {
     .grid-item.wide {
         grid-column: span 1;
     }
-    .music-player, .about-content {
+    .music-player {
         flex-direction: column;
     }
     .music-player img {
