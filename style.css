@@ -1359,3 +1359,88 @@ footer a {
         max-width: 100%;
     }
 }
+
+/* 植物園のししおどし：動画を小さめに */
+#shishi-odoshi .work-media-container {
+    flex: 0 0 auto;      /* 既定の65%幅を解除 */
+    max-width: 560px;    /* 表示サイズを抑制 */
+}
+#shishi-odoshi .work-video-preview {
+    max-width: 100%;
+}
+#shishi-odoshi .work-details-sidebar {
+    flex: 1 1 auto;      /* サイドを自然な幅配分に */
+}
+
+/* --- メディアギャラリー（クッション用） --- */
+.media-gallery {
+    width: 100%;
+}
+.media-gallery .main-media {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(136, 201, 179, 0.2);
+    margin-bottom: 14px;
+    aspect-ratio: 3 / 4; /* 縦写真に最適化（必要なら調整可） */
+    background: #f6f6f6;
+}
+.media-gallery .main-media img.gallery-main,
+.media-gallery .main-media .gallery-main-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.media-gallery .main-media img.gallery-main { transition: opacity 200ms ease; }
+
+/* おはなクッション釧路 専用のサイズ・比率調整 */
+#ohana-cushion-kushiro .work-media-container {
+    flex: 0 0 auto;          /* 共有レイアウトの65%指定を無効化 */
+    max-width: 420px;        /* 全体を小さくコンパクトに */
+    margin: 0 auto;          /* 左右中央寄せ */
+}
+#ohana-cushion-kushiro .media-gallery .main-media {
+    aspect-ratio: 1 / 1;     /* 正方形に近い比率（正方形） */
+}
+#ohana-cushion-kushiro .media-gallery .gallery-thumb img,
+#ohana-cushion-kushiro .media-gallery .gallery-thumb .placeholder-image {
+    height: 64px;            /* サムネも少し小さめに */
+}
+.media-gallery .thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+.media-gallery .gallery-thumb {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+.media-gallery .gallery-thumb img,
+.media-gallery .gallery-thumb .placeholder-image {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(136, 201, 179, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, outline-color 0.25s ease;
+}
+.media-gallery .gallery-thumb:hover .placeholder-image,
+.media-gallery .gallery-thumb:hover img {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(136, 201, 179, 0.25);
+}
+.media-gallery .gallery-thumb.active .placeholder-image,
+.media-gallery .gallery-thumb.active img {
+    outline: 2px solid var(--accent-color-2);
+}
+
+@media (max-width: 768px) {
+    .media-gallery .thumbs {
+        grid-template-columns: repeat(5, 72px);
+        overflow-x: auto;
+    }
+}

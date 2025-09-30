@@ -172,5 +172,60 @@ document.addEventListener('DOMContentLoaded', () => {
         addRotatingFlowers();
         addLightParticles();
         addSwayingEffect();
+        initMediaGalleries();
     }, 1000);
+
+    // メディアギャラリーの初期化（サムネクリックでメイン切替）
+    function initMediaGalleries() {
+        const galleries = document.querySelectorAll('[data-gallery]');
+        galleries.forEach(gallery => {
+            const mainImg = gallery.querySelector('img.gallery-main');
+            const mainPlaceholder = gallery.querySelector('.gallery-main-placeholder');
+            const thumbs = gallery.querySelectorAll('.gallery-thumb');
+
+            // 最初の有効サムネをメインに適用
+            let initialized = false;
+            thumbs.forEach((thumb, idx) => {
+                const src = thumb.getAttribute('data-src');
+                // サムネ画像が用意されていれば img を入れる
+                if (src) {
+                    // プレースホルダーがあれば外す
+                    const ph = thumb.querySelector('.placeholder-image');
+                    if (ph) ph.remove();
+                    const thumbImg = document.createElement('img');
+                    thumbImg.alt = `ギャラリー サムネイル ${idx+1}`;
+                    thumbImg.src = src; // 画像未配置でも壊れはするが構造は維持
+                    thumb.appendChild(thumbImg);
+                }
+                thumb.addEventListener('click', () => {
+                    thumbs.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    if (mainImg) {
+                        mainImg.style.opacity = '0';
+                        const nextSrc = src || '';
+                        if (nextSrc) {
+                            // 画像のロード完了後にフェードイン
+                            const onload = () => {
+                                mainImg.style.display = 'block';
+                                mainImg.style.opacity = '1';
+                                mainImg.removeEventListener('load', onload);
+                            };
+                            mainImg.addEventListener('load', onload);
+                            mainImg.src = nextSrc;
+                        } else {
+                            mainImg.style.display = 'none';
+                        }
+                    }
+                    if (mainPlaceholder) {
+                        mainPlaceholder.style.display = src ? 'none' : 'flex';
+                    }
+                });
+                // 初期選択
+                if (!initialized && src) {
+                    thumb.click();
+                    initialized = true;
+                }
+            });
+        });
+    }
 });
