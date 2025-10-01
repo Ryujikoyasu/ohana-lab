@@ -1372,7 +1372,7 @@ footer a {
     flex: 1 1 auto;      /* サイドを自然な幅配分に */
 }
 
-/* --- メディアギャラリー（クッション用） --- */
+/* --- メディアギャラリー（座布団用） --- */
 .media-gallery {
     width: 100%;
 }
@@ -1395,17 +1395,17 @@ footer a {
 }
 .media-gallery .main-media img.gallery-main { transition: opacity 200ms ease; }
 
-/* おはなクッション釧路 専用のサイズ・比率調整 */
-#ohana-cushion-kushiro .work-media-container {
+/* おはな座布団釧路 専用のサイズ・比率調整 */
+#ohana-zabuton-kushiro .work-media-container {
     flex: 0 0 auto;          /* 共有レイアウトの65%指定を無効化 */
     max-width: 420px;        /* 全体を小さくコンパクトに */
     margin: 0 auto;          /* 左右中央寄せ */
 }
-#ohana-cushion-kushiro .media-gallery .main-media {
+#ohana-zabuton-kushiro .media-gallery .main-media {
     aspect-ratio: 1 / 1;     /* 正方形に近い比率（正方形） */
 }
-#ohana-cushion-kushiro .media-gallery .gallery-thumb img,
-#ohana-cushion-kushiro .media-gallery .gallery-thumb .placeholder-image {
+#ohana-zabuton-kushiro .media-gallery .gallery-thumb img,
+#ohana-zabuton-kushiro .media-gallery .gallery-thumb .placeholder-image {
     height: 64px;            /* サムネも少し小さめに */
 }
 .media-gallery .thumbs {
