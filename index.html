@@ -36,6 +36,26 @@
     <div class="cursor"></div>
     <div class="floating-petals" id="petals-container"></div>
 
+    <!-- Global Header: simplified, clear IA -->
+    <header id="site-header" role="banner">
+        <div class="header-inner">
+            <a href="index.html" class="brand">おはな研究所</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="#works" class="nav-link">作品</a>
+                <a href="#collab" class="nav-link">コラボレーション</a>
+                <a href="about.html" class="nav-link">研究所について</a>
+                <a href="https://note.com/ryuddi" target="_blank" rel="noopener" class="nav-link">note</a>
+                <a href="#contact" class="nav-link">葉書</a>
+                <a href="en/index.html" class="lang-link" hreflang="en">EN</a>
+            </nav>
+            <div class="header-controls" role="group" aria-label="Lab Controls">
+                <button id="mode-toggle" class="btn small" aria-pressed="false" title="あそびモード">あそび</button>
+                <button id="notes-open" class="btn small" title="フィールドノート">📓</button>
+                <button id="specimen-toggle" class="btn small" title="標本パレット">🧪</button>
+            </div>
+        </div>
+    </header>
+
     <div id="nav-trigger">
         <div class="bud"></div>
     </div>
@@ -44,29 +64,80 @@
         <ul>
             <li><a href="about.html" class="nav-link">研究所について</a></li>
             <li><a href="#works" class="nav-link">作品</a></li>
-            <li><a href="#ohana-mini" class="nav-link">おはな研究所ミニ</a></li>
-            <li><a href="#journal" class="nav-link">記録</a></li>
-            <li><a href="#ohana-robot" class="nav-link">プロジェクト</a></li>
+            <li><a href="https://note.com/ryuddi" target="_blank" rel="noopener" class="nav-link">note</a></li>
             <li><a href="news.html" class="nav-link">展示・メディア</a></li>
+            <li><a href="#collab" class="nav-link">コラボレーション</a></li>
             <li><a href="#contact" class="nav-link">葉書</a></li>
         </ul>
     </nav>
 
+    <!-- Parallax forest layers -->
+    <div id="forest" aria-hidden="true">
+        <div class="forest-layer layer-canopy"></div>
+        <div class="forest-layer layer-mid"></div>
+        <div class="forest-layer layer-ground"></div>
+    </div>
+
+    <!-- Specimen Drawer (Palette Switcher) -->
+    <aside id="specimen-drawer" aria-label="標本パレット" aria-hidden="true">
+        <div class="drawer-inner">
+            <h3>標本パレット</h3>
+            <div class="chips">
+                <button class="chip" data-theme="sakura" aria-label="桜"><span>桜</span></button>
+                <button class="chip" data-theme="indigo" aria-label="藍"><span>藍</span></button>
+                <button class="chip" data-theme="ezo" aria-label="蝦夷"><span>蝦夷</span></button>
+                <button class="chip" data-theme="default" aria-label="標準"><span>標準</span></button>
+            </div>
+            <p class="drawer-note">色と質感のプリセットを切替えます。</p>
+        </div>
+    </aside>
+
     <main id="main-content">
 
-        <header class="hero-section">
-            <div class="hero-content">
-                <h1 class="main-title">おはな研究所</h1>
-                <p class="hero-subtitle">人と自然、あはひを探る</p>
-                <div class="hero-description">
-                    <p>花は、咲くために何かを求めることがありません。ただそこにあり、時が来れば散っていく。その在り方に、私たちが忘れてしまった何かが宿っています。</p>
-                    <p>「おはな」を軸として、自然や季節を自分の中に取り込んでいく作法を探求する研究所です。草花を布に写し取り、植物で空間を染め、土地の記憶を手に宿らせながら、個々の技術の完成度よりも、一人の人間としての完成度を高めていくこと。</p>
-                    <p>人と自然の境界が曖昧になる「あはひ」の領域で、自然を取り込んでいく様々な方法を探っています。</p>
+        <!-- Showreel: full-bleed video/image hero -->
+        <section class="showreel" aria-label="Featured works">
+            <div class="reel">
+                <div class="slide active" data-target="#shishi-odoshi" data-title="秋の庭・鹿おどし">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide" data-target="#ohana-ike" data-title="お花の池・小鳥の森">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide" data-target="#mandala" data-title="弟子屈草花曼荼羅">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
-        </header>
+            <div class="reel-overlay">
+                <div class="logo-mark" aria-hidden="true">
+                    <div class="petal a"></div><div class="petal b"></div><div class="petal c"></div><div class="petal d"></div>
+                    <div class="core"></div>
+                </div>
+                <div class="title-stack">
+                    <h1>おはな研究所</h1>
+                    <p>人と自然のあいだに、新しい作法を。</p>
+                </div>
+                <div class="reel-actions">
+                    <button class="btn primary" data-goto="#works">作品を見る</button>
+                    <button class="btn" data-goto="#collab">コラボのご相談</button>
+                </div>
+                <div class="reel-spots">
+                    <button class="spot" data-target="#shishi-odoshi">鹿おどし →</button>
+                    <button class="spot" data-target="#ohana-ike">お花の池 →</button>
+                    <button class="spot" data-target="#mandala">曼荼羅 →</button>
+                </div>
+                <div class="scroll-cue">Scroll</div>
+            </div>
+        </section>
 
         
+        
+
         <!-- Section: 作品ギャラリー -->
         <section id="works" class="creation-section">
             <div class="content-panel">
@@ -74,9 +145,122 @@
                     <h2 class="section-title">作品</h2>
                     <p class="section-subtitle">人と自然の「あはひ」を探る創作</p>
                 </div>
+
+                <!-- Works Stack: scrollytelling panels -->
+                <div class="works-stack">
+                    <section class="stack-item" data-target="#shishi-odoshi">
+                        <div class="stack-sticky">
+                            <div class="stack-bg">
+                                <video autoplay muted loop playsinline preload="metadata">
+                                    <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="stack-overlay">
+                                <div class="stack-tag">Installation / Kushiro EGG</div>
+                                <h3>秋の庭・鹿おどし</h3>
+                                <p>毛綱毅曠建築に溶ける、退廃と祈りの音。</p>
+                                <div class="stack-actions">
+                                    <button class="btn primary" data-case="#shishi-odoshi">Case Study</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="stack-item" data-target="#ohana-ike">
+                        <div class="stack-sticky">
+                            <div class="stack-bg">
+                                <video autoplay muted loop playsinline preload="metadata">
+                                    <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="stack-overlay">
+                                <div class="stack-tag">Light & Sound / Teshikaga</div>
+                                <h3>お花の池・小鳥の森</h3>
+                                <p>水と森の境界で、ひかりが呼吸する。</p>
+                                <div class="stack-actions">
+                                    <button class="btn primary" data-case="#ohana-ike">Case Study</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="stack-item" data-target="#mandala">
+                        <div class="stack-sticky">
+                            <div class="stack-bg">
+                                <video autoplay muted loop playsinline preload="metadata">
+                                    <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="stack-overlay">
+                                <div class="stack-tag">Community Art / Teshikaga</div>
+                                <h3>みんなで弟子屈草花曼荼羅</h3>
+                                <p>土地の記憶を、手と布に宿す。</p>
+                                <div class="stack-actions">
+                                    <button class="btn primary" data-case="#mandala">Case Study</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                
+
+                <!-- Field Atlas: by territory × method (no lists) -->
+                <section id="atlas" class="atlas-section">
+                    <div class="atlas-controls">
+                        <div class="chips regions" aria-label="地域で見る">
+                            <button class="chip active" data-filter-region="all">すべて</button>
+                            <button class="chip" data-filter-region="doto">道東</button>
+                            <button class="chip" data-filter-region="koinosemi">小院瀬見</button>
+                        </div>
+                        <div class="chips methods" aria-label="カテゴリーで見る">
+                            <button class="chip" data-filter-tag="wear">衣</button>
+                            <button class="chip" data-filter-tag="space">空間</button>
+                        </div>
+                    </div>
+                    <div class="atlas-grid">
+                        <!-- 道東 -->
+                        <a class="atlas-item span-2" data-region="doto" data-tags="space" data-case="#shishi-odoshi">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                            </video>
+                            <div class="label">鹿おどし</div>
+                        </a>
+                        <a class="atlas-item" data-region="doto" data-tags="space" data-case="#ohana-ike">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                            </video>
+                            <div class="label">お花の池</div>
+                        </a>
+                        <a class="atlas-item" data-region="doto" data-tags="space" data-case="#mandala">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                            </video>
+                            <div class="label">曼荼羅</div>
+                        </a>
+                        <a class="atlas-item" data-region="doto" data-tags="wear" data-case="#ohana-zabuton-kushiro">
+                            <img src="images/works/zabuton/1.jpg" alt="おは奈座布団 釧路" onerror="this.closest('a').classList.add('ph')">
+                            <div class="label">おは奈座布団 釧路</div>
+                        </a>
+
+                        <!-- 小院瀬見 -->
+                        <a class="atlas-item" data-region="koinosemi" data-tags="wear" data-case="#case-kusabana">
+                            <img src="images/works/kusabana-taku.jpg" alt="草花拓">
+                            <div class="label">草花拓</div>
+                        </a>
+                        <a class="atlas-item span-2" data-region="koinosemi" data-tags="wear" data-case="#case-karamushi">
+                            <img src="images/journal/karamushi-dye/3.png" alt="カラムシ染">
+                            <div class="label">カラムシ染</div>
+                        </a>
+                        <a class="atlas-item" data-region="koinosemi" data-tags="space" data-case="#washi-light">
+                            <img src="images/interior/wasi.png" alt="五箇山和紙の灯り">
+                            <div class="label">和紙の灯り</div>
+                        </a>
+                    </div>
+                </section>
                 
                 <!-- 植物園のししおどし（最上段） -->
-                <div class="work-section enhanced" id="shishi-odoshi">
+                <div class="work-section enhanced compact case-hidden" id="shishi-odoshi">
                     <h3 class="work-title">秋の庭・鹿おどし</h3>
                     
                     <div class="work-top-content">
@@ -131,7 +315,7 @@
                 </div>
                 
                 <!-- お花の池・小鳥の森 -->
-                <div class="work-section enhanced">
+                <div class="work-section enhanced compact case-hidden" id="ohana-ike">
                     <h3 class="work-title">お花の池・小鳥の森</h3>
                     
                     <div class="work-top-content">
@@ -194,7 +378,7 @@
                 </div>
 
                 <!-- みんなで弟子屈草花曼荼羅 -->
-                <div class="work-section enhanced">
+                <div class="work-section enhanced compact case-hidden" id="mandala">
                     <h3 class="work-title">みんなで弟子屈草花曼荼羅</h3>
                     
                     <div class="work-top-content">
@@ -239,7 +423,7 @@
                 
 
                 <!-- 草花拓 -->
-                <div class="work-section">
+                <div class="work-section case-hidden" id="case-kusabana">
                     <h3 class="work-title">草花拓</h3>
                     <div class="work-content">
                         <div class="work-image-container">
@@ -253,7 +437,7 @@
                 </div>
 
                 <!-- カラムシ染 -->
-                <div class="work-section">
+                <div class="work-section case-hidden" id="case-karamushi">
                     <h3 class="work-title">カラムシ染</h3>
                     <div class="work-content reverse">
                         <div class="work-image-container">
@@ -267,7 +451,7 @@
                 </div>
 
                 <!-- 五箇山和紙の灯り -->
-                <div class="work-section">
+                <div class="work-section case-hidden" id="washi-light">
                     <h3 class="work-title">五箇山和紙の灯り</h3>
                     <div class="work-content">
                         <div class="work-image-container">
@@ -280,7 +464,7 @@
                 </div>
 
                 <!-- おはな座布団釧路（作品） -->
-                <div class="work-section enhanced" id="ohana-zabuton-kushiro">
+                <div class="work-section enhanced case-hidden" id="ohana-zabuton-kushiro">
                     <h3 class="work-title">おは奈座布団 釧路</h3>
                     <div class="work-top-content">
                         <!-- 左：ギャラリー -->
@@ -327,165 +511,78 @@
             </div>
         </section>
 
-                <!-- Section: おはな研究所ミニ -->
-                <section id="ohana-mini" class="creation-section">
-                    <div class="content-panel">
-                        <div class="section-title-wrapper">
-                            <h2 class="section-title">おはな研究所ミニ</h2>
-                            <p class="section-subtitle">より多くの人へ、日常に自然を</p>
-                        </div>
-                        
-                        <!-- ブランド概要 -->
-                        <div class="brand-intro">
-                            <p>おはな研究所の理念を受け継ぎながら、より多くの人の日常に自然の美しさを届けるブランドです。量産可能な技術と商業的アプローチを取り入れ、手に取りやすい価格で自然との「あはひ」を体験できる製品を提供します。</p>
-                        </div>
-
-                        
-                
-                <!-- レーザーカット草花拓ハンコ -->
-                <div class="work-section mini">
-                    <h3 class="work-title">レーザーカット草花拓ハンコ</h3>
-                    <div class="work-content">
-                        <div class="work-image-container">
-                            <div class="placeholder-image">
-                                <p>レーザーカット木材ハンコ</p>
-                            </div>
-                        </div>
-                        <div class="work-description">
-                            <p>実際の植物を使った草花拓の美しさを、レーザーカッターで加工した木材のハンコで再現。繊細な植物の形状を精密にカットし、何度でも美しい草花拓を楽しめます。手紙や包装紙、クラフト作品の装飾に最適です。</p>
-                            <div class="work-features">
-                                <h5>特徴</h5>
-                                <ul>
-                                    <li>レーザーカッターによる精密加工</li>
-                                    <li>持続可能な木材使用</li>
-                                    <li>量産可能でお求めやすい価格</li>
-                                    <li>繰り返し使用可能</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- その他のミニ製品 -->
-                <div class="work-section mini">
-                    <h3 class="work-title">ミニテキスタイル コレクション</h3>
-                    <div class="work-content reverse">
-                        <div class="work-image-container">
-                            <div class="placeholder-image">
-                                <p>量産型テキスタイル製品</p>
-                            </div>
-                        </div>
-                        <div class="work-description">
-                            <p>手ぬぐい、ハンカチ、小物入れなど、日常使いできる小さなテキスタイル製品。おはな研究所のデザインを活かしながら、工業的な印刷技術で量産し、多くの方に手に取っていただけるアイテムです。</p>
-                            <div class="work-features">
-                                <h5>製品ライン</h5>
-                                <ul>
-                                    <li>草花柄手ぬぐい</li>
-                                    <li>エゾ植物ハンカチ</li>
-                                    <li>小物入れ・ポーチ</li>
-                                    <li>ステッカー・シール</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 店舗情報 -->
-                <div class="store-info">
-                    <h3>おはな研究所トマム</h3>
-                    <p>2027年、実店舗として「おはな研究所トマム」の出店を予定しています。北海道の自然の中で、おはな研究所とおはな研究所ミニの作品を直接手に取ってご覧いただける場所となります。</p>
-                </div>
-                
             </div>
         </section>
 
-        <!-- Section: 思考の記録 -->
-        <section id="journal" class="creation-section">
+        
+
+
+        <!-- Section: Collaboration -->
+        <section id="collab" class="creation-section">
             <div class="content-panel">
                 <div class="section-title-wrapper">
-                    <h2 class="section-title">思考の記録</h2>
-                    <p class="section-subtitle">創造の過程で生まれる断章</p>
+                    <h2 class="section-title">コラボレーション</h2>
+                    <p class="section-subtitle">アーティスト、企業、地域とともに</p>
                 </div>
-                
-                <!-- 最近の活動 -->
-                <div class="recent-activity">
-                    <h3>最近の活動</h3>
-                    <div class="activity-links">
-                        <a href="https://note.com/ryuddi/n/n718dda29227a" target="_blank" class="activity-link">
-                            <div class="activity-content">
-                                <h4>弟子屈曼荼羅とお花の池・小鳥の森</h4>
-                                <p>釧路川源流感謝祭で制作したインスタレーション作品について</p>
-                                <span class="activity-date">2024.12.16</span>
+                <!-- Duo: Who makes the lab (moved here) -->
+                <section id="duo" class="duo-section">
+                    <div class="duo-grid">
+                        <div class="duo-card">
+                            <div class="duo-photo">
+                                <img src="images/profile/ryu-portrait.jpg" alt="りゅうの写真">
                             </div>
-                        </a>
+                            <div class="duo-text">
+                                <h3>りゅう</h3>
+                                <p>自然と暮らし、なんでも自分でやってみる人。農業ロボット開発の経験を背景に、衣を中心に染めと服づくり、道具設計まで。</p>
+                            </div>
+                        </div>
+                        <div class="duo-card">
+                            <div class="duo-photo">
+                                <img src="images/profile/mi-portrait.jpg" alt="みーの写真">
+                            </div>
+                            <div class="duo-text">
+                                <h3>みー</h3>
+                                <p>光の申し子。光の存在論的な経験を探り、北欧の光文化を研究。照明の制作と収集、体験としての光の設計。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="duo-note">二人の協働として「おはな」は生まれる——技術と感性、山の生活と光の研究が交差する。</p>
+                </section>
+                <div class="collab-grid">
+                    <div class="collab-card">
+                        <h3>企業・ブランド</h3>
+                        <p>空間演出、展示、素材開発。自然の記憶を宿すプロダクト/体験づくり。</p>
+                        <ul>
+                            <li>インスタレーション企画・実装</li>
+                            <li>素材/色のリサーチと提案</li>
+                            <li>コンセプト設計・ストーリー</li>
+                        </ul>
+                    </div>
+                    <div class="collab-card">
+                        <h3>アーティスト/キュレーター</h3>
+                        <p>共同制作や展覧会の共同構成。技術と自然素材の橋渡し。</p>
+                        <ul>
+                            <li>共同制作・テクニカル支援</li>
+                            <li>展示構成・照明/音環境</li>
+                            <li>地域連携型プロジェクト</li>
+                        </ul>
+                    </div>
+                    <div class="collab-card">
+                        <h3>自治体・工場</h3>
+                        <p>地域資源を活かした観光/教育/工場のブランディング・体験化。</p>
+                        <ul>
+                            <li>土地素材のリサーチ・活用</li>
+                            <li>ワークショップ設計</li>
+                            <li>地域・産業の物語化</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="journal-grid">
-                    <a href="journal.html#nature-print" class="journal-card">
-                        <h3>ネイチャープリント</h3>
-                        <p>植物という存在が持つ固有のフォルムを、布というメディアに写し取る「転写」の試み。</p>
-                        <span class="journal-date">2025.06.21</span>
-                    </a>
-                    <a href="journal.html#karamushi-dye" class="journal-card">
-                        <h3>カラムシ染</h3>
-                        <p>明確な完成図を持たない行為が、いかにして土地と身体の記憶を布の上に堆積させていくかという実証。</p>
-                        <span class="journal-date">2025.06.20</span>
-                    </a>
-                    <div class="journal-card philosophy">
-                        <h3>おはな研究所の理念</h3>
-                        <p>技術を極めることよりも、「おはな」を軸とした生き方そのものを作品にしていく。日常の行為すべてが、自然との対話であり、一人の人間としての成長の軌跡である。</p>
-                    </div>
+                <div class="collab-cta">
+                    <a class="btn primary" href="mailto:ryuddi0wani@gmail.com">相談してみる</a>
+                    <span class="note">企画段階からお気軽にどうぞ。</span>
                 </div>
             </div>
         </section>
-
-        <!-- Section: プロジェクト -->
-        <section id="ohana-robot" class="creation-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">プロジェクト</h2>
-                    <p class="section-subtitle">技術と自然の調和を目指して</p>
-                </div>
-                
-                <!-- OHANA-ROBOT -->
-                <div class="project-content">
-                    <img src="https://raw.githubusercontent.com/Ryujikoyasu/ohana-robot/main/media/ogp.png" alt="OHANA-ROBOT">
-                    <div class="project-text">
-                        <h3>OHANA-ROBOT</h3>
-                        <p>対話可能な選択的機械除草ロボット。人と自然が共存する新しい農業のかたちを提案します。</p>
-                        <a href="https://ryujikoyasu.github.io/ohana-robot/" target="_blank" class="read-more">プロジェクトサイトへ</a>
-                    </div>
-                </div>
-                
-                <!-- お花の池・小鳥の森 -->
-                <div class="project-content">
-                    <div class="project-text">
-                        <h3>お花の池・小鳥の森</h3>
-                        <p>弟子屈での釧路川源流感謝祭にて制作。自然の音と光が織りなすインスタレーション作品。水と森の境界で、訪れる人々に静謐な体験を提供します。</p>
-                        <div class="project-details">
-                            <p><strong>開催場所：</strong>弟子屈ふれあい広場（釧路川源流感謝祭）</p>
-                            <p><strong>開催期間：</strong>2024年8月16-24日</p>
-                            <p><strong>主催：</strong>くしろまちづくり研究所</p>
-                        </div>
-                        <a href="https://note.com/ryuddi/n/n718dda29227a" target="_blank" class="read-more">noteで詳しく読む</a>
-                    </div>
-                </div>
-                
-                <!-- みんなで弟子屈曼荼羅 -->
-                <div class="project-content">
-                    <div class="project-text">
-                        <h3>みんなで弟子屈曼荼羅</h3>
-                        <p>弟子屈の自然と人々の繋がりを表現したコミュニティアート作品。参加者の思いが重なり合って生まれる、土地の記憶と未来への曼荼羅。</p>
-                        <div class="project-details">
-                            <p><strong>制作場所：</strong>弟子屈町（釧路川源流感謝祭）</p>
-                            <p><strong>制作期間：</strong>2024年8月</p>
-                        </div>
-                        <a href="https://note.com/ryuddi/n/n718dda29227a" target="_blank" class="read-more">noteで詳しく読む</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
 
         <footer id="contact">
             <div class="content-panel">
@@ -496,6 +593,63 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Field Notes Overlay -->
+        <div id="notes-overlay" aria-modal="true" aria-hidden="true" role="dialog">
+            <div class="notes-panel" role="document">
+                <button id="notes-close" class="btn small close" aria-label="閉じる">×</button>
+                <h3>Field Notes</h3>
+                <div class="notes-content" id="notes-content"></div>
+            </div>
+        </div>
+
+        <!-- Lines: おはな研究所ミニ / トマム（軽く） -->
+        <section id="lines" class="creation-section">
+            <div class="content-panel">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">ライン</h2>
+                    <p class="section-subtitle">毎日の生活へ、やさしく</p>
+                </div>
+                <div class="atlas-grid">
+                    <div class="atlas-item" style="grid-column: span 6;">
+                        <div class="label">おはな研究所ミニ</div>
+                        <div class="placeholder-image" style="height:100%;display:flex;align-items:center;justify-content:center;">
+                            <p>日常に届く小さな“おはな”</p>
+                        </div>
+                    </div>
+                    <div class="atlas-item" style="grid-column: span 6;">
+                        <div class="label">おはな研究所トマム</div>
+                        <div class="placeholder-image" style="height:100%;display:flex;align-items:center;justify-content:center;">
+                            <p>2027年、北海道・トマムにて</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity: いつ・なにをしたか -->
+        <section id="activity" class="creation-section">
+            <div class="content-panel">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">活動の軌跡</h2>
+                    <p class="section-subtitle">When / What</p>
+                </div>
+                <div class="journey-timeline">
+                    <div class="timeline-item"><div class="timeline-year">2025.9</div><div class="timeline-content"><h4>くしろとっておき</h4><p>EGGにて空間デザイン、前庭で草花拓/藍染体験</p></div></div>
+                    <div class="timeline-item"><div class="timeline-year">2025.8</div><div class="timeline-content"><h4>釧路川源流感謝祭</h4><p>お花の池・小鳥の森／みんなで弟子屈草花曼荼羅</p></div></div>
+                    <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-content"><h4>OHANA-ROBOT開発</h4><p>対話可能な選択的機械除草ロボット</p></div></div>
+                    <div class="timeline-item"><div class="timeline-year">2023-</div><div class="timeline-content"><h4>草花拓・植物染</h4><p>小院瀬見を拠点に自然染と転写</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Overlay -->
+        <div id="case-overlay" aria-modal="true" aria-hidden="true" role="dialog">
+            <div class="case-panel" role="document">
+                <button id="case-close" class="btn small close" aria-label="閉じる">×</button>
+                <div class="case-content" id="case-content"></div>
+            </div>
+        </div>
 
     </main>
     <script src="script.js"></script>
