@@ -6,7 +6,7 @@
     <title>おはな研究所 - 人と自然、あはひを探る</title>
     <meta name="description" content="おはな研究所は、人と自然の「あはひ」を探ることを目的としています。衣、光、蝦夷（えぞ）をテーマにした作品や、思考の記録を掲載しています。">
     <meta name="google-site-verification" content="mvPYTKvP0eoeKpSxGUNsn6SCn8Uf5zwaLd0B1KoNs6U" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
@@ -156,66 +156,8 @@
                     <p class="section-subtitle">人と自然の「あはひ」を探る創作</p>
                 </div>
 
-                <!-- Works Stack: scrollytelling panels -->
-                <div class="works-stack">
-                    <section class="stack-item" data-target="#shishi-odoshi">
-                        <div class="stack-sticky">
-                            <div class="stack-bg">
-                                <video autoplay muted loop playsinline preload="metadata">
-                                    <source src="images/videos/sisiodosi.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="stack-overlay">
-                                <div class="stack-tag">Installation / Kushiro EGG</div>
-                                <h3>秋の庭・鹿おどし</h3>
-                                <p>毛綱毅曠建築に溶ける、退廃と祈りの音。</p>
-                                <div class="stack-actions">
-                                    <button class="btn primary" data-case="#shishi-odoshi">Case Study</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="stack-item" data-target="#ohana-ike">
-                        <div class="stack-sticky">
-                            <div class="stack-bg">
-                                <video autoplay muted loop playsinline preload="metadata">
-                                    <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="stack-overlay">
-                                <div class="stack-tag">Light & Sound / Teshikaga</div>
-                                <h3>お花の池・小鳥の森</h3>
-                                <p>水と森の境界で、ひかりが呼吸する。</p>
-                                <div class="stack-actions">
-                                    <button class="btn primary" data-case="#ohana-ike">Case Study</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="stack-item" data-target="#mandala">
-                        <div class="stack-sticky">
-                            <div class="stack-bg">
-                                <video autoplay muted loop playsinline preload="metadata">
-                                    <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="stack-overlay">
-                                <div class="stack-tag">Community Art / Teshikaga</div>
-                                <h3>みんなで弟子屈草花曼荼羅</h3>
-                                <p>土地の記憶を、手と布に宿す。</p>
-                                <div class="stack-actions">
-                                    <button class="btn primary" data-case="#mandala">Case Study</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                
-
                 <!-- Field Atlas: by territory × method (no lists) -->
+                <h3 class="section-subhead">一覧</h3>
                 <section id="atlas" class="atlas-section">
                     <div class="atlas-controls">
                         <div class="chips regions" aria-label="地域で見る">
@@ -229,40 +171,47 @@
                         </div>
                     </div>
                     <div class="atlas-grid">
-                        <!-- 道東 -->
+                        <!-- 道東：ハイライトの3件も一覧に掲載（軽量表示） -->
                         <a class="atlas-item span-2" data-region="doto" data-tags="space" data-case="#shishi-odoshi">
-                            <video autoplay muted loop playsinline preload="metadata">
+                            <div class="meta">Installation / Kushiro EGG</div>
+                            <video muted playsinline preload="metadata">
                                 <source src="images/videos/sisiodosi.mp4" type="video/mp4">
                             </video>
                             <div class="label">鹿おどし</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="space" data-case="#ohana-ike">
-                            <video autoplay muted loop playsinline preload="metadata">
+                            <div class="meta">Light &amp; Sound / Teshikaga</div>
+                            <video muted playsinline preload="metadata">
                                 <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
                             </video>
                             <div class="label">お花の池</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="space" data-case="#mandala">
-                            <video autoplay muted loop playsinline preload="metadata">
+                            <div class="meta">Community Art / Teshikaga</div>
+                            <video muted playsinline preload="metadata">
                                 <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
                             </video>
                             <div class="label">曼荼羅</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="wear" data-case="#ohana-zabuton-kushiro">
+                            <div class="meta">Wear / Kushiro</div>
                             <img src="images/works/zabuton/1.jpg" alt="おは奈座布団 釧路" onerror="this.closest('a').classList.add('ph')">
                             <div class="label">おは奈座布団 釧路</div>
                         </a>
 
                         <!-- 小院瀬見 -->
                         <a class="atlas-item" data-region="koinosemi" data-tags="wear" data-case="#case-kusabana">
+                            <div class="meta">Nature Print / Koinosemi</div>
                             <img src="images/works/kusabana-taku.jpg" alt="草花拓">
                             <div class="label">草花拓</div>
                         </a>
                         <a class="atlas-item span-2" data-region="koinosemi" data-tags="wear" data-case="#case-karamushi">
+                            <div class="meta">Plant Dye / Koinosemi</div>
                             <img src="images/journal/karamushi-dye/3.png" alt="カラムシ染">
                             <div class="label">カラムシ染</div>
                         </a>
                         <a class="atlas-item" data-region="koinosemi" data-tags="space" data-case="#washi-light">
+                            <div class="meta">Lighting / Koinosemi</div>
                             <img src="images/interior/wasi.png" alt="五箇山和紙の灯り">
                             <div class="label">和紙の灯り</div>
                         </a>
@@ -277,7 +226,7 @@
                         <!-- メイン画像/動画エリア -->
                         <div class="work-media-container">
                             <div class="work-video-preview">
-                                <video autoplay muted loop playsinline preload="metadata">
+                                <video muted loop playsinline preload="metadata">
                                     <source src="images/videos/sisiodosi.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
@@ -333,7 +282,7 @@
                         <div class="work-media-container">
                             <!-- 動画プレビュー -->
                             <div class="work-video-preview">
-                                <video autoplay muted loop>
+                                <video muted loop preload="metadata" playsinline>
                                     <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
@@ -396,7 +345,7 @@
                         <div class="work-media-container">
                             <!-- 動画プレビュー -->
                             <div class="work-video-preview">
-                                <video autoplay muted loop>
+                                <video muted loop preload="metadata" playsinline>
                                     <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
@@ -662,6 +611,6 @@
         </footer>
 
     </main>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>

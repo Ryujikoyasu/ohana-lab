@@ -172,10 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setTimeout(() => {
         if (!reduceMotion) {
-            createFloatingPetals();
-            addRotatingFlowers();
-            addLightParticles();
-            addSwayingEffect();
+            // falling/particle effects disabled for a cleaner hero
+            // createFloatingPetals();
+            // addRotatingFlowers();
+            // addLightParticles();
+            // addSwayingEffect();
         }
         initMediaGalleries();
         initForestParallax(reduceMotion);
@@ -314,13 +315,26 @@ function initShowreel(reduceMotion){
     if (!reel) return;
     const slides = Array.from(reel.querySelectorAll('.slide'));
     if (slides.length === 0) return;
+    const videos = slides.map(s=> s.querySelector('video'));
     let i = 0; let timer;
     function activate(idx){
-        slides.forEach((s, n)=>{ s.classList.toggle('active', n===idx); });
+        slides.forEach((s, n)=>{
+            const isActive = (n===idx);
+            s.classList.toggle('active', isActive);
+            const v = videos[n];
+            if (v){
+                if (isActive){ v.muted = true; v.play().catch(()=>{}); }
+                else { v.pause(); }
+            }
+        });
     }
     function next(){ i = (i+1) % slides.length; activate(i); }
     activate(0);
     if (!reduceMotion){ timer = setInterval(next, 6000); }
+    document.addEventListener('visibilitychange', ()=>{
+        if (document.hidden){ videos.forEach(v=> v && v.pause()); }
+        else { videos[i]?.play().catch(()=>{}); }
+    });
     const spots = document.querySelector('.reel-spots');
     if (spots){
         spots.addEventListener('click', (e)=>{
@@ -342,22 +356,7 @@ function initShowreel(reduceMotion){
     }
     // Add gentle ripple under cursor
     if (!reduceMotion){
-        const overlay = document.querySelector('.reel-overlay');
-        if (overlay){
-            let ticking = false; let x=0,y=0;
-            overlay.addEventListener('mousemove', (e)=>{
-                x = e.clientX; y = e.clientY;
-                if (!ticking){
-                    window.requestAnimationFrame(()=>{
-                        overlay.style.setProperty('--rx', x+'px');
-                        overlay.style.setProperty('--ry', y+'px');
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-            overlay.classList.add('ripple-active');
-        }
+        // ripple effect disabled for a cleaner hero (no white circles)
     }
 }
 
@@ -380,8 +379,15 @@ function initWorksStack(){
     if (!items.length) return;
     const observer = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
-            if (entry.isIntersecting) entry.target.classList.add('is-active');
-            else entry.target.classList.remove('is-active');
+            const el = entry.target;
+            const v = el.querySelector('.stack-bg video');
+            if (entry.isIntersecting){
+                el.classList.add('is-active');
+                if (v){ v.muted = true; v.play().catch(()=>{}); }
+            } else {
+                el.classList.remove('is-active');
+                if (v){ v.pause(); }
+            }
         });
     }, { threshold: 0.55 });
     items.forEach(el=> observer.observe(el));
@@ -426,6 +432,7 @@ function initOhanaBackground(reduceMotion){
     const fireflies = [];
     const washes = [];
     let t0 = performance.now();
+    let stopped = false;
     function isDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
     function resize(){
         W = window.innerWidth; H = window.innerHeight;
@@ -443,7 +450,7 @@ function initOhanaBackground(reduceMotion){
             'rgba(164, 188, 206, 0.06)' /* 薄藍 */
         ];
         const pal = kasaneLight; // 明るさ重視（常にライトパレット）
-        const washCount = 6;
+        const washCount = 4; // 少なめで軽量化
         for (let i=0;i<washCount;i++){
             washes.push({
                 x: (0.2 + 0.6*Math.random())*W,
@@ -454,29 +461,9 @@ function initOhanaBackground(reduceMotion){
                 dy: (Math.random()*2-1) * 0.05
             });
         }
-        const petalCount = Math.max(10, Math.floor(W/180));
-        for (let i=0;i<petalCount;i++){
-            petals.push({
-                x: Math.random()*W,
-                y: Math.random()*H,
-                r: 6 + Math.random()*10,
-                rot: Math.random()*Math.PI*2,
-                vx: (-0.2 + Math.random()*0.4),
-                vy: (0.08 + Math.random()*0.18),
-                drift: Math.random()*0.5,
-                hue: Math.random()
-            });
-        }
-        const flyCount = Math.max(16, Math.floor(W/120));
-        for (let i=0;i<flyCount;i++){
-            fireflies.push({
-                x: Math.random()*W,
-                y: Math.random()*H,
-                a: Math.random()*Math.PI*2,
-                speed: 0.25 + Math.random()*0.35,
-                flicker: Math.random()*Math.PI*2
-            });
-        }
+        // 背景を軽く・クリーンに：花びら/ホタルは生成しない
+        const petalCount = 0;
+        const flyCount = 0;
     }
     resize();
     window.addEventListener('resize', resize);
@@ -486,6 +473,7 @@ function initOhanaBackground(reduceMotion){
             mountains.style.transform = `translateY(${y}px)`;
         }
     }, { passive: true });
+    document.addEventListener('visibilitychange', ()=>{ stopped = document.hidden; });
 
     function drawPetal(p){
         ctx.save();
@@ -530,26 +518,8 @@ function initOhanaBackground(reduceMotion){
         }
         ctx.restore();
 
-        // animate petals
-        for (const p of petals){
-            p.x += p.vx + Math.sin(p.y*0.01 + now*0.0008)*p.drift;
-            p.y += p.vy;
-            p.rot += 0.002*dt;
-            if (p.y - p.r > H+40){ p.y = -40; p.x = Math.random()*W; }
-            if (p.x < -40) p.x = W+40; if (p.x > W+40) p.x = -40;
-            drawPetal(p);
-        }
-        // animate fireflies
-        for (const f of fireflies){
-            f.a += 0.0025*dt;
-            f.flicker += 0.015*dt/16;
-            f.x += Math.cos(f.a)*f.speed;
-            f.y += Math.sin(f.a*0.9)*f.speed*0.8;
-            if (f.x < -20) f.x = W+20; if (f.x > W+20) f.x = -20;
-            if (f.y < -20) f.y = H+20; if (f.y > H+20) f.y = -20;
-            drawFirefly(f);
-        }
-        requestAnimationFrame(frame);
+        // petals/fireflies disabled
+        if (!stopped) requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
 }
@@ -611,6 +581,7 @@ function openCaseModal(selector){
     // clone minimal safe HTML
     const clone = src.cloneNode(true);
     clone.classList.remove('case-hidden','compact');
+    clone.classList.add('is-modal');
     content.innerHTML = '';
     // optional: simplify structure
     content.appendChild(clone);
@@ -620,6 +591,7 @@ function openCaseModal(selector){
     }
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('no-scroll');
 }
 
 document.getElementById('case-close')?.addEventListener('click', closeCase);
@@ -630,4 +602,26 @@ function closeCase(){
     if (!overlay) return;
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden','true');
+    document.body.classList.remove('no-scroll');
 }
+
+// Atlas videos: play on hover (desktop) and pause when out of view
+document.addEventListener('DOMContentLoaded', ()=>{
+  const atlasVids = Array.from(document.querySelectorAll('.atlas-item video'));
+  if (!atlasVids.length) return;
+  const mql = window.matchMedia('(hover: hover)');
+  if (mql.matches){
+    atlasVids.forEach(v=>{
+      const wrap = v.closest('.atlas-item');
+      wrap.addEventListener('mouseenter', ()=>{ v.muted = true; v.play().catch(()=>{}); });
+      wrap.addEventListener('mouseleave', ()=>{ v.pause(); v.currentTime = 0; });
+    });
+  }
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(({isIntersecting, target})=>{
+      const vid = target;
+      if (!isIntersecting){ vid.pause(); }
+    });
+  }, { threshold: 0.25 });
+  atlasVids.forEach(v=> obs.observe(v));
+});

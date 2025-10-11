@@ -15,6 +15,7 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: light; /* 明示的にライトに固定 */
 }
 
 body {
@@ -452,33 +453,21 @@ footer::before {
 
 /* コンテンツエリアのパネル */
 .content-panel {
-    background: 
-        /* 花柄パターン（より淡く調整） */
-        radial-gradient(circle at 20% 25%, rgba(228, 161, 193, 0.1) 0%, transparent 30%),
-        radial-gradient(ellipse 16px 12px at 40% 40%, rgba(125, 157, 133, 0.08) 0%, transparent 55%),
-        radial-gradient(circle at 70% 20%, rgba(247, 231, 206, 0.12) 0%, transparent 28%),
-        radial-gradient(ellipse 12px 18px at 85% 50%, rgba(228, 161, 193, 0.07) 0%, transparent 65%),
-        radial-gradient(circle at 25% 75%, rgba(125, 157, 133, 0.1) 0%, transparent 32%),
-        radial-gradient(ellipse 14px 10px at 60% 85%, rgba(247, 231, 206, 0.11) 0%, transparent 50%),
-        /* 微細な装飾 */
-        radial-gradient(circle at 15% 50%, rgba(228, 161, 193, 0.06) 0%, transparent 8px),
-        radial-gradient(circle at 80% 75%, rgba(125, 157, 133, 0.04) 0%, transparent 6px),
-        radial-gradient(circle at 45% 10%, rgba(247, 231, 206, 0.07) 0%, transparent 7px),
-        /* ベースグラデーション */
-        linear-gradient(135deg, 
-            rgba(247, 231, 206, 0.2) 0%, 
-            rgba(228, 161, 193, 0.04) 25%,
-            rgba(250, 248, 243, 0.25) 50%,
-            rgba(125, 157, 133, 0.03) 75%,
-            rgba(247, 231, 206, 0.2) 100%);
+    background: rgba(255,255,255,0.64);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    backdrop-filter: blur(6px) saturate(120%);
     padding: 5vh 5vw;
     border-radius: 16px;
-    box-shadow: 
-        0 10px 40px rgba(228, 161, 193, 0.15),
-        0 5px 15px rgba(125, 157, 133, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(228, 161, 193, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 小見出し（ハイライト／一覧） */
+.section-subhead {
+    margin: 16px 0 8px;
+    font-size: 1rem;
+    letter-spacing: .12em;
+    color: #666;
 }
 
 .creation-section, .about-section {
@@ -773,14 +762,7 @@ footer a {
 
 /* 浮遊する花びらのアニメーション */
 .floating-petals {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 100;
-    overflow: hidden;
+    display: none; /* disable falling petals */
 }
 
 .petal {
@@ -1662,6 +1644,7 @@ footer a {
     background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
     border-radius: 50%; pointer-events: none; transition: left .15s ease, top .15s ease;
 }
+/* (removed) hero overlay sky: using global background instead */
 .logo-mark { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); width: 120px; height:120px; opacity: 0.9; }
 .logo-mark .core { position:absolute; top:50%; left:50%; width: 22px; height:22px; background:#fff; border-radius:50%; transform: translate(-50%,-50%); }
 .logo-mark .petal { position:absolute; width: 64px; height: 64px; border-radius: 60% 40% 60% 40%; background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.5)); filter: blur(0.2px); }
@@ -1715,7 +1698,7 @@ footer a {
   box-shadow: 0 0 120px rgba(255,243,214,0.45);
   filter: saturate(1.1);
 }
-#bg-visuals .clouds { position: absolute; inset: 0 0 35vh 0; pointer-events: none; }
+#bg-visuals .clouds { display: none; }
 #bg-visuals .clouds .cloud {
   position: absolute; width: 220px; height: 90px; opacity: 0.55; filter: blur(0.6px);
   background:
@@ -1734,21 +1717,7 @@ footer a {
 @media (prefers-reduced-motion: reduce){
   /* background animation reduced */
 }
-
-/* Dark mode palette */
-@media (prefers-color-scheme: dark){
-  :root {
-    --bg-color: #0f1012;
-    --text-color: #ececec;
-    --accent-color-1: #ff9dbf;
-    --accent-color-2: #7ec9a8;
-    --accent-color-3: #2a2c31;
-  }
-  body { color: var(--text-color); }
-  .content-panel { background: linear-gradient(135deg, rgba(60,65,72,0.14), rgba(30,32,36,0.14)), rgba(20,22,26,0.22); border-color: rgba(255,255,255,0.06); box-shadow: 0 10px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05); }
-  #bg-visuals .mountains path { fill: rgba(126, 171, 150, 0.22); }
-  .reel-actions .btn { border-color: rgba(255,255,255,0.35); }
-}
+  
 
 /* ===== Works Stack (scrollytelling) ===== */
 .works-stack { position: relative; margin: 0 -5vw 0; }
@@ -1797,6 +1766,7 @@ footer a {
 .atlas-item { position: relative; grid-column: span 4; border-radius: 12px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.14); cursor: pointer; display: block; text-decoration: none; }
 .atlas-item video, .atlas-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .atlas-item .label { position: absolute; left: 10px; bottom: 10px; background: rgba(0,0,0,0.35); color: #fff; padding: 6px 10px; border-radius: 999px; font-size: .9rem; backdrop-filter: blur(2px); }
+.atlas-item .meta { position: absolute; left: 10px; top: 10px; background: rgba(0,0,0,0.32); color: #fff; padding: 4px 8px; border-radius: 999px; font-size: .8rem; letter-spacing: .02em; backdrop-filter: blur(2px); }
 .atlas-item.span-2 { grid-column: span 8; grid-row: span 2; }
 .atlas-item.ph { background: repeating-linear-gradient(45deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06) 6px, transparent 6px, transparent 12px); }
 
@@ -1812,8 +1782,28 @@ footer a {
 }
 
 /* ===== Case Study Modal ===== */
-#case-overlay { position: fixed; inset:0; z-index: 720; display:none; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); }
-#case-overlay.active { display:flex; }
-.case-panel { width: min(960px, 94vw); max-height: 86vh; overflow: auto; background: #fff; border-radius: 16px; box-shadow: 0 24px 80px rgba(0,0,0,0.3); position: relative; }
-.case-panel .close { position: sticky; top: 0; margin-left: auto; display: inline-block; margin: 10px; }
-.case-content { padding: 6px 10px 20px; }
+#case-overlay { position: fixed; inset:0; z-index: 720; display:none; align-items: center; justify-content: center; background: rgba(0,0,0,0.28); backdrop-filter: blur(4px); }
+#case-overlay.active { display:flex; animation: overlayIn .22s ease; }
+.case-panel { width: min(980px, 94vw); max-height: 86vh; overflow: auto; background: linear-gradient(180deg, #fff, #fefbf7); position: relative; border: 0; box-shadow: 0 30px 80px rgba(0,0,0,0.26); padding: 6px 0 10px; }
+/* 有機的な輪郭（長方形でない雰囲気） */
+.case-panel { border-radius: 42px 28px 46px 32px / 36px 42px 32px 28px; }
+.case-panel .close { position: sticky; top: 8px; margin-left: auto; display: inline-flex; align-items: center; justify-content: center; margin: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.06); color: #333; border: 1px solid rgba(0,0,0,0.1); backdrop-filter: blur(4px); }
+.case-panel .close:hover { background: rgba(0,0,0,0.12); }
+.case-content { padding: 6px 16px 22px; }
+@keyframes overlayIn { 0% { opacity: 0 } 100% { opacity: 1 } }
+
+/* Modal-friendly layout for case clones */
+.case-panel .is-modal .work-top-content { display: block; }
+.case-panel .is-modal .work-media-container { max-width: 100%; }
+.case-panel .is-modal .work-video-preview { max-width: 100%; margin: 0 0 12px; border-radius: 14px; }
+.case-panel .is-modal video { width: 100%; height: auto; display: block; }
+.case-panel .is-modal .work-details-sidebar { max-width: 100%; }
+.case-panel .is-modal .work-title { text-align: left; color: var(--text-color); margin-top: 8px; }
+.case-panel .is-modal .work-main-description { margin-top: 10px; }
+
+/* Prevent body scroll when modal open */
+body.no-scroll { overflow: hidden; }
+
+/* モーダルの出現を“ふわっと” */
+#case-overlay.active .case-panel { animation: modalIn .28s cubic-bezier(0.2, 0.9, 0.2, 1); transform-origin: 50% 10%; }
+@keyframes modalIn { 0% { opacity: 0; transform: translateY(8px) scale(0.98); filter: blur(4px); } 100% { opacity: 1; transform: none; filter: none; } }
