@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const galleries = document.querySelectorAll('[data-gallery]');
         galleries.forEach(gallery => {
             const mainImg = gallery.querySelector('img.gallery-main');
+            let mainVideo = gallery.querySelector('video.gallery-main-video');
             const mainPlaceholder = gallery.querySelector('.gallery-main-placeholder');
             const thumbs = gallery.querySelectorAll('.gallery-thumb');
 
@@ -199,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let initialized = false;
             thumbs.forEach((thumb, idx) => {
                 const src = thumb.getAttribute('data-src');
+                const vsrc = thumb.getAttribute('data-video');
                 // サムネ画像が用意されていれば img を入れる
                 if (src) {
                     // プレースホルダーがあれば外す
@@ -212,32 +214,60 @@ document.addEventListener('DOMContentLoaded', () => {
                         thumb.appendChild(thumbImg);
                     }
                     thumbImg.src = src;
+                } else if (vsrc) {
+                    // 動画サムネは簡易なビデオアイコン風のプレースホルダーに
+                    let badge = thumb.querySelector('.placeholder-image');
+                    if (!badge){
+                        badge = document.createElement('div');
+                        badge.className = 'placeholder-image';
+                        const p = document.createElement('p'); p.textContent = '▶'; badge.appendChild(p);
+                        thumb.appendChild(badge);
+                    }
                 }
                 thumb.addEventListener('click', () => {
                     thumbs.forEach(t => t.classList.remove('active'));
                     thumb.classList.add('active');
-                    if (mainImg) {
+                    const showImage = !!src && !vsrc;
+                    if (showImage && mainImg){
+                        // 画像表示
+                        if (mainVideo){ try { mainVideo.pause(); } catch(e){} mainVideo.style.display = 'none'; }
                         mainImg.style.opacity = '0';
-                        const nextSrc = src || '';
-                        if (nextSrc) {
-                            // 画像のロード完了後にフェードイン
-                            const onload = () => {
-                                mainImg.style.display = 'block';
-                                mainImg.style.opacity = '1';
-                                mainImg.removeEventListener('load', onload);
-                            };
-                            mainImg.addEventListener('load', onload);
-                            mainImg.src = nextSrc;
-                        } else {
-                            mainImg.style.display = 'none';
+                        const nextSrc = src;
+                        // 画像のロード完了後にフェードイン
+                        const onload = () => {
+                            mainImg.style.display = 'block';
+                            mainImg.style.opacity = '1';
+                            mainImg.removeEventListener('load', onload);
+                        };
+                        mainImg.addEventListener('load', onload);
+                        mainImg.src = nextSrc;
+                        if (mainPlaceholder) mainPlaceholder.style.display = 'none';
+                    } else if (vsrc){
+                        // 動画表示
+                        if (!mainVideo){
+                            mainVideo = document.createElement('video');
+                            mainVideo.className = 'gallery-main-video';
+                            mainVideo.setAttribute('playsinline','');
+                            mainVideo.setAttribute('muted','');
+                            mainVideo.setAttribute('loop','');
+                            mainVideo.controls = true;
+                            // 挿入（mainImgの直前に）
+                            if (mainImg && mainImg.parentNode){
+                                mainImg.parentNode.insertBefore(mainVideo, mainImg);
+                            } else {
+                                gallery.querySelector('.main-media')?.appendChild(mainVideo);
+                            }
                         }
-                    }
-                    if (mainPlaceholder) {
-                        mainPlaceholder.style.display = src ? 'none' : 'flex';
+                        if (mainImg){ mainImg.style.display = 'none'; }
+                        if (mainPlaceholder) mainPlaceholder.style.display = 'none';
+                        try { mainVideo.pause(); } catch(e){}
+                        mainVideo.src = vsrc;
+                        mainVideo.style.display = 'block';
+                        try { mainVideo.play(); } catch(e){}
                     }
                 });
                 // 初期選択
-                if (!initialized && src) {
+                if (!initialized && (src || vsrc)) {
                     thumb.click();
                     initialized = true;
                 }
@@ -589,6 +619,13 @@ function openCaseModal(selector){
     if (window.__initMediaGalleries) {
         try { window.__initMediaGalleries(); } catch(e) {}
     }
+    // Autoplay first video inside the case (muted/inline)
+    const firstVideo = content.querySelector('video');
+    if (firstVideo){
+        firstVideo.muted = true; 
+        firstVideo.setAttribute('playsinline','');
+        try { firstVideo.play(); } catch(e) {}
+    }
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden','false');
     document.body.classList.add('no-scroll');
@@ -600,6 +637,8 @@ document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') closeCase(); }
 function closeCase(){
     const overlay = document.getElementById('case-overlay');
     if (!overlay) return;
+    // Pause any playing videos in modal
+    document.querySelectorAll('#case-content video').forEach(v=>{ try { v.pause(); } catch(e){} });
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden','true');
     document.body.classList.remove('no-scroll');

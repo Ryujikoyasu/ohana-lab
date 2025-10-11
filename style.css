@@ -1784,26 +1784,101 @@ footer a {
 /* ===== Case Study Modal ===== */
 #case-overlay { position: fixed; inset:0; z-index: 720; display:none; align-items: center; justify-content: center; background: rgba(0,0,0,0.28); backdrop-filter: blur(4px); }
 #case-overlay.active { display:flex; animation: overlayIn .22s ease; }
-.case-panel { width: min(980px, 94vw); max-height: 86vh; overflow: auto; background: linear-gradient(180deg, #fff, #fefbf7); position: relative; border: 0; box-shadow: 0 30px 80px rgba(0,0,0,0.26); padding: 6px 0 10px; }
+.case-panel { width: min(1200px, 96vw); max-height: 92vh; overflow: auto; background: linear-gradient(180deg, #fff, #fefbf7); position: relative; border: 0; box-shadow: 0 30px 80px rgba(0,0,0,0.24); padding: 8px 0 12px; }
 /* 有機的な輪郭（長方形でない雰囲気） */
-.case-panel { border-radius: 42px 28px 46px 32px / 36px 42px 32px 28px; }
+.case-panel { border-radius: 44px 30px 48px 34px / 38px 44px 34px 30px; }
 .case-panel .close { position: sticky; top: 8px; margin-left: auto; display: inline-flex; align-items: center; justify-content: center; margin: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.06); color: #333; border: 1px solid rgba(0,0,0,0.1); backdrop-filter: blur(4px); }
 .case-panel .close:hover { background: rgba(0,0,0,0.12); }
-.case-content { padding: 6px 16px 22px; }
+.case-content { padding: 10px 18px 24px; }
 @keyframes overlayIn { 0% { opacity: 0 } 100% { opacity: 1 } }
 
 /* Modal-friendly layout for case clones */
 .case-panel .is-modal .work-top-content { display: block; }
 .case-panel .is-modal .work-media-container { max-width: 100%; }
-.case-panel .is-modal .work-video-preview { max-width: 100%; margin: 0 0 12px; border-radius: 14px; }
-.case-panel .is-modal video { width: 100%; height: auto; display: block; }
+.case-panel .is-modal .work-video-preview { max-width: 100%; margin: 0 0 16px; border-radius: 16px; overflow: hidden; }
+.case-panel .is-modal .work-video-preview video { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: 72vh; object-fit: contain; }
+.case-panel .is-modal video { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: 72vh; object-fit: contain; }
 .case-panel .is-modal .work-details-sidebar { max-width: 100%; }
-.case-panel .is-modal .work-title { text-align: left; color: var(--text-color); margin-top: 8px; }
+.case-panel .is-modal .work-title { text-align: left; color: var(--text-color); margin-top: 8px; font-size: 1.9rem; letter-spacing: .04em; }
 .case-panel .is-modal .work-main-description { margin-top: 10px; }
+
+/* Case meta pills and tidy info blocks */
+.case-panel .is-modal .case-meta { 
+  display: inline-flex; gap: 8px; align-items: center; 
+  background: rgba(0,0,0,0.06); color: #333; 
+  border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; 
+  padding: 6px 10px; font-size: .92rem; margin: 6px 0 10px; 
+}
+.case-panel .is-modal .work-technical-details, 
+.case-panel .is-modal .work-details {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; 
+  padding: 10px 12px; margin: 10px 0; 
+}
+.case-panel .is-modal .work-technical-details h5 { margin-bottom: 6px; color: #546; font-weight: 500; }
+.case-panel .is-modal .work-technical-details ul { margin-left: 14px; line-height: 1.7; }
+.case-panel .is-modal .work-details p { margin: 2px 0; color: #444; }
+
+/* Portrait images (gallery) should also be constrained */
+.case-panel .is-modal .work-image-gallery img { display:block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: 72vh; object-fit: contain; }
+
+/* Refine body text in modal for a designerly feel */
+.case-panel .is-modal .work-main-description p { font-size: 1.06rem; line-height: 1.9; color: #333; }
+.case-panel .is-modal .work-title + .case-meta { margin-left: 2px; }
+
+@media (max-width: 640px){
+  .case-panel .is-modal .work-video-preview video,
+  .case-panel .is-modal video,
+  .case-panel .is-modal .work-image-gallery img { max-height: 60vh; }
+}
+
+/* Force-fit helper for portrait media to match others */
+.case-panel .is-modal .media-fit {
+  display: block;
+  margin: 0 auto;
+  width: auto !important;
+  height: auto !important;
+  max-width: min(100%, 860px);
+  max-height: 72vh;
+  object-fit: contain !important;
+}
+@media (max-width: 640px){
+  .case-panel .is-modal .media-fit { max-height: 60vh; }
+}
 
 /* Prevent body scroll when modal open */
 body.no-scroll { overflow: hidden; }
 
 /* モーダルの出現を“ふわっと” */
 #case-overlay.active .case-panel { animation: modalIn .28s cubic-bezier(0.2, 0.9, 0.2, 1); transform-origin: 50% 10%; }
-@keyframes modalIn { 0% { opacity: 0; transform: translateY(8px) scale(0.98); filter: blur(4px); } 100% { opacity: 1; transform: none; filter: none; } }
+@keyframes modalIn { 0% { opacity: 0; transform: translateY(10px) scale(0.985); filter: blur(5px); } 100% { opacity: 1; transform: none; filter: none; } }
+
+/* ===== Modal gallery sizing (unify with Zabuton style) ===== */
+.case-panel .is-modal .media-gallery .main-media {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 4 / 5; /* Harmonized portrait-friendly frame */
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.02);
+}
+.case-panel .is-modal .media-gallery .gallery-main,
+.case-panel .is-modal .media-gallery .gallery-main-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.case-panel .is-modal .media-gallery .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.case-panel .is-modal .media-gallery .gallery-thumb img,
+.case-panel .is-modal .media-gallery .gallery-thumb .placeholder-image {
+  width: 100%; height: 80px; object-fit: cover; border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(136, 201, 179, 0.15);
+}
+@media (max-width: 640px){
+  .case-panel .is-modal .media-gallery .main-media { max-width: 100%; }
+}

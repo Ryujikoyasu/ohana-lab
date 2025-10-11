@@ -109,25 +109,22 @@
             <div class="reel">
                 <div class="slide active" data-target="#shishi-odoshi" data-title="秋の庭・鹿おどし">
                     <video autoplay muted loop playsinline preload="metadata">
-                        <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                        <source src="images/cases/shishi-odoshi/video.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="slide" data-target="#ohana-ike" data-title="お花の池・小鳥の森">
                     <video autoplay muted loop playsinline preload="metadata">
-                        <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                        <source src="images/cases/ohana-ike/video.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="slide" data-target="#mandala" data-title="弟子屈草花曼荼羅">
                     <video autoplay muted loop playsinline preload="metadata">
-                        <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                        <source src="images/cases/mandala/video.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
             <div class="reel-overlay">
-                <div class="logo-mark" aria-hidden="true">
-                    <div class="petal a"></div><div class="petal b"></div><div class="petal c"></div><div class="petal d"></div>
-                    <div class="core"></div>
-                </div>
+                <!-- logo-mark removed to avoid white circle over hero video -->
                 <div class="title-stack">
                     <h1>おはな研究所</h1>
                     <p>人と自然のあいだに、新しい作法を。</p>
@@ -136,12 +133,7 @@
                     <button class="btn primary" data-goto="#works">作品を見る</button>
                     <button class="btn" data-goto="#collab">コラボのご相談</button>
                 </div>
-                <div class="reel-spots">
-                    <button class="spot" data-target="#shishi-odoshi">鹿おどし →</button>
-                    <button class="spot" data-target="#ohana-ike">お花の池 →</button>
-                    <button class="spot" data-target="#mandala">曼荼羅 →</button>
-                </div>
-                <div class="scroll-cue">Scroll</div>
+                <!-- spots and scroll cue removed for cleaner hero -->
             </div>
         </section>
 
@@ -175,31 +167,43 @@
                         <a class="atlas-item span-2" data-region="doto" data-tags="space" data-case="#shishi-odoshi">
                             <div class="meta">Installation / Kushiro EGG</div>
                             <video muted playsinline preload="metadata">
-                                <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                                <source src="images/cases/shishi-odoshi/video.mp4" type="video/mp4">
                             </video>
                             <div class="label">鹿おどし</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="space" data-case="#ohana-ike">
                             <div class="meta">Light &amp; Sound / Teshikaga</div>
                             <video muted playsinline preload="metadata">
-                                <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                                <source src="images/cases/ohana-ike/video.mp4" type="video/mp4">
                             </video>
                             <div class="label">お花の池</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="space" data-case="#mandala">
                             <div class="meta">Community Art / Teshikaga</div>
                             <video muted playsinline preload="metadata">
-                                <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                                <source src="images/cases/mandala/video.mp4" type="video/mp4">
                             </video>
                             <div class="label">曼荼羅</div>
                         </a>
                         <a class="atlas-item" data-region="doto" data-tags="wear" data-case="#ohana-zabuton-kushiro">
                             <div class="meta">Wear / Kushiro</div>
-                            <img src="images/works/zabuton/1.jpg" alt="おは奈座布団 釧路" onerror="this.closest('a').classList.add('ph')">
+                            <img src="images/cases/zabuton-kushiro/1.jpg" alt="おは奈座布団 釧路" onerror="this.closest('a').classList.add('ph')">
                             <div class="label">おは奈座布団 釧路</div>
                         </a>
 
                         <!-- 小院瀬見 -->
+                        <!-- 新規: 柳のサンキャッチャー（千羽鶴＋ビーズ） -->
+                        <a class="atlas-item" data-region="koinosemi" data-tags="space" data-case="#case-suncatcher">
+                            <div class="meta">Suncatcher / Koinosemi</div>
+                            <img src="images/cases/suncatcher/cover.jpg" alt="柳のサンキャッチャー（千羽鶴＋ビーズ）">
+                            <div class="label">柳のサンキャッチャー</div>
+                        </a>
+                        <!-- 新規: お花のビーズアクセサリー -->
+                        <a class="atlas-item" data-region="koinosemi" data-tags="wear" data-case="#case-beads-flower">
+                            <div class="meta">Accessory / Koinosemi</div>
+                            <img src="images/cases/beads-flower/1.jpg" alt="お花のビーズアクセサリー">
+                            <div class="label">ビーズアクセサリー（花）</div>
+                        </a>
                         <a class="atlas-item" data-region="koinosemi" data-tags="wear" data-case="#case-kusabana">
                             <div class="meta">Nature Print / Koinosemi</div>
                             <img src="images/works/kusabana-taku.jpg" alt="草花拓">
@@ -221,13 +225,14 @@
                 <!-- 植物園のししおどし（最上段） -->
                 <div class="work-section enhanced compact case-hidden" id="shishi-odoshi">
                     <h3 class="work-title">秋の庭・鹿おどし</h3>
+                    <div class="case-meta">Installation / Kushiro EGG</div>
                     
                     <div class="work-top-content">
                         <!-- メイン画像/動画エリア -->
                         <div class="work-media-container">
                             <div class="work-video-preview">
                                 <video muted loop playsinline preload="metadata">
-                                    <source src="images/videos/sisiodosi.mp4" type="video/mp4">
+                                    <source src="images/cases/shishi-odoshi/video.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
                             </div>
@@ -276,6 +281,7 @@
                 <!-- お花の池・小鳥の森 -->
                 <div class="work-section enhanced compact case-hidden" id="ohana-ike">
                     <h3 class="work-title">お花の池・小鳥の森</h3>
+                    <div class="case-meta">Light &amp; Sound / Teshikaga</div>
                     
                     <div class="work-top-content">
                         <!-- メイン画像/動画エリア -->
@@ -283,7 +289,7 @@
                             <!-- 動画プレビュー -->
                             <div class="work-video-preview">
                                 <video muted loop preload="metadata" playsinline>
-                                    <source src="images/videos/ohana-ike-preview.mp4" type="video/mp4">
+                                    <source src="images/cases/ohana-ike/video.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
                             </div>
@@ -339,6 +345,7 @@
                 <!-- みんなで弟子屈草花曼荼羅 -->
                 <div class="work-section enhanced compact case-hidden" id="mandala">
                     <h3 class="work-title">みんなで弟子屈草花曼荼羅</h3>
+                    <div class="case-meta">Community Art / Teshikaga</div>
                     
                     <div class="work-top-content">
                         <!-- メイン画像/動画エリア -->
@@ -346,7 +353,7 @@
                             <!-- 動画プレビュー -->
                             <div class="work-video-preview">
                                 <video muted loop preload="metadata" playsinline>
-                                    <source src="images/videos/teshikaga-mandara.mp4" type="video/mp4">
+                                    <source src="images/cases/mandala/video.mp4" type="video/mp4">
                                     お使いのブラウザは動画再生をサポートしていません。
                                 </video>
                             </div>
@@ -422,6 +429,92 @@
                     </div>
                 </div>
 
+                <!-- 新規ケース: 柳のサンキャッチャー（千羽鶴＋ビーズ） -->
+                <div class="work-section case-hidden" id="case-suncatcher">
+                    <h3 class="work-title">柳のサンキャッチャー（千羽鶴＋ビーズ）</h3>
+                    <div class="case-meta">Suncatcher / Koinosemi</div>
+                    <div class="work-top-content">
+                        <div class="work-media-container">
+                            <div class="media-gallery" data-gallery="suncatcher">
+                                <div class="main-media">
+                                    <div class="placeholder-image gallery-main-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                                        <p>メディア</p>
+                                    </div>
+                                    <img class="gallery-main" alt="柳のサンキャッチャー メイン" style="display:none;" />
+                                </div>
+                                <div class="thumbs">
+                                    <button class="gallery-thumb" type="button" aria-label="動画" data-video="images/cases/suncatcher/video.mov">
+                                        <div class="placeholder-image"><p>▶</p></div>
+                                    </button>
+                                    <button class="gallery-thumb" type="button" aria-label="写真1" data-src="images/cases/suncatcher/cover.jpg">
+                                        <div class="placeholder-image"><p>1</p></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details-sidebar">
+                            <div class="work-technical-details">
+                                <h5>材料</h5>
+                                <ul>
+                                    <li>ビーズ</li>
+                                    <li>ワイヤー</li>
+                                    <li>糸</li>
+                                    <li>紙（千羽鶴）</li>
+                                </ul>
+                            </div>
+                            <div class="work-details">
+                                <p>夏の柳をイメージしたサンキャッチャー</p>
+                                <p>小院瀬見</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-main-description">
+                        <p>窓辺に飾ると、風と光に合わせて柳の葉のようにしなやかに揺れ、ビーズが光を拾って室内に小さな光の粒を散らします。千羽鶴とビーズの繊細な重なりが、夏の涼やかさを運びます。</p>
+                    </div>
+                </div>
+
+                <!-- 新規ケース: ビーズアクセサリー（花） -->
+                <div class="work-section case-hidden" id="case-beads-flower">
+                    <h3 class="work-title">ビーズアクセサリー（花）</h3>
+                    <div class="case-meta">Accessory / Koinosemi</div>
+                    <div class="work-top-content">
+                        <div class="work-media-container">
+                            <div class="media-gallery" data-gallery="beads-flower">
+                                <div class="main-media">
+                                    <div class="placeholder-image gallery-main-placeholder" style="display:flex;align-items:center;justify-content:center;">
+                                        <p>メディア</p>
+                                    </div>
+                                    <img class="gallery-main" alt="ビーズアクセサリー メイン" style="display:none;" />
+                                </div>
+                                <div class="thumbs">
+                                    <button class="gallery-thumb" type="button" aria-label="写真1" data-src="images/cases/beads-flower/1.jpg">
+                                        <div class="placeholder-image"><p>1</p></div>
+                                    </button>
+                                    <button class="gallery-thumb" type="button" aria-label="写真2" data-src="images/cases/beads-flower/2.jpg">
+                                        <div class="placeholder-image"><p>2</p></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details-sidebar">
+                            <div class="work-technical-details">
+                                <h5>材料</h5>
+                                <ul>
+                                    <li>ビーズ</li>
+                                    <li>テグス / 針金</li>
+                                    <li>金具</li>
+                                </ul>
+                            </div>
+                            <div class="work-details">
+                                <p>花の佇まいをビーズで表現</p>
+                                <p>小院瀬見</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-main-description">
+                        <p>花弁の重なりや光の反射を丁寧に設計し、揺れたときに生まれる小さな輝きと陰影をアクセサリーに落とし込みました。装いに季節の気配を添える、軽やかな一点です。</p>
+                    </div>
+                </div>
                 <!-- おはな座布団釧路（作品） -->
                 <div class="work-section enhanced case-hidden" id="ohana-zabuton-kushiro">
                     <h3 class="work-title">おは奈座布団 釧路</h3>
@@ -438,19 +531,19 @@
                                 </div>
                                 <div class="thumbs">
                                     <!-- 5枚のサムネイル（画像到着次第、data-src と src を差し替え） -->
-                                    <button class="gallery-thumb" type="button" aria-label="サムネイル1" data-src="images/works/zabuton/1.jpg">
+                                    <button class="gallery-thumb" type="button" aria-label="サムネイル1" data-src="images/cases/zabuton-kushiro/1.jpg">
                                         <div class="placeholder-image"><p>1</p></div>
                                     </button>
-                                    <button class="gallery-thumb" type="button" aria-label="サムネイル2" data-src="images/works/zabuton/2.jpg">
+                                    <button class="gallery-thumb" type="button" aria-label="サムネイル2" data-src="images/cases/zabuton-kushiro/2.jpg">
                                         <div class="placeholder-image"><p>2</p></div>
                                     </button>
-                                    <button class="gallery-thumb" type="button" aria-label="サムネイル3" data-src="images/works/zabuton/3.jpg">
+                                    <button class="gallery-thumb" type="button" aria-label="サムネイル3" data-src="images/cases/zabuton-kushiro/3.jpg">
                                         <div class="placeholder-image"><p>3</p></div>
                                     </button>
-                                    <button class="gallery-thumb" type="button" aria-label="サムネイル4" data-src="images/works/zabuton/4.jpg">
+                                    <button class="gallery-thumb" type="button" aria-label="サムネイル4" data-src="images/cases/zabuton-kushiro/4.jpg">
                                         <div class="placeholder-image"><p>4</p></div>
                                     </button>
-                                    <button class="gallery-thumb" type="button" aria-label="サムネイル5" data-src="images/works/zabuton/5.jpg">
+                                    <button class="gallery-thumb" type="button" aria-label="サムネイル5" data-src="images/cases/zabuton-kushiro/5.jpg">
                                         <div class="placeholder-image"><p>5</p></div>
                                     </button>
                                 </div>
