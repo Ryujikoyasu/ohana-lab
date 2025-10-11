@@ -7,13 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navigation = document.getElementById('navigation');
     const navLinks = document.querySelectorAll('.nav-link');
     const siteHeader = document.getElementById('site-header');
-    const modeToggle = document.getElementById('mode-toggle');
-    const specimenToggle = document.getElementById('specimen-toggle');
-    const specimenDrawer = document.getElementById('specimen-drawer');
-    const notesOpen = document.getElementById('notes-open');
     const notesOverlay = document.getElementById('notes-overlay');
-    const notesClose = document.getElementById('notes-close');
-    const notesContent = document.getElementById('notes-content');
 
     // ページ読み込み時の初期化
     if(navTrigger) {
@@ -24,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('mousemove', e => {
         cursor.style.top = e.clientY + 'px';
         cursor.style.left = e.clientX + 'px';
-        if (document.body.classList.contains('mode-play')) maybeSpawnSeed(e);
     });
 
     // ホバーエフェクト
@@ -186,12 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         initMediaGalleries();
         initForestParallax(reduceMotion);
-        initPlayMode(reduceMotion);
-        initSpecimenDrawer();
         initFieldNotes();
         initShowreel(reduceMotion);
         initHeaderOnHero();
         initWorksStack();
+        initOhanaBackground(reduceMotion);
     }, 600);
 
     // メディアギャラリーの初期化（サムネクリックでメイン切替）
@@ -211,10 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     // プレースホルダーがあれば外す
                     const ph = thumb.querySelector('.placeholder-image');
                     if (ph) ph.remove();
-                    const thumbImg = document.createElement('img');
-                    thumbImg.alt = `ギャラリー サムネイル ${idx+1}`;
-                    thumbImg.src = src; // 画像未配置でも壊れはするが構造は維持
-                    thumb.appendChild(thumbImg);
+                    // 既存のimgがあれば差し替え、なければ追加（重複防止）
+                    let thumbImg = thumb.querySelector('img');
+                    if (!thumbImg){
+                        thumbImg = document.createElement('img');
+                        thumbImg.alt = `ギャラリー サムネイル ${idx+1}`;
+                        thumb.appendChild(thumbImg);
+                    }
+                    thumbImg.src = src;
                 }
                 thumb.addEventListener('click', () => {
                     thumbs.forEach(t => t.classList.remove('active'));
@@ -284,87 +280,6 @@ function initForestParallax(reduceMotion){
     requestAnimationFrame(raf);
 }
 
-// ===== Play Mode =====
-function initPlayMode(reduceMotion){
-    const btn = document.getElementById('mode-toggle');
-    if (!btn) return;
-    const saved = localStorage.getItem('mode');
-    if (saved === 'play') enablePlay();
-    updateBtn();
-    btn.addEventListener('click', () => {
-        if (document.body.classList.contains('mode-play')) {
-            disablePlay();
-        } else {
-            enablePlay();
-        }
-        updateBtn();
-    });
-
-    function updateBtn(){
-        const on = document.body.classList.contains('mode-play');
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-        btn.textContent = on ? '研究' : 'あそび';
-    }
-    function enablePlay(){ document.body.classList.add('mode-play'); localStorage.setItem('mode','play'); }
-    function disablePlay(){ document.body.classList.remove('mode-play'); localStorage.setItem('mode','lab'); }
-
-    if (!reduceMotion){
-        // seed container
-        let seedLayer = document.getElementById('seed-layer');
-        if (!seedLayer){
-            seedLayer = document.createElement('div');
-            seedLayer.id = 'seed-layer';
-            document.body.appendChild(seedLayer);
-        }
-    }
-}
-
-let lastSeedTime = 0;
-function maybeSpawnSeed(e){
-    const now = performance.now();
-    if (now - lastSeedTime < 60) return; // rate limit
-    lastSeedTime = now;
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
-    const seed = document.createElement('div');
-    seed.className = 'seed' + (Math.random() < 0.33 ? ' alt' : '');
-    seed.style.left = e.clientX + 'px';
-    seed.style.top = e.clientY + 'px';
-    seed.style.transform += ` rotate(${Math.random()*180}deg)`;
-    document.body.appendChild(seed);
-    const driftX = (Math.random() - 0.5) * 40;
-    const driftY = 30 + Math.random() * 40;
-    const duration = 900 + Math.random() * 600;
-    seed.animate([
-        { transform: seed.style.transform, opacity: 0.85 },
-        { transform: `translate(${driftX}px, ${driftY}px)` , opacity: 0 }
-    ], { duration, easing: 'ease-out' });
-    setTimeout(()=> seed.remove(), duration);
-}
-
-// ===== Specimen Drawer =====
-function initSpecimenDrawer(){
-    const toggle = document.getElementById('specimen-toggle');
-    const drawer = document.getElementById('specimen-drawer');
-    if (!toggle || !drawer) return;
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) applyTheme(savedTheme);
-    toggle.addEventListener('click', ()=> {
-        drawer.classList.toggle('active');
-        drawer.setAttribute('aria-hidden', drawer.classList.contains('active') ? 'false' : 'true');
-    });
-    drawer.addEventListener('click', (e)=>{
-        const btn = e.target.closest('.chip');
-        if (!btn) return;
-        const theme = btn.getAttribute('data-theme');
-        applyTheme(theme);
-        localStorage.setItem('theme', theme);
-    });
-    function applyTheme(theme){
-        document.body.classList.remove('theme-sakura','theme-indigo','theme-ezo','theme-default');
-        if (theme) document.body.classList.add(`theme-${theme}`);
-    }
-}
 
 // ===== Field Notes Overlay =====
 function initFieldNotes(){
@@ -412,7 +327,8 @@ function initShowreel(reduceMotion){
             const btn = e.target.closest('.spot');
             if (!btn) return;
             const target = btn.getAttribute('data-target');
-            if (target) document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+            if (!target) return;
+            smoothGoto(target);
         });
     }
     const actions = document.querySelector('.reel-actions');
@@ -423,6 +339,25 @@ function initShowreel(reduceMotion){
             const target = btn.getAttribute('data-goto');
             if (target) document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
         });
+    }
+    // Add gentle ripple under cursor
+    if (!reduceMotion){
+        const overlay = document.querySelector('.reel-overlay');
+        if (overlay){
+            let ticking = false; let x=0,y=0;
+            overlay.addEventListener('mousemove', (e)=>{
+                x = e.clientX; y = e.clientY;
+                if (!ticking){
+                    window.requestAnimationFrame(()=>{
+                        overlay.style.setProperty('--rx', x+'px');
+                        overlay.style.setProperty('--ry', y+'px');
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            overlay.classList.add('ripple-active');
+        }
     }
 }
 
@@ -460,6 +395,163 @@ function initWorksStack(){
             return;
         }
     });
+}
+
+// Smooth goto helper
+function smoothGoto(hash){
+    if (!hash) return;
+    const panel = document.querySelector(`.works-stack .stack-item[data-target="${hash}"]`);
+    if (panel) { panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    const el = document.querySelector(hash);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    const works = document.querySelector('#works');
+    if (works){
+        works.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(()=>{
+            const p = document.querySelector(`.works-stack .stack-item[data-target="${hash}"]`);
+            if (p) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 350);
+    }
+}
+
+// OHANA background: petals + fireflies + soft light (有機/無機の混在)
+function initOhanaBackground(reduceMotion){
+    const canvas = document.getElementById('ohana-bg');
+    const mountains = document.querySelector('#bg-visuals .mountains');
+    if (!canvas || reduceMotion) return;
+    const ctx = canvas.getContext('2d');
+    let dpr = Math.max(1, window.devicePixelRatio || 1);
+    let W=0, H=0;
+    const petals = [];
+    const fireflies = [];
+    const washes = [];
+    let t0 = performance.now();
+    function isDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+    function resize(){
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        petals.length = 0; fireflies.length = 0; washes.length = 0;
+        // layered color washes (重ね色)
+        const kasaneLight = [
+            'rgba(228,161,193,0.08)', /* 桜 */
+            'rgba(125,157,133,0.07)', /* 常磐 */
+            'rgba(247,231,206,0.07)', /* 練色 */
+            'rgba(164, 188, 206, 0.06)' /* 薄藍 */
+        ];
+        const pal = kasaneLight; // 明るさ重視（常にライトパレット）
+        const washCount = 6;
+        for (let i=0;i<washCount;i++){
+            washes.push({
+                x: (0.2 + 0.6*Math.random())*W,
+                y: (0.2 + 0.6*Math.random())*H,
+                r: Math.max(W,H) * (0.38 + Math.random()*0.42),
+                col: pal[i % pal.length],
+                dx: (Math.random()*2-1) * 0.05,
+                dy: (Math.random()*2-1) * 0.05
+            });
+        }
+        const petalCount = Math.max(10, Math.floor(W/180));
+        for (let i=0;i<petalCount;i++){
+            petals.push({
+                x: Math.random()*W,
+                y: Math.random()*H,
+                r: 6 + Math.random()*10,
+                rot: Math.random()*Math.PI*2,
+                vx: (-0.2 + Math.random()*0.4),
+                vy: (0.08 + Math.random()*0.18),
+                drift: Math.random()*0.5,
+                hue: Math.random()
+            });
+        }
+        const flyCount = Math.max(16, Math.floor(W/120));
+        for (let i=0;i<flyCount;i++){
+            fireflies.push({
+                x: Math.random()*W,
+                y: Math.random()*H,
+                a: Math.random()*Math.PI*2,
+                speed: 0.25 + Math.random()*0.35,
+                flicker: Math.random()*Math.PI*2
+            });
+        }
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', ()=>{
+        if (mountains){
+            const y = Math.min(20, window.scrollY*0.04);
+            mountains.style.transform = `translateY(${y}px)`;
+        }
+    }, { passive: true });
+
+    function drawPetal(p){
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        const col = isDark()? 'rgba(255,158,191,0.28)' : 'rgba(228,161,193,0.26)';
+        ctx.fillStyle = col;
+        ctx.beginPath();
+        // rotated ellipse-like petal
+        const w = p.r*1.2, h = p.r*0.7;
+        for (let i=0;i<2;i++){
+            ctx.ellipse(0,0,w,h, i?Math.PI/6:-Math.PI/6, 0, Math.PI*2);
+        }
+        ctx.fill();
+        ctx.restore();
+    }
+    function drawFirefly(f){
+        const flick = (Math.sin(f.flicker)+1)/2; // 0-1
+        const alpha = 0.08 + flick*0.18;
+        const r = 1.6 + flick*2.0;
+        const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, r*4);
+        grad.addColorStop(0, `rgba(255,240,210,${alpha})`);
+        grad.addColorStop(1, 'rgba(255,240,210,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(f.x, f.y, r*3, 0, Math.PI*2); ctx.fill();
+    }
+    function frame(now){
+        const dt = Math.min(32, now - t0); t0 = now;
+        ctx.clearRect(0,0,W,H);
+        // kasane color washes (lighter blend)
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        for (const w of washes){
+            w.x += w.dx; w.y += w.dy;
+            if (w.x < -w.r) w.x = W+w.r; if (w.x > W+w.r) w.x = -w.r;
+            if (w.y < -w.r) w.y = H+w.r; if (w.y > H+w.r) w.y = -w.r;
+            const grad = ctx.createRadialGradient(w.x,w.y,0, w.x,w.y,w.r);
+            grad.addColorStop(0, w.col);
+            grad.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath(); ctx.arc(w.x,w.y,w.r,0,Math.PI*2); ctx.fill();
+        }
+        ctx.restore();
+
+        // animate petals
+        for (const p of petals){
+            p.x += p.vx + Math.sin(p.y*0.01 + now*0.0008)*p.drift;
+            p.y += p.vy;
+            p.rot += 0.002*dt;
+            if (p.y - p.r > H+40){ p.y = -40; p.x = Math.random()*W; }
+            if (p.x < -40) p.x = W+40; if (p.x > W+40) p.x = -40;
+            drawPetal(p);
+        }
+        // animate fireflies
+        for (const f of fireflies){
+            f.a += 0.0025*dt;
+            f.flicker += 0.015*dt/16;
+            f.x += Math.cos(f.a)*f.speed;
+            f.y += Math.sin(f.a*0.9)*f.speed*0.8;
+            if (f.x < -20) f.x = W+20; if (f.x > W+20) f.x = -20;
+            if (f.y < -20) f.y = H+20; if (f.y > H+20) f.y = -20;
+            drawFirefly(f);
+        }
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
 }
 
 // ===== Atlas filters and case modal =====
