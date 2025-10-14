@@ -554,7 +554,7 @@ function initOhanaBackground(reduceMotion){
     requestAnimationFrame(frame);
 }
 
-// ===== Atlas filters and case modal =====
+// ===== Atlas filters =====
 document.addEventListener('click', (e)=>{
     // Atlas filter chips
     const regionChip = e.target.closest('.chips.regions .chip');
@@ -567,13 +567,16 @@ document.addEventListener('click', (e)=>{
         applyAtlasFilter();
         return;
     }
-    // Atlas items -> case or link
+    // Atlas items: allow normal navigation when href is present
     const atlas = e.target.closest('.atlas-item');
     if (atlas){
         const caseSel = atlas.getAttribute('data-case');
-        if (caseSel){ openCaseModal(caseSel); }
-        else if (atlas.hasAttribute('href')) { /* normal link anchor */ }
-        e.preventDefault();
+        if (caseSel){
+            // legacy: modal opening (not used now)
+            e.preventDefault();
+            if (typeof openCaseModal === 'function') openCaseModal(caseSel);
+        }
+        // else: follow the href normally
     }
 });
 
@@ -602,47 +605,7 @@ document.addEventListener('click', (e)=>{
     applyAtlasFilter();
 });
 
-// Case modal
-function openCaseModal(selector){
-    const src = document.querySelector(selector);
-    const overlay = document.getElementById('case-overlay');
-    const content = document.getElementById('case-content');
-    if (!src || !overlay || !content) return;
-    // clone minimal safe HTML
-    const clone = src.cloneNode(true);
-    clone.classList.remove('case-hidden','compact');
-    clone.classList.add('is-modal');
-    content.innerHTML = '';
-    // optional: simplify structure
-    content.appendChild(clone);
-    // initialize any dynamic galleries inside the modal
-    if (window.__initMediaGalleries) {
-        try { window.__initMediaGalleries(); } catch(e) {}
-    }
-    // Autoplay first video inside the case (muted/inline)
-    const firstVideo = content.querySelector('video');
-    if (firstVideo){
-        firstVideo.muted = true; 
-        firstVideo.setAttribute('playsinline','');
-        try { firstVideo.play(); } catch(e) {}
-    }
-    overlay.classList.add('active');
-    overlay.setAttribute('aria-hidden','false');
-    document.body.classList.add('no-scroll');
-}
-
-document.getElementById('case-close')?.addEventListener('click', closeCase);
-document.getElementById('case-overlay')?.addEventListener('click', (e)=>{ if (e.target.id==='case-overlay') closeCase(); });
-document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') closeCase(); });
-function closeCase(){
-    const overlay = document.getElementById('case-overlay');
-    if (!overlay) return;
-    // Pause any playing videos in modal
-    document.querySelectorAll('#case-content video').forEach(v=>{ try { v.pause(); } catch(e){} });
-    overlay.classList.remove('active');
-    overlay.setAttribute('aria-hidden','true');
-    document.body.classList.remove('no-scroll');
-}
+// Case modal code removed (individual pages now in use)
 
 // Atlas videos: play on hover (desktop) and pause when out of view
 document.addEventListener('DOMContentLoaded', ()=>{

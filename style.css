@@ -1140,6 +1140,28 @@ footer a {
     position: relative;
 }
 
+/* 制作記録（各作品ページ内のミニJournal） */
+.work-journal {
+    max-width: 760px;
+    margin: 48px auto 0;
+}
+.work-journal header {
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding-top: 16px;
+    margin-bottom: 16px;
+}
+.work-journal h2 { font-size: 1.4rem; margin-bottom: 6px; }
+.work-journal time { color: #888; font-size: .95rem; }
+.work-journal .article-content { line-height: 1.9; font-size: 1.05rem; }
+.work-journal .article-content p { margin: 1rem 0; }
+.work-journal figure { margin: 20px auto; text-align: center; }
+.work-journal img, .work-journal video {
+    display: block; width: 100%; height: auto;
+    max-width: 720px; margin: 0 auto;
+    border-radius: 8px;
+}
+.work-journal figcaption { color: #888; font-size: .9rem; margin-top: 8px; }
+
 .work-title::after {
     content: '';
     position: absolute;
