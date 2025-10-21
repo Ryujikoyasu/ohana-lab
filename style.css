@@ -693,6 +693,18 @@ footer a {
     }
 }
 
+/* おはな研究所ミニ（トップのカード）サムネイルを正方形＆上寄せでクロップ */
+#line-ohana-mini .work-image-container {
+    aspect-ratio: 1 / 1; /* 正方形 */
+}
+
+#line-ohana-mini .work-image-container img {
+    width: 100%;
+    height: 100%;           /* コンテナにフィット */
+    object-fit: cover;      /* はみ出しつつカバー */
+    object-position: 50% 40%; /* 縦位置を少し上寄せ（中央=50%） */
+}
+
 /* style.cssへの追記 */
 
 /* Grid ItemのRead Moreリンク */
