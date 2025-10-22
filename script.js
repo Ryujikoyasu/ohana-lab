@@ -702,6 +702,8 @@ function initRelatedWorks(){
     const idx = p.indexOf('/works/');
     if (idx !== -1) manifestPath = p.slice(0, idx+1) + 'data/works-manifest.json';
   } catch(e){}
+  // Derive a site-root base to resolve item href/src consistently
+  const siteBase = manifestPath.replace(/data\/works-manifest\.json$/, '');
   fetch(manifestPath)
     .then(r=> r.json())
     .then(list=>{
@@ -712,8 +714,14 @@ function initRelatedWorks(){
         if (!works.length){ holder.parentElement.style.display='none'; return; }
         const grid = document.createElement('div'); grid.className = 'journal-grid';
         works.forEach(w=>{
-          const a = document.createElement('a'); a.className = 'journal-card'; a.href = w.url;
-          a.innerHTML = `<img src="${w.cover}" alt="${w.title}" style="width:100%;height:auto;border-radius:8px;margin-bottom:12px;"/>`+
+          const resolve = (path) => {
+            if (!path) return '';
+            // absolute URL or already root-relative
+            if (/^https?:\/\//.test(path) || path.startsWith('/')) return path;
+            return siteBase + path;
+          };
+          const a = document.createElement('a'); a.className = 'journal-card'; a.href = resolve(w.url);
+          a.innerHTML = `<img src="${resolve(w.cover)}" alt="${w.title}" style="width:100%;height:auto;border-radius:8px;margin-bottom:12px;"/>`+
                         `<h3>${w.title}</h3>`;
           grid.appendChild(a);
         });
