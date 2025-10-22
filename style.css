@@ -33,8 +33,26 @@ body {
     background-position: 0 0, 70px 70px, 130px 130px, 0 0, 70px 70px, 0 0;
     color: var(--text-color);
     font-family: var(--font-family);
-    cursor: none;
 }
+
+/* システムカーソルはfine pointerのみ非表示 */
+@media (pointer: fine) {
+  body { cursor: none; }
+}
+@media (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+/* スキップリンク */
+.skip-link {
+  position: absolute; left: 8px; top: -40px; z-index: 10000;
+  background: #fff; color: #000; padding: 8px 12px; border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.skip-link:focus { top: 8px; }
+
+/* キーボードフォーカス可視化 */
+:focus-visible { outline: 2px solid var(--accent-color-1); outline-offset: 3px; }
 
 /* カスタムカーソル */
 .cursor {
@@ -560,6 +578,15 @@ footer::before {
     border-radius: 8px;
     transition: transform 0.8s ease-out, filter 0.5s;
     filter: brightness(0.9) saturate(1.1);
+}
+
+/* Atlas item media sizing to prevent CLS */
+.atlas-item img, .atlas-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .grid-item:hover img {

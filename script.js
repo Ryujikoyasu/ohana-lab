@@ -8,27 +8,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const siteHeader = document.getElementById('site-header');
     const notesOverlay = document.getElementById('notes-overlay');
+    const pointerFine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
 
     // ページ読み込み時の初期化
     if(navTrigger) {
         navTrigger.style.opacity = '1';
     }
 
-    // カスタムカーソルの追従
-    window.addEventListener('mousemove', e => {
-        cursor.style.top = e.clientY + 'px';
-        cursor.style.left = e.clientX + 'px';
-    });
+    // カスタムカーソルの追従（fine pointer のみ）
+    if (pointerFine && cursor) {
+        window.addEventListener('mousemove', e => {
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.left = e.clientX + 'px';
+        }, { passive: true });
+    } else if (cursor) {
+        cursor.style.display = 'none';
+    }
 
     // ホバーエフェクト
     document.querySelectorAll('a, button, .grid-item, #nav-trigger, input, audio, .work-image-container').forEach(el => {
         el.addEventListener('mouseover', () => {
+            if (!pointerFine || !cursor) return;
             cursor.style.width = '32px';
             cursor.style.height = '32px';
             cursor.style.backgroundColor = 'rgba(228, 161, 193, 0.2)'; // 桜色
             cursor.style.boxShadow = '0 0 12px rgba(228, 161, 193, 0.4)';
         });
         el.addEventListener('mouseout', () => {
+            if (!pointerFine || !cursor) return;
             cursor.style.width = '16px';
             cursor.style.height = '16px';
             cursor.style.backgroundColor = 'transparent';
@@ -39,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ナビゲーションの開閉
     if(navTrigger) {
         navTrigger.addEventListener('click', () => {
-            navigation.classList.toggle('active');
+            const isActive = navigation.classList.toggle('active');
+            const expanded = isActive ? 'true' : 'false';
+            navTrigger.setAttribute('aria-expanded', expanded);
         });
     }
     
@@ -50,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // index.html内でのスムーススクロールの場合
                 if(link.getAttribute('href').startsWith('#')) {
                     navigation.classList.remove('active');
+                    if (navTrigger) navTrigger.setAttribute('aria-expanded','false');
                 }
                 // ページ遷移の場合は何もしない
             });
@@ -186,6 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initWorksStack();
         initOhanaBackground(reduceMotion);
     }, 600);
+
+    // 初期表示: 工程非表示・衣は控えめ（特集のみ）
+    try { applyAtlasFilter(); } catch(e){}
 
     // メディアギャラリーの初期化（サムネクリックでメイン切替）
     function initMediaGalleries() {
@@ -561,8 +574,9 @@ document.addEventListener('click', (e)=>{
     const tagChip = e.target.closest('.chips.methods .chip');
     if (regionChip || tagChip){
         if (regionChip){
-            regionChip.parentElement.querySelectorAll('.chip').forEach(c=> c.classList.remove('active'));
+            regionChip.parentElement.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });
             regionChip.classList.add('active');
+            regionChip.setAttribute('aria-pressed','true');
         }
         applyAtlasFilter();
         return;
@@ -585,13 +599,24 @@ function applyAtlasFilter(){
     const region = activeRegionBtn ? activeRegionBtn.getAttribute('data-filter-region') : 'all';
     const activeTag = document.querySelector('.chips.methods .chip.active');
     const tag = activeTag ? activeTag.getAttribute('data-filter-tag') : null;
+    const activeAuthor = document.querySelector('.chips.authors .chip.active');
+    const author = activeAuthor ? activeAuthor.getAttribute('data-filter-author') : null;
+    const showProcess = !!document.querySelector('.chips.view [data-toggle-process].active');
+    const wearSuppressed = !tag; // when no methods filter selected
     const items = document.querySelectorAll('.atlas-item');
     items.forEach(el=>{
-        const r = el.getAttribute('data-region');
+        const regions = (el.getAttribute('data-region')||'').split(/\s+/).filter(Boolean);
         const tags = (el.getAttribute('data-tags')||'').split(/\s+/);
-        const regionOK = (region==='all' || region===r);
+        const a = el.getAttribute('data-author') || null; // solo works only
+        const kind = el.getAttribute('data-kind') || 'work';
+        const regionOK = (region==='all' || regions.includes(region));
         const tagOK = (!tag || tags.includes(tag));
-        el.style.display = (regionOK && tagOK) ? '' : 'none';
+        const authorOK = (!author || a === author);
+        // Hide processes unless toggled
+        const processOK = (kind !== 'process' || showProcess);
+        // Suppress wear by default unless featured or tag explicitly selected
+        const wearOK = (!wearSuppressed || !tags.includes('wear') || el.classList.contains('featured-wear'));
+        el.style.display = (regionOK && tagOK && authorOK && processOK && wearOK) ? '' : 'none';
     });
 }
 
@@ -600,8 +625,27 @@ document.addEventListener('click', (e)=>{
     const m = e.target.closest('.chips.methods .chip');
     if (!m) return;
     const wrap = m.parentElement;
-    if (m.classList.contains('active')) m.classList.remove('active');
-    else { wrap.querySelectorAll('.chip').forEach(c=> c.classList.remove('active')); m.classList.add('active'); }
+    if (m.classList.contains('active')) { m.classList.remove('active'); m.setAttribute('aria-pressed','false'); }
+    else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); m.classList.add('active'); m.setAttribute('aria-pressed','true'); }
+    applyAtlasFilter();
+});
+
+// Author chips (single-select; selecting shows only solo works by that author)
+document.addEventListener('click', (e)=>{
+    const a = e.target.closest('.chips.authors .chip');
+    if (!a) return;
+    const wrap = a.parentElement;
+    if (a.classList.contains('active')) { a.classList.remove('active'); a.setAttribute('aria-pressed','false'); }
+    else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); a.classList.add('active'); a.setAttribute('aria-pressed','true'); }
+    applyAtlasFilter();
+});
+
+// Process view toggle
+document.addEventListener('click', (e)=>{
+    const t = e.target.closest('.chips.view [data-toggle-process]');
+    if (!t) return;
+    const active = t.classList.toggle('active');
+    t.setAttribute('aria-pressed', active ? 'true' : 'false');
     applyAtlasFilter();
 });
 
