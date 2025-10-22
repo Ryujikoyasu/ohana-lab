@@ -218,12 +218,18 @@
                             <button class="chip" data-filter-tag="wear">衣</button>
                             <button class="chip" data-filter-tag="space">空間</button>
                         </div>
-                        <div class="chips view" aria-label="表示切替">
-                            <button class="chip" data-toggle-process aria-pressed="false">工程も表示</button>
-                        </div>
-                        <div class="chips authors" aria-label="作者で見る">
-                            <button class="chip" data-filter-author="ryu" aria-pressed="false">りゅう</button>
-                            <button class="chip" data-filter-author="mi" aria-pressed="false">みー</button>
+                        <button class="chip" data-toggle-advanced aria-pressed="false">詳細フィルタ</button>
+                        <div class="filters-advanced" hidden>
+                            <div class="chips seasons" aria-label="季節で見る">
+                                <button class="chip" data-filter-season="spring" aria-pressed="false">春</button>
+                                <button class="chip" data-filter-season="summer" aria-pressed="false">夏</button>
+                                <button class="chip" data-filter-season="autumn" aria-pressed="false">秋</button>
+                                <button class="chip" data-filter-season="winter" aria-pressed="false">冬</button>
+                            </div>
+                            <div class="chips authors" aria-label="作者で見る">
+                                <button class="chip" data-filter-author="ryu" aria-pressed="false">りゅう</button>
+                                <button class="chip" data-filter-author="mi" aria-pressed="false">みー</button>
+                            </div>
                         </div>
                     </div>
                     <div class="atlas-grid">
@@ -249,7 +255,7 @@
                             </video>
                             <div class="label">曼荼羅</div>
                         </a>
-                        <a class="atlas-item featured-wear" data-region="doto" data-tags="wear" href="works/ohana-zabuton-kushiro.html">
+                        <a class="atlas-item featured-wear" data-region="doto" data-tags="wear" data-tech="kusabana kusaki:karamushi" href="works/ohana-zabuton-kushiro.html">
                             <div class="meta">Wear / Kushiro</div>
                             <img src="images/cases/zabuton-kushiro/1.jpg" alt="おは奈座布団 釧路" loading="lazy" decoding="async">
                             <div class="label">おは奈座布団 釧路</div>
@@ -263,22 +269,28 @@
                             <div class="label">柳のサンキャッチャー</div>
                         </a>
                         <!-- 新規: お花のビーズアクセサリー -->
-                        <a class="atlas-item featured-wear" data-tags="wear" data-author="mi" href="works/beads-flower.html">
+                        <a class="atlas-item" data-tags="object" data-author="mi" href="works/beads-flower.html">
                             <div class="meta">Accessory / Koinzemi</div>
                             <img src="images/cases/beads-flower/1.jpg" alt="お花のビーズアクセサリー" loading="lazy" decoding="async">
                             <div class="label">ビーズアクセサリー（花）</div>
                         </a>
                         <!-- 新規: 制服シャツ（草花拓→藍染） -->
-                        <a class="atlas-item featured-wear" data-region="doto koinzemi" data-tags="wear" href="works/shirt1.html">
+                        <a class="atlas-item featured-wear" data-region="doto koinzemi" data-tags="wear" data-season="summer" href="works/shirt1.html">
                             <div class="meta">Wear / Koinzemi → Kushiro</div>
                             <img src="images/wear/shirt1/cover.jpg" alt="制服シャツに草花拓を施し、裾を水平にクロップ後に藍染した作品（着画）" loading="lazy" decoding="async">
                             <div class="label">制服シャツ（草花拓＋藍）</div>
                         </a>
                         <!-- 新規: 制服シャツ2（カラムシ染→草花拓） -->
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" href="works/shirt2.html">
+                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-season="summer" href="works/shirt2.html">
                             <div class="meta">Wear / Koinzemi</div>
                             <img src="images/wear/shirt2/cover.jpg" alt="制服シャツにカラムシ染めを施し、その上から草花拓した作品（着画）" loading="lazy" decoding="async">
                             <div class="label">制服シャツ（カラムシ＋拓）</div>
+                        </a>
+                        <!-- 新規: ラミー生地（アケビ／ドローイング＋蝶・鳥スタンプ） -->
+                        <a class="atlas-item" data-tags="wear" data-season="autumn" href="works/cloth1.html">
+                            <div class="meta">Fabric / Ramie</div>
+                            <img src="images/wear/cloth1/cover.jpg" alt="アケビをイメージした紫のラミー生地に、ドローイングと蝶・鳥のスタンプでデザインした布" loading="lazy" decoding="async">
+                            <div class="label">ラミー生地（アケビ）</div>
                         </a>
                         <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-kind="process" href="works/kusabana.html">
                             <div class="meta">Nature Print / Koinzemi</div>
@@ -297,7 +309,7 @@
                         </a>
 
                         <!-- りゅう（ソロ）: カラムシ拓シャツ / 3Dスタンプ -->
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-author="ryu" href="works/karamusi-shirt.html">
+                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-author="ryu" data-tech="kusabana" href="works/karamusi-shirt.html">
                             <div class="meta">Mini / Koinzemi</div>
                             <img src="images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg" alt="カラムシ拓シャツ" loading="lazy" decoding="async">
                             <div class="label">カラムシ拓シャツ</div>
@@ -310,12 +322,12 @@
                     </div>
                 </section>
 
-                <!-- Techniques/Projects Hub: 工程やイベントのハブ -->
+                <!-- Techniques/Projects Hub: 技法・プロジェクトのハブ -->
                 <section id="techniques" class="creation-section">
                     <div class="content-panel">
                         <div class="section-title-wrapper">
-                            <h2 class="section-title">技法・プロジェクト（工程）</h2>
-                            <p class="section-subtitle">作品を支える手法や場づくりを紹介</p>
+                            <h2 class="section-title">技法・プロジェクト</h2>
+                            <p class="section-subtitle">作品を支える手法や場づくり</p>
                         </div>
                         <div class="grid-container">
                             <a class="grid-item" href="works/kusabana.html">
@@ -323,12 +335,8 @@
                                 <div class="item-overlay"><h3>草花拓</h3><p>布に季節の形を転写する技法</p></div>
                             </a>
                             <a class="grid-item" href="works/kusaki-zome.html">
-                                <img src="images/journal/karamushi-dye/3.png" alt="草木染め" loading="lazy" decoding="async">
-                                <div class="item-overlay"><h3>草木染め</h3><p>植物染色の総覧（例：カラムシ染）</p></div>
-                            </a>
-                            <a class="grid-item" href="works/mandala.html">
-                                <img src="images/works/teshikaga-mandala.jpg" alt="草花曼荼羅（プロジェクト）" loading="lazy" decoding="async">
-                                <div class="item-overlay"><h3>曼荼羅（プロジェクト）</h3><p>草花拓を用いた共作の場</p></div>
+                                <img src="images/journal/karamushi-dye/3.png" alt="草木染" loading="lazy" decoding="async">
+                                <div class="item-overlay"><h3>草木染</h3><p>植物由来の色を布に宿す総覧（事例あり）</p></div>
                             </a>
                         </div>
                     </div>

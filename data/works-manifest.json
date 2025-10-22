@@ -1,0 +1,42 @@
+[
+  {
+    "id": "shirt1",
+    "title": "制服シャツ（草花拓＋藍）",
+    "url": "works/shirt1.html",
+    "cover": "images/wear/shirt1/cover.jpg",
+    "techs": ["kusabana", "kusaki:indigo"],
+    "tags": ["wear"],
+    "region": ["doto", "koinzemi"],
+    "season": "summer"
+  },
+  {
+    "id": "shirt2",
+    "title": "制服シャツ（カラムシ＋拓）",
+    "url": "works/shirt2.html",
+    "cover": "images/wear/shirt2/cover.jpg",
+    "techs": ["kusaki:karamushi", "kusabana"],
+    "tags": ["wear"],
+    "region": ["koinzemi"],
+    "season": "summer"
+  },
+  {
+    "id": "zabuton-kushiro",
+    "title": "おは奈座布団 釧路",
+    "url": "works/ohana-zabuton-kushiro.html",
+    "cover": "images/cases/zabuton-kushiro/1.jpg",
+    "techs": ["kusabana", "kusaki:karamushi"],
+    "tags": ["wear"],
+    "region": ["doto"],
+    "season": null
+  },
+  {
+    "id": "karamusi-shirt",
+    "title": "カラムシ拓シャツ",
+    "url": "works/karamusi-shirt.html",
+    "cover": "images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg",
+    "techs": ["kusabana"],
+    "tags": ["wear"],
+    "region": ["koinzemi"],
+    "season": null
+  }
+]

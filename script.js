@@ -195,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initHeaderOnHero();
         initWorksStack();
         initOhanaBackground(reduceMotion);
+        initRelatedWorks();
     }, 600);
 
     // 初期表示: 工程非表示・衣は控えめ（特集のみ）
@@ -601,7 +602,9 @@ function applyAtlasFilter(){
     const tag = activeTag ? activeTag.getAttribute('data-filter-tag') : null;
     const activeAuthor = document.querySelector('.chips.authors .chip.active');
     const author = activeAuthor ? activeAuthor.getAttribute('data-filter-author') : null;
-    const showProcess = !!document.querySelector('.chips.view [data-toggle-process].active');
+    const activeSeason = document.querySelector('.chips.seasons .chip.active');
+    const season = activeSeason ? activeSeason.getAttribute('data-filter-season') : null;
+    const showProcess = false; // Atlasは完成品のみ（工程は常時非表示）
     const wearSuppressed = !tag; // when no methods filter selected
     const items = document.querySelectorAll('.atlas-item');
     items.forEach(el=>{
@@ -609,14 +612,16 @@ function applyAtlasFilter(){
         const tags = (el.getAttribute('data-tags')||'').split(/\s+/);
         const a = el.getAttribute('data-author') || null; // solo works only
         const kind = el.getAttribute('data-kind') || 'work';
+        const s = el.getAttribute('data-season') || null;
         const regionOK = (region==='all' || regions.includes(region));
         const tagOK = (!tag || tags.includes(tag));
         const authorOK = (!author || a === author);
-        // Hide processes unless toggled
-        const processOK = (kind !== 'process' || showProcess);
+        const seasonOK = (!season || s === season);
+        // 工程はAtlasでは常時非表示（技法ページで紹介）
+        const processOK = (kind !== 'process');
         // Suppress wear by default unless featured or tag explicitly selected
         const wearOK = (!wearSuppressed || !tags.includes('wear') || el.classList.contains('featured-wear'));
-        el.style.display = (regionOK && tagOK && authorOK && processOK && wearOK) ? '' : 'none';
+        el.style.display = (regionOK && tagOK && authorOK && seasonOK && processOK && wearOK) ? '' : 'none';
     });
 }
 
@@ -640,13 +645,27 @@ document.addEventListener('click', (e)=>{
     applyAtlasFilter();
 });
 
-// Process view toggle
+// Season chips (single-select)
 document.addEventListener('click', (e)=>{
-    const t = e.target.closest('.chips.view [data-toggle-process]');
-    if (!t) return;
-    const active = t.classList.toggle('active');
-    t.setAttribute('aria-pressed', active ? 'true' : 'false');
+    const sc = e.target.closest('.chips.seasons .chip');
+    if (!sc) return;
+    const wrap = sc.parentElement;
+    if (sc.classList.contains('active')) { sc.classList.remove('active'); sc.setAttribute('aria-pressed','false'); }
+    else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); sc.classList.add('active'); sc.setAttribute('aria-pressed','true'); }
     applyAtlasFilter();
+});
+
+// （削除）工程トグルは廃止：Atlasは完成品のみ表示
+
+// Advanced filters toggle (reduce chip clutter)
+document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-toggle-advanced]');
+    if (!btn) return;
+    const panel = document.querySelector('.filters-advanced');
+    if (!panel) return;
+    const show = panel.hasAttribute('hidden');
+    if (show) panel.removeAttribute('hidden'); else panel.setAttribute('hidden','');
+    btn.setAttribute('aria-pressed', show ? 'true' : 'false');
 });
 
 // Case modal code removed (individual pages now in use)
@@ -671,3 +690,34 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }, { threshold: 0.25 });
   atlasVids.forEach(v=> obs.observe(v));
 });
+
+// ===== Related works (technique pages) =====
+function initRelatedWorks(){
+  const relHolders = document.querySelectorAll('[data-related-tech]');
+  if (!relHolders.length) return;
+  // Resolve manifest path from site root (handle /works/* pages)
+  let manifestPath = 'data/works-manifest.json';
+  try {
+    const p = location.pathname;
+    const idx = p.indexOf('/works/');
+    if (idx !== -1) manifestPath = p.slice(0, idx+1) + 'data/works-manifest.json';
+  } catch(e){}
+  fetch(manifestPath)
+    .then(r=> r.json())
+    .then(list=>{
+      relHolders.forEach(holder=>{
+        const techKey = holder.getAttribute('data-related-tech');
+        const startsWith = holder.hasAttribute('data-tech-prefix');
+        const works = list.filter(w=> (w.techs||[]).some(t=> startsWith ? t.startsWith(techKey) : t===techKey));
+        if (!works.length){ holder.parentElement.style.display='none'; return; }
+        const grid = document.createElement('div'); grid.className = 'journal-grid';
+        works.forEach(w=>{
+          const a = document.createElement('a'); a.className = 'journal-card'; a.href = w.url;
+          a.innerHTML = `<img src="${w.cover}" alt="${w.title}" style="width:100%;height:auto;border-radius:8px;margin-bottom:12px;"/>`+
+                        `<h3>${w.title}</h3>`;
+          grid.appendChild(a);
+        });
+        holder.appendChild(grid);
+      });
+    }).catch(()=>{});
+}
