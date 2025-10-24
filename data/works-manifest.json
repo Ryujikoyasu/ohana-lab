@@ -38,5 +38,35 @@
     "tags": ["wear"],
     "region": ["koinzemi"],
     "season": null
+  },
+  {
+    "id": "zouri-makomo",
+    "title": "昼寝用真菰草履",
+    "url": "works/zouri-makomo.html",
+    "cover": "images/wear/zouri1/cover.jpg",
+    "techs": [],
+    "tags": ["wear"],
+    "region": ["koinzemi"],
+    "season": "autumn"
+  },
+  {
+    "id": "hirune-set",
+    "title": "真菰の昼寝セット",
+    "url": "works/hirune.html",
+    "cover": "images/objects/hirune/cover.jpg",
+    "techs": ["kusaki:kusagi"],
+    "tags": ["object"],
+    "region": ["koinzemi"],
+    "season": "autumn"
+  },
+  {
+    "id": "pants1",
+    "title": "茶碗蒸しパンツ（ラミー直線裁断サルエル）",
+    "url": "works/pants1.html",
+    "cover": "images/wear/pants1/cover.jpg",
+    "techs": [],
+    "tags": ["wear"],
+    "region": ["koinzemi"],
+    "season": "autumn"
   }
 ]
