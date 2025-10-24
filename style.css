@@ -1527,7 +1527,7 @@ footer a {
 .on-hero .site-nav a:hover { color: #fff; }
 .on-hero {
   background: linear-gradient(180deg, rgba(0,0,0,0.56), rgba(0,0,0,0.22));
-  border-bottom-color: rgba(255,255,255,0.15);
+  border-bottom: 0; /* ヒーローとヘッダーの隙間/線を消す */
 }
 .on-hero::before {
   content: '';

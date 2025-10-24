@@ -97,65 +97,18 @@
         <div class="header-inner">
             <a href="index.html" class="brand">おはな研究所</a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="#works" class="nav-link">作品</a>
-                <a href="#collab" class="nav-link">コラボレーション</a>
+                <a href="works.html" class="nav-link">作品</a>
+                <a href="collab.html" class="nav-link">コラボレーション</a>
+                <a href="lines.html" class="nav-link">ライン</a>
                 <a href="about.html" class="nav-link">研究所について</a>
                 <a href="news.html" class="nav-link">展示・メディア</a>
                 <a href="https://note.com/ryuddi" target="_blank" rel="noopener" class="nav-link">note</a>
-                <a href="#contact" class="nav-link">葉書（お問い合わせ）</a>
                 <a href="en/index.html" class="lang-link" hreflang="en">EN</a>
             </nav>
-            
+        
         </div>
     </header>
-
-    <button id="nav-trigger" aria-controls="navigation" aria-expanded="false" aria-label="メニュー">
-        <div class="bud"></div>
-    </button>
-
-    <nav id="navigation">
-        <ul>
-            <li><a href="about.html" class="nav-link">研究所について</a></li>
-            <li><a href="#works" class="nav-link">作品</a></li>
-            <li><a href="#collab" class="nav-link">コラボレーション</a></li>
-            <li><a href="news.html" class="nav-link">展示・メディア</a></li>
-            <li><a href="https://note.com/ryuddi" target="_blank" rel="noopener" class="nav-link">note</a></li>
-            <li><a href="#contact" class="nav-link">葉書（お問い合わせ）</a></li>
-        </ul>
-    </nav>
-
-    <!-- Parallax forest layers -->
-    <div id="forest" aria-hidden="true">
-        <div class="forest-layer layer-canopy"></div>
-        <div class="forest-layer layer-mid"></div>
-        <div class="forest-layer layer-ground"></div>
-    </div>
-
-    <!-- Symbolic background visuals: mountains + organic light (canvas) -->
-    <div id="bg-visuals" aria-hidden="true">
-        <div class="sun"></div>
-        <div class="clouds">
-            <div class="cloud c1"></div>
-            <div class="cloud c2"></div>
-            <div class="cloud c3"></div>
-            <div class="cloud c4"></div>
-        </div>
-        <svg class="mountains" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <!-- back ridge (薄藍) -->
-            <path class="m-back" d="M0,220 L100,200 L220,180 L360,195 L460,160 L600,190 L760,170 L900,185 L1080,160 L1240,175 L1360,170 L1440,180 L1440,320 L0,320 Z"></path>
-            <!-- mid ridge (常磐) -->
-            <path class="m-mid" d="M0,250 L120,240 L240,210 L360,230 L480,180 L600,220 L720,200 L840,215 L960,185 L1080,205 L1200,195 L1320,215 L1440,200 L1440,320 L0,320 Z"></path>
-            <!-- foreground ridge (桜) with subtle ridge line -->
-            <path class="m-fore" d="M0,270 L120,260 L240,230 L360,255 L480,220 L600,245 L720,230 L840,242 L960,220 L1080,236 L1200,228 L1320,244 L1440,230 L1440,320 L0,320 Z"></path>
-            <path class="ridge" d="M0,270 L120,260 L240,230 L360,255 L480,220 L600,245 L720,230 L840,242 L960,220 L1080,236 L1200,228 L1320,244 L1440,230"/>
-        </svg>
-        <canvas id="ohana-bg"></canvas>
-        <div class="silk-veils">
-            <div class="veil a"></div>
-            <div class="veil b"></div>
-            <div class="veil c"></div>
-        </div>
-    </div>
+    
 
     
 
@@ -169,16 +122,7 @@
                         <source src="images/cases/shishi-odoshi/video.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="slide" data-target="#ohana-ike" data-title="お花の池・小鳥の森">
-                    <video autoplay muted loop playsinline preload="none">
-                        <source src="images/cases/ohana-ike/video.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide" data-target="#mandala" data-title="弟子屈草花曼荼羅">
-                    <video autoplay muted loop playsinline preload="none">
-                        <source src="images/cases/mandala/video.mp4" type="video/mp4">
-                    </video>
-                </div>
+                
             </div>
             <div class="reel-overlay">
                 <!-- logo-mark removed to avoid white circle over hero video -->
@@ -187,178 +131,12 @@
                     <p>人と自然のあいだに、新しい作法を。</p>
                 </div>
                 <div class="reel-actions">
-                    <button class="btn primary" data-goto="#works">作品を見る</button>
-                    <button class="btn" data-goto="#collab">コラボのご相談</button>
+                    <a class="btn primary" href="works.html">作品を見る</a>
                 </div>
                 <!-- spots and scroll cue removed for cleaner hero -->
             </div>
         </section>
-
         
-        
-
-        <!-- Section: 作品ギャラリー -->
-        <section id="works" class="creation-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">作品</h2>
-                    <p class="section-subtitle">人と自然の「あはひ」を探る創作</p>
-                </div>
-
-                <!-- Field Atlas: by territory × method (no lists) -->
-                <h3 class="section-subhead">一覧</h3>
-                <section id="atlas" class="atlas-section">
-                    <div class="atlas-controls">
-                        <div class="chips regions" aria-label="地域で見る">
-                            <button class="chip active" data-filter-region="all">すべて</button>
-                            <button class="chip" data-filter-region="doto">道東</button>
-                            <button class="chip" data-filter-region="koinzemi">小院瀬見</button>
-                        </div>
-                        <div class="chips methods" aria-label="カテゴリーで見る">
-                            <button class="chip" data-filter-tag="wear">衣</button>
-                            <button class="chip" data-filter-tag="space">空間</button>
-                        </div>
-                        <button class="chip" data-toggle-advanced aria-pressed="false">詳細フィルタ</button>
-                        <div class="filters-advanced" hidden>
-                            <div class="chips seasons" aria-label="季節で見る">
-                                <button class="chip" data-filter-season="spring" aria-pressed="false">春</button>
-                                <button class="chip" data-filter-season="summer" aria-pressed="false">夏</button>
-                                <button class="chip" data-filter-season="autumn" aria-pressed="false">秋</button>
-                                <button class="chip" data-filter-season="winter" aria-pressed="false">冬</button>
-                            </div>
-                            <div class="chips authors" aria-label="作者で見る">
-                                <button class="chip" data-filter-author="ryu" aria-pressed="false">りゅう</button>
-                                <button class="chip" data-filter-author="mi" aria-pressed="false">みー</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="atlas-grid">
-                        <!-- 道東：ハイライトの3件も一覧に掲載（軽量表示） -->
-                        <a class="atlas-item span-2" data-region="doto" data-tags="space" href="works/shishi-odoshi.html">
-                            <div class="meta">Installation / Kushiro EGG</div>
-                            <video muted playsinline preload="none">
-                                <source src="images/cases/shishi-odoshi/video.mp4" type="video/mp4">
-                            </video>
-                            <div class="label">鹿おどし</div>
-                        </a>
-                        <a class="atlas-item" data-region="doto" data-tags="space" href="works/ohana-ike.html">
-                            <div class="meta">Light &amp; Sound / Teshikaga</div>
-                            <video muted playsinline preload="none">
-                                <source src="images/cases/ohana-ike/video.mp4" type="video/mp4">
-                            </video>
-                            <div class="label">お花の池</div>
-                        </a>
-                        <a class="atlas-item" data-region="doto" data-tags="space" data-kind="process" href="works/mandala.html">
-                            <div class="meta">Community Art / Teshikaga</div>
-                            <video muted playsinline preload="none">
-                                <source src="images/cases/mandala/video.mp4" type="video/mp4">
-                            </video>
-                            <div class="label">曼荼羅</div>
-                        </a>
-                        <a class="atlas-item featured-wear" data-region="doto" data-tags="wear" data-tech="kusabana kusaki:karamushi" href="works/ohana-zabuton-kushiro.html">
-                            <div class="meta">Wear / Kushiro</div>
-                            <img src="images/cases/zabuton-kushiro/1.jpg" alt="おは奈座布団 釧路" loading="lazy" decoding="async">
-                            <div class="label">おは奈座布団 釧路</div>
-                        </a>
-
-                        <!-- 小院瀬見 -->
-                        <!-- 新規: 柳のサンキャッチャー（千羽鶴＋ビーズ） -->
-                        <a class="atlas-item" data-tags="space" data-author="mi" href="works/suncatcher.html">
-                            <div class="meta">Suncatcher / Koinzemi</div>
-                            <img src="images/cases/suncatcher/cover.jpg" alt="柳のサンキャッチャー（千羽鶴＋ビーズ）" loading="lazy" decoding="async">
-                            <div class="label">柳のサンキャッチャー</div>
-                        </a>
-                        <!-- 新規: お花のビーズアクセサリー -->
-                        <a class="atlas-item" data-tags="object" data-author="mi" href="works/beads-flower.html">
-                            <div class="meta">Accessory / Koinzemi</div>
-                            <img src="images/cases/beads-flower/1.jpg" alt="お花のビーズアクセサリー" loading="lazy" decoding="async">
-                            <div class="label">ビーズアクセサリー（花）</div>
-                        </a>
-                        <!-- 新規: 真菰の昼寝セット（オブジェクト） -->
-                        <a class="atlas-item" data-tags="object" data-region="koinzemi" data-season="autumn" data-author="ryu" data-tech="kusaki:kusagi" href="works/hirune.html">
-                            <div class="meta">Object / Koinzemi</div>
-                            <img src="images/objects/hirune/cover.jpg" alt="真菰の昼寝セット" loading="lazy" decoding="async">
-                            <div class="label">真菰の昼寝セット</div>
-                        </a>
-                        <!-- 新規: 制服シャツ（草花拓→藍染） -->
-                        <a class="atlas-item featured-wear" data-region="doto koinzemi" data-tags="wear" data-season="summer" href="works/shirt1.html">
-                            <div class="meta">Wear / Koinzemi → Kushiro</div>
-                            <img src="images/wear/shirt1/cover.jpg" alt="制服シャツに草花拓を施し、裾を水平にクロップ後に藍染した作品（着画）" loading="lazy" decoding="async">
-                            <div class="label">制服シャツ（草花拓＋藍）</div>
-                        </a>
-                        <!-- 新規: 制服シャツ2（カラムシ染→草花拓） -->
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-season="summer" href="works/shirt2.html">
-                            <div class="meta">Wear / Koinzemi</div>
-                            <img src="images/wear/shirt2/cover.jpg" alt="制服シャツにカラムシ染めを施し、その上から草花拓した作品（着画）" loading="lazy" decoding="async">
-                            <div class="label">制服シャツ（カラムシ＋拓）</div>
-                        </a>
-                        <!-- 新規: ラミー生地（アケビ／ドローイング＋蝶・鳥スタンプ） -->
-                        <a class="atlas-item" data-tags="wear" data-season="autumn" href="works/cloth1.html">
-                            <div class="meta">Fabric / Ramie</div>
-                            <img src="images/wear/cloth1/cover.jpg" alt="アケビをイメージした紫のラミー生地に、ドローイングと蝶・鳥のスタンプでデザインした布" loading="lazy" decoding="async">
-                            <div class="label">ラミー生地（アケビ）</div>
-                        </a>
-                        <!-- 新規: 茶碗蒸しパンツ（ラミー直線裁断サルエル） -->
-                        <a class="atlas-item featured-wear" data-region="koinzemi" data-tags="wear" data-author="ryu" data-season="autumn" href="works/pants1.html">
-                            <div class="meta">Wear / Koinzemi</div>
-                            <img src="images/wear/pants1/cover.jpg" alt="茶碗蒸しパンツ（ラミー直線裁断サルエル）" loading="lazy" decoding="async">
-                            <div class="label">茶碗蒸しパンツ</div>
-                        </a>
-                        <!-- 新規: 昼寝用真菰草履 -->
-                        <a class="atlas-item featured-wear" data-region="koinzemi" data-tags="wear" data-author="ryu" data-season="autumn" href="works/zouri-makomo.html">
-                            <div class="meta">Wear / Koinzemi</div>
-                            <img src="images/wear/zouri1/cover.jpg" alt="昼寝用真菰草履（全体像）" loading="lazy" decoding="async">
-                            <div class="label">昼寝用真菰草履</div>
-                        </a>
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-kind="process" href="works/kusabana.html">
-                            <div class="meta">Nature Print / Koinzemi</div>
-                            <img src="images/works/kusabana-taku.jpg" alt="草花拓" loading="lazy" decoding="async">
-                            <div class="label">草花拓</div>
-                        </a>
-                        <a class="atlas-item span-2" data-region="koinzemi" data-tags="wear" data-kind="process" href="works/karamushi.html">
-                            <div class="meta">Plant Dye / Koinzemi</div>
-                            <img src="images/journal/karamushi-dye/3.png" alt="カラムシ染" loading="lazy" decoding="async">
-                            <div class="label">カラムシ染</div>
-                        </a>
-                        <a class="atlas-item" data-region="koinzemi" data-tags="space" href="works/washi-light.html">
-                            <div class="meta">Lighting / Koinzemi</div>
-                            <img src="images/interior/wasi.png" alt="五箇山和紙の灯り" loading="lazy" decoding="async">
-                            <div class="label">和紙の灯り</div>
-                        </a>
-
-                        <!-- りゅう（ソロ）: カラムシ拓シャツ / 3Dスタンプ -->
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-author="ryu" data-tech="kusabana" href="works/karamusi-shirt.html">
-                            <div class="meta">Mini / Koinzemi</div>
-                            <img src="images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg" alt="カラムシ拓シャツ" loading="lazy" decoding="async">
-                            <div class="label">カラムシ拓シャツ</div>
-                        </a>
-                        <a class="atlas-item" data-region="koinzemi" data-tags="wear" data-author="ryu" href="works/3d-stamp.html">
-                            <div class="meta">Mini / Koinzemi</div>
-                            <img src="images/mini/3dstamp/IMG_9476.jpeg" alt="3D スタンプ生成アプリ" loading="lazy" decoding="async">
-                            <div class="label">3D スタンプ生成アプリ</div>
-                        </a>
-                    </div>
-                </section>
-
-                <!-- Techniques/Projects Hub: 技法・プロジェクトのハブ -->
-                <section id="techniques" class="creation-section">
-                    <div class="content-panel">
-                        <div class="section-title-wrapper">
-                            <h2 class="section-title">技法・プロジェクト</h2>
-                            <p class="section-subtitle">作品を支える手法</p>
-                        </div>
-                        <div class="grid-container">
-                            <a class="grid-item" href="works/kusabana.html">
-                                <img src="images/works/kusabana-taku.jpg" alt="草花拓" loading="lazy" decoding="async">
-                                <div class="item-overlay"><h3>草花拓</h3><p>布に季節の形を転写する技法</p></div>
-                            </a>
-                            <a class="grid-item" href="works/kusaki-zome.html">
-                                <img src="images/journal/karamushi-dye/3.png" alt="草木染" loading="lazy" decoding="async">
-                                <div class="item-overlay"><h3>草木染</h3><p>植物由来の色を布に宿す総覧（事例あり）</p></div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
                 
                 <!-- 植物園のししおどし（最上段） -->
                 <div class="work-section enhanced compact case-hidden" id="shishi-odoshi">
@@ -707,125 +485,7 @@
         
 
 
-        <!-- Section: Collaboration -->
-        <section id="collab" class="creation-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">コラボレーション</h2>
-                    <p class="section-subtitle">アーティスト、企業、地域とともに</p>
-                </div>
-                <!-- Duo: Who makes the lab (moved here) -->
-                <section id="duo" class="duo-section">
-                    <div class="duo-grid">
-                        <div class="duo-card">
-                            <div class="duo-photo">
-                                <img src="images/profile/ryu-portrait.jpg" alt="りゅうの写真" loading="lazy" decoding="async">
-                            </div>
-                            <div class="duo-text">
-                                <h3>りゅう</h3>
-                                <p>自然と暮らし、なんでも自分でやってみる人。農業ロボット開発の経験を背景に、衣を中心に染めと服づくり、道具設計まで。</p>
-                            </div>
-                        </div>
-                        <div class="duo-card">
-                            <div class="duo-photo">
-                                <img src="images/profile/mi-portrait.jpg" alt="みーの写真" loading="lazy" decoding="async">
-                            </div>
-                            <div class="duo-text">
-                                <h3>みー</h3>
-                                <p>光の申し子。光の存在論的な経験を探り、北欧の光文化を研究。照明の制作と収集、体験としての光の設計。</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="duo-note">二人の協働として「おはな」は生まれる——技術と感性、山の生活と光の研究が交差する。</p>
-                </section>
-                <div class="collab-grid">
-                    <div class="collab-card">
-                        <h3>企業・ブランド</h3>
-                        <p>空間演出、展示、素材開発。自然の記憶を宿すプロダクト/体験づくり。</p>
-                        <ul>
-                            <li>インスタレーション企画・実装</li>
-                            <li>素材/色のリサーチと提案</li>
-                            <li>コンセプト設計・ストーリー</li>
-                        </ul>
-                    </div>
-                    <div class="collab-card">
-                        <h3>アーティスト/キュレーター</h3>
-                        <p>共同制作や展覧会の共同構成。技術と自然素材の橋渡し。</p>
-                        <ul>
-                            <li>共同制作・テクニカル支援</li>
-                            <li>展示構成・照明/音環境</li>
-                            <li>地域連携型プロジェクト</li>
-                        </ul>
-                    </div>
-                    <div class="collab-card">
-                        <h3>自治体・工場</h3>
-                        <p>地域資源を活かした観光/教育/工場のブランディング・体験化。</p>
-                        <ul>
-                            <li>土地素材のリサーチ・活用</li>
-                            <li>ワークショップ設計</li>
-                            <li>地域・産業の物語化</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="collab-cta">
-                    <a class="btn primary" href="mailto:ryuddi0wani@gmail.com">相談してみる</a>
-                    <span class="note">企画段階からお気軽にどうぞ。</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Field Notes Overlay -->
-        <div id="notes-overlay" aria-modal="true" aria-hidden="true" role="dialog">
-            <div class="notes-panel" role="document">
-                <button id="notes-close" class="btn small close" aria-label="閉じる">×</button>
-                <h3>Field Notes</h3>
-                <div class="notes-content" id="notes-content"></div>
-            </div>
-        </div>
-
-        <!-- Lines: おはな研究所ミニ / トマム（作品セクションに準拠） -->
-        <section id="lines" class="creation-section">
-            <div class="content-panel">
-                <div class="section-title-wrapper">
-                    <h2 class="section-title">ライン</h2>
-                    <p class="section-subtitle">毎日の生活へ、やさしく</p>
-                </div>
-
-                <!-- おはな研究所ミニ -->
-                <div class="work-section" id="line-ohana-mini">
-                    <h3 class="work-title">おはな研究所ミニ</h3>
-                    <div class="work-content">
-                        <div class="work-image-container">
-                            <a href="works/karamusi-shirt.html" class="work-link" aria-label="カラムシ拓シャツ" style="display:block;position:relative;">
-                                <img src="images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg" alt="カラムシ拓シャツ サムネイル" loading="lazy" decoding="async">
-                                <div style="position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,0.35);color:#fff;padding:6px 10px;border-radius:999px;font-size:.95rem;backdrop-filter: blur(2px);">
-                                    カラムシ拓シャツ
-                                </div>
-                            </a>
-                        </div>
-                        <div class="work-image-container">
-                            <a href="works/3d-stamp.html" class="work-link" aria-label="3D スタンプ生成アプリ" style="display:block;position:relative;">
-                                <img src="images/mini/3dstamp/IMG_9476.jpeg" alt="3D スタンプ生成アプリ サムネイル" loading="lazy" decoding="async">
-                                <div style="position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,0.35);color:#fff;padding:6px 10px;border-radius:999px;font-size:.95rem;backdrop-filter: blur(2px);">
-                                    3D スタンプ生成アプリ
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- トマム -->
-                <div class="work-section" id="line-tomamu">
-                    <h3 class="work-title">おはな研究所トマム</h3>
-                    <div class="work-content">
-                        <div class="work-description">
-                            <p>2027年に出展予定。</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
+        
 
         <!-- Activity: いつ・なにをしたか -->
         <section id="activity" class="creation-section">

@@ -40,18 +40,8 @@
     "season": null
   },
   {
-    "id": "zouri-makomo",
-    "title": "昼寝用真菰草履",
-    "url": "works/zouri-makomo.html",
-    "cover": "images/wear/zouri1/cover.jpg",
-    "techs": [],
-    "tags": ["wear"],
-    "region": ["koinzemi"],
-    "season": "autumn"
-  },
-  {
     "id": "hirune-set",
-    "title": "真菰の昼寝セット",
+    "title": "真菰の昼寝グッズ　枕・敷物・草履",
     "url": "works/hirune.html",
     "cover": "images/objects/hirune/cover.jpg",
     "techs": ["kusaki:kusagi"],
@@ -65,6 +55,16 @@
     "url": "works/pants1.html",
     "cover": "images/wear/pants1/cover.jpg",
     "techs": [],
+    "tags": ["wear"],
+    "region": ["koinzemi"],
+    "season": "autumn"
+  },
+  {
+    "id": "tops1",
+    "title": "貫頭衣／クロップドマント（クサギ染＋朽木スタンプ）",
+    "url": "works/tops1.html",
+    "cover": "images/wear/tops1/cover.jpg",
+    "techs": ["kusaki:kusagi", "kusabana"],
     "tags": ["wear"],
     "region": ["koinzemi"],
     "season": "autumn"
