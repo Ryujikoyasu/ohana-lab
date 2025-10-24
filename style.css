@@ -732,6 +732,21 @@ footer a {
     object-position: 50% 40%; /* 縦位置を少し上寄せ（中央=50%） */
 }
 
+/* おはな研究所ミニのサムネ用バッジ（左下・共通） */
+#line-ohana-mini .thumb-badge {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: .95rem;
+    backdrop-filter: blur(2px);
+    z-index: 3;
+    pointer-events: none;
+}
+
 /* style.cssへの追記 */
 
 /* Grid ItemのRead Moreリンク */
