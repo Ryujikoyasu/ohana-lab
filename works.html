@@ -47,17 +47,17 @@
         <h3 class="section-subhead">一覧</h3>
         <section id="atlas" class="atlas-section">
           <div class="atlas-controls">
-            <div class="chips regions" aria-label="地域で見る">
-              <button class="chip active" data-filter-region="all">すべて</button>
-              <button class="chip" data-filter-region="doto">道東</button>
-              <button class="chip" data-filter-region="koinzemi">小院瀬見</button>
-            </div>
-            <div class="chips methods" aria-label="カテゴリーで見る">
-              <button class="chip" data-filter-tag="wear">衣</button>
-              <button class="chip" data-filter-tag="space">空間</button>
-            </div>
             <button class="chip" data-toggle-advanced aria-pressed="false">詳細フィルタ</button>
             <div class="filters-advanced" hidden>
+              <div class="chips regions" aria-label="地域で見る">
+                <button class="chip active" data-filter-region="all">すべて</button>
+                <button class="chip" data-filter-region="doto">道東</button>
+                <button class="chip" data-filter-region="koinzemi">小院瀬見</button>
+              </div>
+              <div class="chips methods" aria-label="カテゴリーで見る">
+                <button class="chip" data-filter-tag="wear">衣</button>
+                <button class="chip" data-filter-tag="space">空間</button>
+              </div>
               <div class="chips seasons" aria-label="季節で見る">
                 <button class="chip" data-filter-season="spring" aria-pressed="false">春</button>
                 <button class="chip" data-filter-season="summer" aria-pressed="false">夏</button>
@@ -166,6 +166,23 @@
               <img src="images/mini/3dstamp/IMG_9476.jpeg" alt="スタンプ生成アプリ" loading="lazy" decoding="async">
               <div class="label">スタンプ生成アプリ</div>
             </a>
+          </div>
+          <!-- デフォルト状態で衣が抑制されていることを示す控えめなヒント（グリッドの下に表示） -->
+          <div id="atlas-more-hint" class="atlas-more-hint" hidden>
+            <button type="button" class="more-wear-btn" data-more-wear aria-label="衣の作品をリスト表示">
+              <span class="arrow" aria-hidden="true">⌄</span>
+              <span class="label-text">もっと見る</span>
+            </button>
+          </div>
+        </section>
+        <!-- 抑制された衣の作品をリスト表示する領域（クリックで展開） -->
+        <section id="atlas-more-list" class="atlas-more-list" hidden>
+          <div class="atlas-more-grid"></div>
+          <div class="atlas-more-actions">
+            <button type="button" class="more-wear-close-btn" data-more-close aria-label="リストを閉じる">
+              <span class="arrow" aria-hidden="true">⌃</span>
+              <span class="label-text">閉じる</span>
+            </button>
           </div>
         </section>
       </div>

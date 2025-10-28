@@ -292,6 +292,80 @@ document.addEventListener('DOMContentLoaded', () => {
     window.__initMediaGalleries = initMediaGalleries;
 });
 
+// Smooth scroll helper with custom duration (easeInOut)
+function smoothScrollToY(targetY, duration){
+    try {
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) { window.scrollTo({ top: targetY, behavior: 'auto' }); return; }
+    } catch(e){}
+    const startY = window.scrollY || window.pageYOffset || 0;
+    const delta = targetY - startY;
+    const startT = performance.now();
+    const ease = (t)=> t<0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; // easeInOutQuad
+    function step(now){
+        const t = Math.min(1, (now - startT) / Math.max(1, duration));
+        const y = startY + delta * ease(t);
+        window.scrollTo(0, y);
+        if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+function animateMoreListIn(list){
+    const items = Array.from(list.querySelectorAll('.atlas-more-grid .atlas-item'));
+    const step = 0.06; // seconds between items (gentler)
+    const dur = 1.0;   // seconds per item animation (slower)
+    const easing = 'cubic-bezier(.25,.46,.45,.94)'; // easeOutQuad-ish
+    items.forEach((el, i)=>{
+        el.style.animation = 'none';
+        // force reflow to restart animation
+        void el.offsetWidth;
+        el.style.animation = `atlasFadeUp ${dur}s ${easing} forwards`;
+        el.style.animationDelay = `${i*step}s`;
+    });
+}
+
+function animateMoreListOut(list){
+    const items = Array.from(list.querySelectorAll('.atlas-more-grid .atlas-item'));
+    const step = 0.06; // seconds between items (gentler)
+    const dur = 0.8;   // seconds per item animation (slower)
+    const easing = 'cubic-bezier(.25,.46,.45,.94)';
+    const n = items.length;
+    items.forEach((el, i)=>{
+        const delay = (n - 1 - i) * step; // bottom-to-top
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = `atlasFadeOut ${dur}s ${easing} forwards`;
+        el.style.animationDelay = `${delay}s`;
+    });
+    return (dur + step * Math.max(0, n-1)); // total seconds
+}
+
+// Show active count on the advanced toggle button
+function updateAdvancedFilterBadge(){
+    const btn = document.querySelector('[data-toggle-advanced]');
+    const panel = document.querySelector('.filters-advanced');
+    if (!btn || !panel) return;
+    // Build a short, human-friendly summary instead of a raw count
+    const labels = [];
+    const region = panel.querySelector('.chips.regions .chip.active');
+    const regionKey = region ? region.getAttribute('data-filter-region') : 'all';
+    if (region && regionKey !== 'all') labels.push(region.textContent.trim());
+    const method = panel.querySelector('.chips.methods .chip.active');
+    if (method) labels.push(method.textContent.trim());
+    const season = panel.querySelector('.chips.seasons .chip.active');
+    if (season) labels.push(season.textContent.trim());
+    const author = panel.querySelector('.chips.authors .chip.active');
+    if (author) labels.push(author.textContent.trim());
+    if (labels.length === 0) {
+        btn.textContent = '絞り込み';
+    } else if (labels.length <= 2) {
+        btn.textContent = labels.join('・');
+    } else {
+        btn.textContent = `${labels.slice(0,2).join('・')} ほか${labels.length-2}`;
+    }
+}
+
 // パララックス“森”の初期化
 function initForestParallax(reduceMotion){
     const forest = document.getElementById('forest');
@@ -606,7 +680,9 @@ function applyAtlasFilter(){
     const season = activeSeason ? activeSeason.getAttribute('data-filter-season') : null;
     const showProcess = false; // Atlasは完成品のみ（工程は常時非表示）
     const wearSuppressed = !tag; // when no methods filter selected
-    const items = document.querySelectorAll('.atlas-item');
+    const items = document.querySelectorAll('.atlas-grid .atlas-item');
+    let suppressedCount = 0;
+    const suppressed = [];
     items.forEach(el=>{
         const regions = (el.getAttribute('data-region')||'').split(/\s+/).filter(Boolean);
         const tags = (el.getAttribute('data-tags')||'').split(/\s+/);
@@ -619,10 +695,50 @@ function applyAtlasFilter(){
         const seasonOK = (!season || s === season);
         // 工程はAtlasでは常時非表示（技法ページで紹介）
         const processOK = (kind !== 'process');
+        const baseOK = (regionOK && tagOK && authorOK && seasonOK && processOK);
         // Suppress wear by default unless featured or tag explicitly selected
-        const wearOK = (!wearSuppressed || !tags.includes('wear') || el.classList.contains('featured-wear'));
-        el.style.display = (regionOK && tagOK && authorOK && seasonOK && processOK && wearOK) ? '' : 'none';
+        const suppressedWear = (wearSuppressed && baseOK && tags.includes('wear') && !el.classList.contains('featured-wear'));
+        if (suppressedWear) { suppressedCount++; suppressed.push(el); }
+        el.style.display = (baseOK && !suppressedWear) ? '' : 'none';
     });
+    // Show/hide the subtle hint when wear items are suppressed by default
+    const hint = document.getElementById('atlas-more-hint');
+    const list = document.getElementById('atlas-more-list');
+    if (hint){
+        if (!tag && suppressedCount > 0) {
+            // show hint only when list is closed
+            if (list && list.hasAttribute('hidden')) hint.removeAttribute('hidden');
+            else hint.setAttribute('hidden','');
+        } else {
+            hint.setAttribute('hidden','');
+        }
+    }
+    // Rebuild the "more" list from suppressed items
+    if (list){
+        const wrap = list.querySelector('.atlas-more-grid');
+        if (wrap){
+            wrap.innerHTML = '';
+            if (!tag && suppressed.length){
+                suppressed.forEach(el=>{
+                    const clone = el.cloneNode(true);
+                    clone.style.removeProperty('display');
+                    clone.removeAttribute('style');
+                    wrap.appendChild(clone);
+                });
+                // Keep list collapsed until user opens it
+                if (list.hasAttribute('hidden')) {
+                    // keep hidden
+                } else {
+                    // already open: ensure visible
+                    list.removeAttribute('hidden');
+                }
+            } else {
+                list.setAttribute('hidden','');
+            }
+        }
+    }
+    // Update advanced filter button label with active count
+    try { updateAdvancedFilterBadge(); } catch(e){}
 }
 
 // Toggle methods chip active state (single-select)
@@ -633,6 +749,7 @@ document.addEventListener('click', (e)=>{
     if (m.classList.contains('active')) { m.classList.remove('active'); m.setAttribute('aria-pressed','false'); }
     else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); m.classList.add('active'); m.setAttribute('aria-pressed','true'); }
     applyAtlasFilter();
+    try { updateAdvancedFilterBadge(); } catch(e){}
 });
 
 // Author chips (single-select; selecting shows only solo works by that author)
@@ -643,6 +760,7 @@ document.addEventListener('click', (e)=>{
     if (a.classList.contains('active')) { a.classList.remove('active'); a.setAttribute('aria-pressed','false'); }
     else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); a.classList.add('active'); a.setAttribute('aria-pressed','true'); }
     applyAtlasFilter();
+    try { updateAdvancedFilterBadge(); } catch(e){}
 });
 
 // Season chips (single-select)
@@ -653,6 +771,7 @@ document.addEventListener('click', (e)=>{
     if (sc.classList.contains('active')) { sc.classList.remove('active'); sc.setAttribute('aria-pressed','false'); }
     else { wrap.querySelectorAll('.chip').forEach(c=> { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }); sc.classList.add('active'); sc.setAttribute('aria-pressed','true'); }
     applyAtlasFilter();
+    try { updateAdvancedFilterBadge(); } catch(e){}
 });
 
 // （削除）工程トグルは廃止：Atlasは完成品のみ表示
@@ -666,6 +785,166 @@ document.addEventListener('click', (e)=>{
     const show = panel.hasAttribute('hidden');
     if (show) panel.removeAttribute('hidden'); else panel.setAttribute('hidden','');
     btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+    try { updateAdvancedFilterBadge(); } catch(e){}
+});
+
+// Quick toggles removed; all filters live in advanced panel
+
+// “もっと見る”ヒント: 抑制中の衣をリスト表示
+document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-more-wear]');
+    if (!btn) return;
+    const list = document.getElementById('atlas-more-list');
+    const hint = document.getElementById('atlas-more-hint');
+    if (!list) return;
+    const isHidden = list.hasAttribute('hidden');
+    if (isHidden) {
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Snapshot start BEFORE hiding/mutating DOM
+        const startRect = btn.getBoundingClientRect();
+        // Enter anim state first to prevent double visibility
+        document.body.classList.add('is-animating-more');
+        // Hide top hint/button immediately
+        if (hint) hint.setAttribute('hidden','');
+        try { btn.style.visibility = 'hidden'; } catch(e){}
+        // Prepare list (bottom close is hidden by anim state)
+        list.removeAttribute('hidden');
+        // Button morph animation
+        if (!reduce) {
+            // ensure no previous ghost remains
+            document.querySelectorAll('.floating-more-btn').forEach(el=> el.remove());
+            const ghost = document.createElement('button');
+            ghost.type = 'button';
+            ghost.className = 'floating-more-btn';
+            ghost.setAttribute('aria-hidden','true');
+            ghost.innerHTML = `<span class="arrow" aria-hidden="true">⌄</span><span class="label-text">もっと見る</span>`;
+            ghost.style.left = startRect.left + 'px';
+            ghost.style.top = startRect.top + 'px';
+            ghost.style.transform = 'translate(0,0)';
+            document.body.appendChild(ghost);
+            // Open list with animation for items
+            list.classList.add('is-open');
+            try { animateMoreListIn(list); } catch(e){}
+            // Smooth scroll down (halfway towards list) with custom duration
+            try {
+                const rect = list.getBoundingClientRect();
+                const current = window.scrollY || window.pageYOffset;
+                const target = current + rect.top;
+                const halfway = current + (target - current) * 0.5;
+                smoothScrollToY(halfway, 1100);
+            } catch(e){}
+            // After a short delay, compute target and move ghost
+            setTimeout(()=>{
+                const closeBtn = document.querySelector('[data-more-close]');
+                if (closeBtn){
+                    const endRect = closeBtn.getBoundingClientRect();
+                    const dx = (endRect.left - startRect.left);
+                    const dy = (endRect.top - startRect.top);
+                    // change label to 閉じる as it moves
+                    const label = ghost.querySelector('.label-text');
+                    if (label) label.textContent = '閉じる';
+                    const arrow = ghost.querySelector('.arrow');
+                    if (arrow) arrow.textContent = '⌃';
+                    ghost.style.transform = `translate(${dx}px, ${dy}px)`;
+                }
+            }, 450);
+            // Cleanup after motion
+            setTimeout(()=>{
+                ghost.remove();
+                document.body.classList.remove('is-animating-more');
+            }, 1100);
+        } else {
+            // Reduced motion: just open and scroll
+            list.classList.add('is-open');
+            try {
+                const rect = list.getBoundingClientRect();
+                const current = window.scrollY || window.pageYOffset;
+                const target = current + rect.top;
+                const halfway = current + (target - current) * 0.5;
+                smoothScrollToY(halfway, 1100);
+            } catch(e){}
+        }
+    } else {
+        // Close if already open
+        list.setAttribute('hidden','');
+        list.classList.remove('is-open');
+    }
+});
+
+// 下部の閉じるボタン
+document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-more-close]');
+    if (!btn) return;
+    const list = document.getElementById('atlas-more-list');
+    const hint = document.getElementById('atlas-more-hint');
+    if (!list) return;
+    // Clean any previous ghosts and states
+    document.querySelectorAll('.floating-more-btn').forEach(el=> el.remove());
+    document.body.classList.remove('is-animating-more');
+    // Prepare morph back to top (if hint exists)
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const startRect = btn.getBoundingClientRect();
+    let targetRect = null;
+    if (hint){
+        // Ensure hint participates in layout for measuring
+        hint.removeAttribute('hidden');
+        const topBtn = hint.querySelector('[data-more-wear]');
+        if (topBtn){ targetRect = topBtn.getBoundingClientRect(); }
+    }
+    document.body.classList.add('is-animating-close');
+    // Create ghost at close position
+    const ghost = document.createElement('button');
+    ghost.type = 'button';
+    ghost.className = 'floating-more-btn';
+    ghost.setAttribute('aria-hidden','true');
+    ghost.innerHTML = `<span class=\"arrow\" aria-hidden=\"true\">⌃</span><span class=\"label-text\">閉じる</span>`;
+    ghost.style.left = startRect.left + 'px';
+    ghost.style.top = startRect.top + 'px';
+    ghost.style.transform = 'translate(0,0)';
+    document.body.appendChild(ghost);
+
+    // Start item-out animation (bottom-to-top)
+    let itemsTotalMs = 0;
+    try { itemsTotalMs = animateMoreListOut(list) * 1000; } catch(e){}
+
+    // Smooth scroll up towards hint (halfway)
+    if (!reduce && targetRect){
+        try {
+            const current = window.scrollY || window.pageYOffset;
+            const targetY = current + targetRect.top;
+            const halfway = current + (targetY - current) * 0.5;
+            smoothScrollToY(halfway, 1100);
+        } catch(e){}
+    }
+    // Animate ghost towards top and change to もっと見る
+    if (targetRect){
+        setTimeout(()=>{
+            const dx = (targetRect.left - startRect.left);
+            const dy = (targetRect.top - startRect.top);
+            const label = ghost.querySelector('.label-text');
+            if (label) label.textContent = 'もっと見る';
+            const arrow = ghost.querySelector('.arrow');
+            if (arrow) arrow.textContent = '⌄';
+            ghost.style.transform = `translate(${dx}px, ${dy}px)`;
+        }, 120);
+    }
+    // After motion completes, finalize state (max of ghost/scroll and items animation)
+    const settleMs = Math.max(1150, itemsTotalMs + 100);
+    setTimeout(()=>{
+        ghost.remove();
+        document.body.classList.remove('is-animating-close');
+        // Now actually close the list
+        list.setAttribute('hidden','');
+        list.classList.remove('is-open');
+        if (hint){
+            // Reveal hint and reset label
+            hint.removeAttribute('hidden');
+            const topLabel = hint.querySelector('.label-text');
+            if (topLabel) topLabel.textContent = 'もっと見る';
+            try { document.querySelector('[data-more-wear]').style.visibility = ''; } catch(e){}
+        }
+        try { applyAtlasFilter(); } catch(e){}
+    }, 1150);
 });
 
 // Case modal code removed (individual pages now in use)
