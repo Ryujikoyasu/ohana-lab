@@ -1567,12 +1567,34 @@ footer a {
   text-shadow: 0 1px 2px rgba(0,0,0,0.8), 0 0 1px rgba(0,0,0,0.7);
 }
 .on-hero .site-nav a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.38);
-  border: 1px solid rgba(255,255,255,0.28);
+  padding: 0;           /* ヒーロー上では囲いを外す */
+  border-radius: 0;
+  background: none;
+  border: 0;
 }
-.on-hero .site-nav a:hover { background: rgba(0,0,0,0.46); }
+.on-hero .site-nav a:hover { background: none; }
+
+/* --- Header/nav: mobile micro adjustments --- */
+@media (max-width: 768px) {
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;      /* 行間と列間の最小余白 */
+    justify-content: flex-end;
+  }
+  .site-nav a {
+    margin-left: 0;     /* 先頭要素の余白ズレを解消 */
+    line-height: 1.4;   /* タップしやすい行高に */
+  }
+  .lang-link {          /* 行折返し時に境界線が見切れるのを防止 */
+    border-left: 0;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+@media (max-width: 520px) {
+  .site-nav a { font-size: 0.9rem; }
+}
 
 /* ===== Buttons ===== */
 .btn { 
