@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ryujikoyasu.github.io/ohana-lab/</loc>
-    <lastmod>2025-10-12</lastmod>
+    <lastmod>2025-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/collab.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/lines.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
   </url>
   <url>
     <loc>https://ryujikoyasu.github.io/ohana-lab/about.html</loc>
@@ -83,5 +101,65 @@
     <lastmod>2025-10-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/3d-stamp.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/cloth1.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/hirune.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/karamusi-shirt.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/kusagi.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/kusaki-zome.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/pants1.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/shirt1.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/shirt2.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://ryujikoyasu.github.io/ohana-lab/works/tops1.html</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
   </url>
 </urlset>
