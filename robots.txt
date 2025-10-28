@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ryujikoyasu.github.io/ohana-lab/sitemap.xml
-
+Sitemap: https://ryujikoyasu.github.io/ohana-lab/sitemap.txt
