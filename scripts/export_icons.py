@@ -38,7 +38,14 @@ def export_pngs():
         (48, OUT_DIR / "favicon-48.png"),
     ]
     for size, path in targets:
-        cairosvg.svg2png(url=str(SRC), write_to=str(path), output_width=size, output_height=size, background_color='white')
+        # Preserve transparency in PNGs
+        cairosvg.svg2png(
+            url=str(SRC),
+            write_to=str(path),
+            output_width=size,
+            output_height=size,
+            background_color='rgba(255,255,255,0)'
+        )
         print(f"[+] Wrote {path}")
 
 def export_ico():
@@ -77,4 +84,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

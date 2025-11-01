@@ -138,7 +138,7 @@ def star_polygon(n: int, r1: float, r2: float, fill: str):
 
 
 def build_svg(size: int = SIZE) -> str:
-    bg = PALETTE["background"]
+    # Transparent background (no rect)
     kuchiba = PALETTE["kuchiba"]
     akane = PALETTE["akane"]
     suou = PALETTE["suou"]
@@ -150,8 +150,7 @@ def build_svg(size: int = SIZE) -> str:
 
     layers: list[str] = []
 
-    # Background
-    layers.append(f'<rect width="{size}" height="{size}" fill="{bg}" />')
+    # No background rect to keep transparency
 
     # Outer thin ring
     layers.append(circle(CENTER, CENTER, 240, kigara, 0.25))

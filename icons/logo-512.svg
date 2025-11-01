@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-<rect width="512" height="512" fill="#fcfaf7" />
 <circle cx="256.000" cy="256.000" r="240.000" fill="#C79A4B" fill-opacity="0.250" />
 <circle cx="256.000" cy="256.000" r="238.000" fill="#C79A4B" fill-opacity="0.350" />
 <path d="M 256.000 106.000 C 214.000 66.000 235.000 49.000 256.000 26.000 C 277.000 49.000 298.000 66.000 256.000 106.000 Z" style="fill:#917347;stroke:#60281E;stroke-width:1.2;" />
