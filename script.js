@@ -949,7 +949,7 @@ document.addEventListener('click', (e)=>{
 
 // Case modal code removed (individual pages now in use)
 
-// Atlas videos: play on hover (desktop) and pause when out of view
+// Atlas videos: autoplay when visible, pause/reset when out of view; hover keeps working on desktop
 document.addEventListener('DOMContentLoaded', ()=>{
   const atlasVids = Array.from(document.querySelectorAll('.atlas-item video'));
   if (!atlasVids.length) return;
@@ -957,6 +957,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if (mql.matches){
     atlasVids.forEach(v=>{
       const wrap = v.closest('.atlas-item');
+      if (!wrap) return;
       wrap.addEventListener('mouseenter', ()=>{ v.muted = true; v.play().catch(()=>{}); });
       wrap.addEventListener('mouseleave', ()=>{ v.pause(); v.currentTime = 0; });
     });
@@ -964,7 +965,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(({isIntersecting, target})=>{
       const vid = target;
-      if (!isIntersecting){ vid.pause(); }
+      if (isIntersecting){
+        vid.muted = true;
+        vid.play().catch(()=>{});
+      } else {
+        vid.pause();
+        try { vid.currentTime = 0; } catch(e){}
+      }
     });
   }, { threshold: 0.25 });
   atlasVids.forEach(v=> obs.observe(v));
