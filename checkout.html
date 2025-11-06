@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>レジ - おはな研究所</title>
+  <meta name="theme-color" content="#fcfaf7">
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="icon" type="image/svg+xml" href="icons/ohana-mandala.svg">
+  <style>
+    .checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .card{border:1px solid #eee;border-radius:12px;background:#fff;overflow:hidden}
+    .card header{padding:12px 16px;border-bottom:1px solid #f0f0f0;font-weight:600}
+    .card .body{padding:14px 16px}
+    .order-items{display:flex;flex-direction:column;gap:12px}
+    .order-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px}
+    .order-item img{width:64px;height:48px;object-fit:cover;border-radius:6px}
+    .sum-row{display:flex;justify-content:space-between;margin:6px 0}
+    .sum-row.total{font-weight:700}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-grid .full{grid-column:1/-1}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input,.field select,.field textarea{padding:10px;border:1px solid #ddd;border-radius:8px}
+    .actions{display:flex;gap:8px;margin-top:10px}
+    .muted{color:#666;font-size:.9rem}
+    @media(max-width:860px){.checkout-grid{grid-template-columns:1fr}}
+  </style>
+  <script src="config.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">コンテンツへスキップ</a>
+  <div class="cursor"></div>
+  <header id="site-header" role="banner"></header>
+
+  <main id="main-content" class="creation-section">
+    <div class="content-panel">
+      <div class="section-title-wrapper"><h1 class="section-title">レジ</h1><p class="section-subtitle">お届け先と支払いの確認</p></div>
+      <div id="empty" hidden>
+        <p>カートが空です。<a href="shop.html">ショップへ戻る</a></p>
+      </div>
+      <div class="checkout-grid" id="checkout">
+        <section class="card" id="order-card">
+          <header>ご注文内容</header>
+          <div class="body">
+            <div class="order-items" id="order-items"></div>
+            <div class="sum-row"><span>小計</span><span id="sum-sub">¥0</span></div>
+            <div class="sum-row"><span>送料</span><span id="sum-ship">後でご連絡</span></div>
+            <div class="sum-row total"><span>合計（送料別）</span><span id="sum-total">¥0</span></div>
+            <p class="muted">送料は後ほどメールでご案内します。国内発送に対応。</p>
+          </div>
+        </section>
+        <section class="card" id="info-card">
+          <header>お届け先情報</header>
+          <div class="body">
+            <form id="checkout-form" novalidate>
+              <div class="form-grid">
+                <div class="field full"><label>お名前 <span aria-hidden="true">*</span><input required name="name" autocomplete="name"></label></div>
+                <div class="field"><label>メール <span aria-hidden="true">*</span><input required type="email" name="email" autocomplete="email"></label></div>
+                <div class="field"><label>電話番号 <span aria-hidden="true">*</span><input required type="tel" name="tel" autocomplete="tel"></label></div>
+                <div class="field"><label>郵便番号 <span aria-hidden="true">*</span><input required name="postal" inputmode="numeric" pattern="[0-9\-]{7,}" placeholder="000-0000" aria-describedby="postal-help"></label><small id="postal-help" class="muted">7桁入力で都道府県・市区町村を自動入力します</small></div>
+                <div class="field"><label>都道府県 <span aria-hidden="true">*</span>
+                  <select required name="pref">
+                    <option value="">選択してください</option>
+                    <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option>
+                    <option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option>
+                    <option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+                    <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+                    <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option>
+                    <option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option>
+                    <option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option>
+                    <option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+                  </select>
+                </div>
+                <div class="field full"><label>市区町村 <span aria-hidden="true">*</span><input required name="city" autocomplete="address-level2"></label></div>
+                <div class="field full"><label>番地・建物名 <span aria-hidden="true">*</span><input required name="addr1" autocomplete="address-line1"></label></div>
+                <div class="field full"><label>備考（任意）<textarea name="note" rows="3" placeholder="サイズ、色のご希望、納期など"></textarea></label></div>
+                <div class="field full"><label><input type="checkbox" required name="agree"> 利用規約とプライバシーに同意します</label></div>
+              </div>
+              <div class="actions">
+                <button class="btn" type="button" id="back-shop">ショップに戻る</button>
+                <button class="btn primary" type="submit" id="place-order">注文を確定</button>
+              </div>
+              <p class="muted">注文確定後、PayPalでお支払いへ進みます。発送のご連絡はメールにてお送りします。</p>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <!-- Optional EmailJS SDK (only used if configured in config.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+  (function(){
+    const KEY = 'ohana_cart';
+    const orderItemsEl = document.getElementById('order-items');
+    const sumSub = document.getElementById('sum-sub');
+    const sumTotal = document.getElementById('sum-total');
+    const emptyEl = document.getElementById('empty');
+    const checkoutEl = document.getElementById('checkout');
+    const form = document.getElementById('checkout-form');
+    const backBtn = document.getElementById('back-shop');
+    const postalInput = form.querySelector('input[name="postal"]');
+    const prefSelect = form.querySelector('select[name="pref"]');
+    const cityInput = form.querySelector('input[name="city"]');
+
+    function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch(e){ return []; } }
+    function subtotal(){ return load().reduce((s,x)=> s + x.price * x.qty, 0); }
+    function formatJPY(n){ return '¥' + n.toLocaleString('ja-JP'); }
+    function render(){
+      const list = load();
+      if (list.length === 0){ emptyEl.hidden = false; checkoutEl.style.display = 'none'; return; }
+      orderItemsEl.innerHTML = list.map(x=> `
+        <div class="order-item">
+          <img src="${x.image}" alt="${x.name}">
+          <div><div>${x.name}</div><div class="muted">数量: ${x.qty}</div></div>
+          <div>${formatJPY(x.price * x.qty)}</div>
+        </div>
+      `).join('');
+      sumSub.textContent = formatJPY(subtotal());
+      sumTotal.textContent = formatJPY(subtotal()); // 送料別
+    }
+
+    function orderId(){ const t = new Date(); return 'OL' + t.getFullYear().toString().slice(-2) + (t.getMonth()+1).toString().padStart(2,'0') + t.getDate().toString().padStart(2,'0') + '-' + Math.random().toString(36).slice(2,7).toUpperCase(); }
+
+    function toLines(obj){ return Object.entries(obj).map(([k,v])=> `${k}: ${v}`).join('\n'); }
+
+    async function sendEmail(order){
+      try {
+        if (window.SHOP_CONFIG && window.SHOP_CONFIG.emailProvider === 'emailjs' && window.SHOP_CONFIG.emailjs.publicKey){
+          const pub = window.SHOP_CONFIG.emailjs.publicKey;
+          const svc = window.SHOP_CONFIG.emailjs.serviceId;
+          const tpl = window.SHOP_CONFIG.emailjs.templateId;
+          const params = {
+            to_email: window.SHOP_CONFIG.sellerEmail,
+            subject: `新規注文 ${order.id}`,
+            message: order.text,
+            reply_to: order.customer?.email || '',
+            from_name: order.customer?.name || 'OHANA LAB Shop',
+            from_email: order.customer?.email || '',
+            order_id: order.id,
+            subtotal: String(order.subtotal),
+            items: order.items.map(x=> `${x.name} x${x.qty} = ${x.price * x.qty}`).join('\n')
+          };
+          // Some EmailJS setups require passing public key directly on send
+          await emailjs.send(svc, tpl, params, pub);
+          return true;
+        }
+      } catch(e){ console.warn(e); }
+      // Fallback: 送信は行わず非表示（ユーザーにUIを出さない）
+      return false;
+    }
+
+    function openPayPal(total, order){
+      const base = (window.SHOP_CONFIG && window.SHOP_CONFIG.paypalMeUrl) || 'https://www.paypal.com/paypalme/ryuddi';
+      const url = `${base}/${total}JPY`;
+      window.open(url, '_blank');
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      // Validate
+      if (!form.reportValidity()) return;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const list = load();
+      const id = orderId();
+      const sub = subtotal();
+      const text = [
+        `[注文ID] ${id}`,
+        `[合計] ${sub} (送料別)`,
+        '',
+        '[商品]',
+        ...list.map(x=> `- ${x.name} x${x.qty} = ${x.price * x.qty}`),
+        '',
+        '[お届け先]',
+        `お名前: ${data.name}`,
+        `メール: ${data.email}`,
+        `電話: ${data.tel}`,
+        `郵便番号: ${data.postal}`,
+        `都道府県: ${data.pref}`,
+        `市区町村: ${data.city}`,
+        `番地・建物: ${data.addr1}`,
+        `備考: ${data.note || ''}`,
+      ].join('\n');
+      const order = { id, items: list, subtotal: sub, customer: data, text };
+      localStorage.setItem('ohana_last_order', JSON.stringify(order));
+      // Email notify（設定されていればバックグラウンド送信。ユーザーには表示しない）
+      await sendEmail(order).catch(()=>{});
+      // Open PayPal.Me for payment
+      openPayPal(sub, order);
+      // Optionally clear cart
+      // localStorage.removeItem(KEY);
+      alert('ご注文を受け付けました。別タブでPayPalの支払いページを開きました。');
+    });
+
+    backBtn.addEventListener('click', ()=>{ window.location.href = 'shop.html#cart'; });
+
+    // Init
+    render();
+
+    // ---- 郵便番号から住所自動入力（ZipCloud API） ----
+    function sanitizePostal(v){ return (v||'').replace(/[^0-9]/g,''); }
+    let postalTimer;
+    async function lookupPostal(){
+      const code = sanitizePostal(postalInput.value);
+      if (code.length !== 7) return;
+      try {
+        const res = await fetch('https://zipcloud.ibsnet.co.jp/api/search?zipcode=' + encodeURIComponent(code));
+        const data = await res.json();
+        if (data && data.status === 200 && Array.isArray(data.results) && data.results.length){
+          const r = data.results[0];
+          const pref = r.address1 || '';
+          const city = [(r.address2||''),(r.address3||'')].filter(Boolean).join('');
+          // prefecture select: set by value (option text)
+          prefSelect.value = pref;
+          cityInput.value = city;
+        }
+      } catch(e){ /* fail silently */ }
+    }
+    function debouncedLookup(){
+      clearTimeout(postalTimer);
+      postalTimer = setTimeout(lookupPostal, 500);
+    }
+    postalInput.addEventListener('input', debouncedLookup);
+    postalInput.addEventListener('blur', lookupPostal);
+  })();
+  </script>
+</body>
+</html>

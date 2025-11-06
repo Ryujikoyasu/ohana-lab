@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ショップ - おはな研究所</title>
+  <meta name="description" content="おはな研究所の作品を購入できます。PayPalでの決済に対応。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://ryujikoyasu.github.io/ohana-lab/shop.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ショップ - おはな研究所">
+  <meta property="og:description" content="おはな研究所の作品を購入できます。PayPalでの決済に対応。">
+  <meta property="og:image" content="https://ryujikoyasu.github.io/ohana-lab/images/works/ohana-ike-kotori-mori.jpg">
+  <meta name="theme-color" content="#fcfaf7">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/ohana-mandala.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/logo-192.png">
+  <link rel="mask-icon" href="icons/ohana-mandala.svg" color="#8E354A">
+  <style>
+    .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .product-card { border: 1px solid #eee; border-radius: 12px; background: #fff; overflow: hidden; display: flex; flex-direction: column; }
+    .product-media { aspect-ratio: 4/3; background: #faf8f6; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .product-media img { width: 100%; height: 100%; object-fit: cover; }
+    .product-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .product-title { font-size: 1.05rem; margin: 0; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-height: calc(1.35em * 2); min-height: calc(1.35em * 2); }
+    .product-meta { color: #666; font-size: 0.9rem; min-height: 1.2em; }
+    .price { font-weight: 600; }
+    .actions { margin-top: auto; display:flex; gap:8px; }
+    .actions .btn { width: 100%; }
+    .note { color: #666; font-size: .9rem; }
+    .stock { color: #6f4e2f; font-size: 0.9rem; }
+    .stock.soldout { color: #999; }
+    .btn[disabled] { opacity: .5; cursor: not-allowed; }
+  </style>
+  <!-- PayPal 決済先メール。必要なら変更してください。 -->
+  <!-- business に設定されるメールが PayPal 受取先です。-->
+  <script>
+    window.PAYPAL_BUSINESS = 'ryuddi0wani@gmail.com';
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">コンテンツへスキップ</a>
+  <div class="cursor"></div>
+
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand">おはな研究所</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="works.html" class="nav-link">作品</a>
+        <a href="shop.html" class="nav-link" aria-current="page">ショップ</a>
+        <a href="collab.html" class="nav-link">コラボレーション</a>
+        <a href="lines.html" class="nav-link">ライン</a>
+        <a href="about.html" class="nav-link">研究所について</a>
+        <a href="news.html" class="nav-link">展示・メディア</a>
+        <a href="https://note.com/ryuddi" target="_blank" rel="noopener" class="nav-link">note</a>
+        <a href="en/index.html" class="lang-link" hreflang="en">EN</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="creation-section">
+      <div class="content-panel">
+        <div class="section-title-wrapper">
+          <h1 class="section-title">ショップ</h1>
+          <p class="section-subtitle">季節の作品、身につけるもの、灯り</p>
+        </div>
+
+        <p class="note">決済は PayPal に対応しています。発送時期や在庫状況はメールでご連絡いたします。オーダーメイドは価格ご相談となります。</p>
+
+        <div class="shop-grid">
+          <!-- おは奈座布団 大 -->
+          <article class="product-card">
+            <a class="product-media" href="works/ohana-zabuton-kushiro.html" aria-label="おは奈座布団 大">
+              <img src="images/cases/zabuton-kushiro/1.jpg" alt="おは奈座布団 大">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">おは奈座布団（大）</h3>
+              <div class="product-meta"><span class="price">¥20,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り2点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="zabuton-large" data-name="おは奈座布団（大）" data-price="20000" data-image="images/cases/zabuton-kushiro/1.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- おは奈座布団 小 -->
+          <article class="product-card">
+            <a class="product-media" href="works/ohana-zabuton-kushiro.html" aria-label="おは奈座布団 小">
+              <img src="images/cases/zabuton-kushiro/1.jpg" alt="おは奈座布団 小">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">おは奈座布団（小）</h3>
+              <div class="product-meta"><span class="price">¥15,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り3点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="zabuton-small" data-name="おは奈座布団（小）" data-price="15000" data-image="images/cases/zabuton-kushiro/1.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 制服シャツ 藍染 -->
+          <article class="product-card">
+            <a class="product-media" href="works/shirt1.html" aria-label="制服シャツ（藍染）">
+              <img src="images/wear/shirt1/cover.jpg" alt="制服シャツ（藍染）">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">制服シャツ（藍染）</h3>
+              <div class="product-meta"><span class="price">¥20,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="shirt-indigo" data-name="制服シャツ（藍染）" data-price="20000" data-image="images/wear/shirt1/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 制服シャツ カラムシ染 -->
+          <article class="product-card">
+            <a class="product-media" href="works/shirt2.html" aria-label="制服シャツ（カラムシ染）">
+              <img src="images/wear/shirt2/cover.jpg" alt="制服シャツ（カラムシ染）">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">制服シャツ（カラムシ染）</h3>
+              <div class="product-meta"><span class="price">¥30,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="shirt-karamushi" data-name="制服シャツ（カラムシ染）" data-price="30000" data-image="images/wear/shirt2/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 茶碗蒸しパンツ -->
+          <article class="product-card">
+            <a class="product-media" href="works/pants1.html" aria-label="茶碗蒸しパンツ">
+              <img src="images/wear/pants1/cover.jpg" alt="茶碗蒸しパンツ">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">茶碗蒸しパンツ</h3>
+              <div class="product-meta"><span class="price">¥60,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="pants-chawanmushi" data-name="茶碗蒸しパンツ" data-price="60000" data-image="images/wear/pants1/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 和紙の灯り -->
+          <article class="product-card">
+            <a class="product-media" href="works/washi-light.html" aria-label="和紙の灯り">
+              <img src="images/interior/washi.png" alt="和紙の灯り">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">和紙の灯り</h3>
+              <div class="product-meta"><span class="price">¥30,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="washi-light" data-name="和紙の灯り" data-price="30000" data-image="images/interior/washi.png"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- カラムシ拓シャツ（ミニ） -->
+          <article class="product-card">
+            <a class="product-media" href="works/karamusi-shirt.html" aria-label="カラムシ拓シャツ">
+              <img src="images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg" alt="カラムシ拓シャツ">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">カラムシ拓シャツ</h3>
+              <div class="product-meta"><span class="price">¥4,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り4点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="karamusi-shirt" data-name="カラムシ拓シャツ" data-price="4000" data-image="images/mini/karamusi-t-shirt/karamusi-shirt-1-front.jpeg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 真菰の昼寝グッズ 草履 -->
+          <article class="product-card">
+            <a class="product-media" href="works/hirune.html" aria-label="真菰の草履">
+              <img src="images/objects/hirune/cover.jpg" alt="真菰の昼寝グッズ 草履">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">真菰の昼寝グッズ：草履</h3>
+              <div class="product-meta"><span class="price">¥20,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="hirune-zori" data-name="真菰の草履" data-price="20000" data-image="images/objects/hirune/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 真菰座布団 -->
+          <article class="product-card">
+            <div class="product-media">
+              <img src="images/objects/hirune/cover.jpg" alt="真菰座布団">
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">真菰座布団</h3>
+              <div class="product-meta"><span class="price">¥40,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1点</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="makomo-zabuton" data-name="真菰座布団" data-price="40000" data-image="images/objects/hirune/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 柳のサンキャッチャー 10本セット -->
+          <article class="product-card">
+            <a class="product-media" href="works/suncatcher.html" aria-label="柳のサンキャッチャー 10本セット">
+              <img src="images/cases/suncatcher/cover.jpg" alt="柳のサンキャッチャー 10本セット">
+            </a>
+            <div class="product-body">
+              <h3 class="product-title">柳のサンキャッチャー（10本セット）</h3>
+              <div class="product-meta"><span class="price">¥200,000</span></div>
+              <div class="stock" aria-live="polite">在庫: 残り1セット</div>
+              <div class="actions">
+                <button class="btn" data-add-to-cart data-id="suncatcher-10" data-name="柳のサンキャッチャー（10本セット）" data-price="200000" data-image="images/cases/suncatcher/cover.jpg"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠に入れる</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- オーダーメイド（価格要相談） -->
+          <article class="product-card">
+            <div class="product-media">
+              <img src="images/works/kusabana-taku.jpg" alt="オーダーメイド 生地デザイン・草花拓">
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">生地のデザイン・草花拓（オーダー）</h3>
+              <div class="product-meta">価格：要相談</div>
+              <div class="stock" aria-live="polite">受注制作</div>
+              <div class="actions">
+                <a class="btn" href="mailto:ryuddi0wani@gmail.com?subject=%E3%80%90%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%80%91%E3%82%AA%E3%83%BC%E3%83%80%E3%83%BC%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">問い合わせる</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart panel -->
+  <button class="btn cart-toggle" id="open-cart"><img class="icon-basket" src="icons/basket-woven.svg" alt="">籠を見る</button>
+  <div class="cart-panel" id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-header">
+      <strong id="cart-title">籠</strong>
+      <button class="btn" id="close-cart" aria-label="カートを閉じる">閉じる</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>小計</span><span id="cart-subtotal">¥0</span></div>
+      <div class="cart-actions">
+        <button class="btn" id="clear-cart">カートを空にする</button>
+        <button class="btn primary" id="go-checkout">レジへ進む</button>
+      </div>
+      <p class="note">送料・納期はメールでご案内します。オーダーメイドは各商品ページからご相談ください。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="content-panel">
+      <p>おはな研究所への葉書は、このアドレスへ。</p>
+      <a href="mailto:ryuddi0wani@gmail.com">ryuddi0wani@gmail.com</a>
+      <div class="copyright">© 2025 おはな研究所</div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  // Minimal cart implementation (localStorage + PayPal cart form)
+  (function(){
+    const KEY = 'ohana_cart';
+    const itemsEl = document.getElementById('cart-items');
+    const panel = document.getElementById('cart-panel');
+    const openBtn = document.getElementById('open-cart');
+    const closeBtn = document.getElementById('close-cart');
+    const clearBtn = document.getElementById('clear-cart');
+    const checkoutBtn = document.getElementById('checkout-paypal');
+    const subtotalEl = document.getElementById('cart-subtotal');
+
+    function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch(e){ return []; } }
+    function save(list){ localStorage.setItem(KEY, JSON.stringify(list)); updateBadge(); }
+    function add(item){ const list = load(); const ex = list.find(x=> x.id===item.id); if (ex){ ex.qty += 1; } else { list.push({...item, qty:1}); } save(list); render(); }
+    function remove(id){ const list = load().filter(x=> x.id!==id); save(list); render(); }
+    function changeQty(id, delta){ const list = load(); const it = list.find(x=> x.id===id); if (!it) return; it.qty = Math.max(1, it.qty + delta); save(list); render(); }
+    function subtotal(){ return load().reduce((s, x)=> s + x.price * x.qty, 0); }
+    function totalQty(){ return load().reduce((s, x)=> s + x.qty, 0); }
+
+    function formatJPY(n){ return '¥' + n.toLocaleString('ja-JP'); }
+
+    function render(){
+      const list = load();
+      if (!itemsEl) return;
+      if (list.length === 0){ itemsEl.innerHTML = '<div style="padding:14px">カートは空です。</div>'; }
+      else {
+        itemsEl.innerHTML = list.map(x=> `
+          <div class="cart-item" data-id="${x.id}">
+            <img src="${x.image}" alt="${x.name}">
+            <div>
+              <h4>${x.name}</h4>
+              <div class="cart-qty">
+                <button type="button" data-dec>-</button>
+                <span aria-label="数量">${x.qty}</span>
+                <button type="button" data-inc>+</button>
+              </div>
+            </div>
+            <div>${formatJPY(x.price * x.qty)}<br><button type="button" data-remove>削除</button></div>
+          </div>
+        `).join('');
+      }
+      subtotalEl.textContent = formatJPY(subtotal());
+    }
+
+    function updateBadge(){
+      const count = totalQty();
+      const badge = document.getElementById('cart-count');
+      if (badge){ badge.textContent = count ? String(count) : ''; }
+    }
+
+    function open(){ panel?.classList.add('active'); render(); }
+    function close(){ panel?.classList.remove('active'); }
+
+    // Wire events
+    document.querySelectorAll('[data-add-to-cart]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const d = btn.dataset;
+        add({ id: d.id, name: d.name, price: Number(d.price), image: d.image });
+        open();
+      });
+    });
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    clearBtn?.addEventListener('click', ()=>{ save([]); render(); });
+    itemsEl?.addEventListener('click', (e)=>{
+      const itemEl = e.target.closest('.cart-item'); if (!itemEl) return;
+      const id = itemEl.getAttribute('data-id');
+      if (e.target.hasAttribute('data-inc')) changeQty(id, +1);
+      else if (e.target.hasAttribute('data-dec')) changeQty(id, -1);
+      else if (e.target.hasAttribute('data-remove')) remove(id);
+    });
+
+    document.getElementById('go-checkout')?.addEventListener('click', ()=>{
+      if (load().length===0) return; window.location.href = 'checkout.html';
+    });
+
+    // Initial
+    updateBadge();
+    window.addEventListener('storage', (e)=>{ if (e.key===KEY) updateBadge(); });
+    if (location.hash && location.hash.includes('cart')) { open(); }
+  })();
+  </script>
+</body>
+</html>

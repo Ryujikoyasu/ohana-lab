@@ -1,5 +1,51 @@
 // script.js (更新版)
-document.addEventListener('DOMContentLoaded', () => {
+// Inject shared header partial (JA/EN) into #site-header
+async function injectSharedHeader(){
+    const container = document.getElementById('site-header');
+    if (!container) return;
+    try {
+        const lang = (document.documentElement.getAttribute('lang') || 'ja').toLowerCase();
+        const isEn = lang.startsWith('en');
+        const pathname = location.pathname || '/';
+        // Project base (GitHub Pages: /ohana-lab/). Fallback to root.
+        let base = '/';
+        const m = pathname.match(/^(.*?\/ohana-lab\/)/);
+        if (m && m[1]) base = m[1];
+
+        const partial = isEn ? 'partials/header-en.html' : 'partials/header-ja.html';
+        const res = await fetch(base + partial, { credentials: 'same-origin' });
+        if (!res.ok) throw new Error('Failed to load header partial');
+        const html = await res.text();
+        container.innerHTML = html;
+
+        // Fix relative links inside the injected header
+        const fixLink = (a)=>{
+            const href = a.getAttribute('href') || '';
+            if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || href.startsWith('tel:')) return;
+            // convert to absolute under project base
+            a.setAttribute('href', base + href.replace(/^\/?/, ''));
+        };
+        container.querySelectorAll('a').forEach(fixLink);
+
+        // Mark current page in nav
+        try {
+            const here = location.pathname.replace(/\/index\.html?$/, '/');
+            container.querySelectorAll('a.nav-link').forEach(a => {
+                let u = a.getAttribute('href') || '';
+                // normalize for comparison
+                u = u.replace(/\/index\.html?$/, '/');
+                const abs = new URL(u, location.origin).pathname;
+                if (here === abs) a.setAttribute('aria-current', 'page');
+            });
+        } catch(e){}
+    } catch(e) {
+        // silent fail to avoid blocking page
+        console.warn(e);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await injectSharedHeader();
 
     const mainContent = document.getElementById('main-content');
     const cursor = document.querySelector('.cursor');
@@ -196,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initWorksStack();
         initOhanaBackground(reduceMotion);
         initRelatedWorks();
+        initCartBadge();
     }, 600);
 
     // 初期表示: 工程非表示・衣は控えめ（特集のみ）
@@ -291,6 +338,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // expose for dynamic content
     window.__initMediaGalleries = initMediaGalleries;
 });
+
+// ===== Simple Cart badge updater (shared across pages) =====
+function initCartBadge(){
+    const KEY = 'ohana_cart';
+    const badge = document.getElementById('cart-count');
+    if (!badge) return;
+    function total(){
+        try { return (JSON.parse(localStorage.getItem(KEY))||[]).reduce((s,x)=> s + (x.qty||0), 0); } catch(e){ return 0; }
+    }
+    function render(){ const n = total(); badge.textContent = n? String(n) : ''; }
+    render();
+    window.addEventListener('storage', (e)=>{ if (e.key===KEY) render(); });
+}
 
 // Smooth scroll helper with custom duration (easeInOut)
 function smoothScrollToY(targetY, duration){
