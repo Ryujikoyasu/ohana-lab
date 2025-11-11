@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "id": "ohana-robot",
+      "title": "OHANA-ROBOT",
+      "year": 2025,
+      "category": ["robotics"],
+      "thumbnail": "/content/projects/ohana-robot/cover.jpg",
+      "path": "/site_ryuddi/works/ohana-robot.html"
+    },
+    {
+      "id": "vernacular-rice-robot",
+      "title": "ヴァナキュラーな稲作ロボット",
+      "year": 2025,
+      "category": ["robotics", "agri"],
+      "thumbnail": "/content/projects/vernacular-rice-robot/cover.jpg",
+      "path": "/site_ryuddi/works/vernacular-rice-robot.html"
+    },
+    {
+      "id": "akebi-tengu",
+      "title": "アケビ天狗",
+      "year": 2024,
+      "category": ["object"],
+      "thumbnail": "/content/projects/akebi-tengu/cover.jpg",
+      "path": "/site_ryuddi/works/akebi-tengu.html"
+    },
+    {
+      "id": "katamenyo",
+      "title": "カタメニョウ",
+      "year": 2024,
+      "category": ["object"],
+      "thumbnail": "/content/projects/katamenyo/cover.jpg",
+      "path": "/site_ryuddi/works/katamenyo.html"
+    }
+  ]
+}
