@@ -1,6 +1,6 @@
 async function loadFromOhanaWorks(){
   try{
-    const htmlRes = await fetch('../works.html', {cache:'no-store'});
+    const htmlRes = await fetch('../site_ohana/works.html', {cache:'no-store'});
     if(!htmlRes.ok) throw new Error('Failed to fetch works.html');
     const html = await htmlRes.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
