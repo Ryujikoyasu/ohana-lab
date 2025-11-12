@@ -4,7 +4,6 @@ https://ryujikoyasu.github.io/ohana-lab/collab.html
 https://ryujikoyasu.github.io/ohana-lab/lines.html
 https://ryujikoyasu.github.io/ohana-lab/about.html
 https://ryujikoyasu.github.io/ohana-lab/news.html
-https://ryujikoyasu.github.io/ohana-lab/journal.html
 https://ryujikoyasu.github.io/ohana-lab/en/
 https://ryujikoyasu.github.io/ohana-lab/works/shishi-odoshi.html
 https://ryujikoyasu.github.io/ohana-lab/works/ohana-ike.html
